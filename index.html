@@ -118,7 +118,9 @@ button,a[href]{ cursor:pointer; }
 .page[hidden]{ display:none; }
 
 /* ---------- LOGO MARK ---------- */
-.mark{ display:inline-flex; align-items:flex-start; flex-shrink:0; }
+/* direction:ltr keeps the brand mark's internal layout (circle, line, wordmark)
+   from mirroring when it sits inside an RTL (Arabic) ancestor */
+.mark{ display:inline-flex; align-items:flex-start; flex-shrink:0; direction:ltr; }
 .mark .circle{ border-radius:50%; border-style:solid; flex-shrink:0; }
 .mark .vline{ flex-shrink:0; }
 .mark .word{ font-family:var(--font-wordmark); font-weight:900; line-height:.9; letter-spacing:-1px; }
@@ -130,14 +132,12 @@ button,a[href]{ cursor:pointer; }
 .nav-mark .vline{ width:2px; height:30px; }
 .nav-mark .word{ font-size:22px; }
 .nav-mark .tag{ font-size:6.5px; letter-spacing:.14em; margin-top:2px; }
-[data-lang="ar"] .nav-mark .circle{ margin-right:0; margin-left:5px; }
 
 /* footer-sized mark */
 .foot-mark .circle{ width:9px; height:9px; border-width:1.5px; margin-top:3px; margin-right:5px; border-color:var(--orange); }
 .foot-mark .vline{ width:2px; height:30px; background:var(--orange); }
 .foot-mark .word{ font-size:22px; color:#fff; }
 .foot-mark .tag{ font-size:6.5px; letter-spacing:.14em; margin-top:2px; color:var(--white-muted); }
-[data-lang="ar"] .foot-mark .circle{ margin-right:0; margin-left:5px; }
 
 /* ============================================================
    LANGUAGE SWITCH (fixed, chrome — not translated)
@@ -240,7 +240,6 @@ button,a[href]{ cursor:pointer; }
 .hero-big-mark{ position:relative; z-index:1; display:inline-flex; align-items:flex-start; }
 .hero-big-mark .circle{ width:110px; height:110px; border:11px solid var(--orange); margin-top:6px; margin-right:26px; }
 .hero-big-mark .vline{ width:18px; height:320px; background:var(--orange); }
-[data-lang="ar"] .hero-big-mark .circle{ margin-right:0; margin-left:26px; }
 .hero-eyebrow{
   font-size:11px; letter-spacing:.28em; color:var(--white-muted); font-weight:600;
   display:flex; align-items:center; gap:14px; margin-bottom:34px;
@@ -307,7 +306,6 @@ button,a[href]{ cursor:pointer; }
 .story-callout-ring{ position:absolute; width:240px; height:240px; border-radius:50%; border:1px solid rgba(255,255,255,.08); right:-70px; top:-90px; }
 .story-callout .mark{ margin-bottom:22px; }
 .story-callout .circle{ width:16px; height:16px; border:2.5px solid var(--orange); margin-top:3px; margin-right:8px; }
-[data-lang="ar"] .story-callout .circle{ margin-right:0; margin-left:8px; }
 .story-callout .vline{ width:4px; height:64px; background:var(--orange); }
 .story-callout p{ position:relative; font-size:15px; line-height:1.85; color:rgba(255,255,255,.8); }
 [data-lang="ar"] .story-callout p{ line-height:2.05; }
@@ -320,7 +318,6 @@ button,a[href]{ cursor:pointer; }
 .mark-topic-visual{ display:flex; align-items:center; justify-content:center; }
 .mark-topic-mark .circle{ width:56px; height:56px; border:6px solid var(--orange); margin-top:4px; margin-right:16px; }
 .mark-topic-mark .vline{ width:10px; height:150px; background:var(--orange); }
-[data-lang="ar"] .mark-topic-mark .circle{ margin-right:0; margin-left:16px; }
 @media (max-width:760px){ .mark-topic-mark{ justify-content:center; } }
 .mark-topic-label{ font-size:10px; letter-spacing:.2em; color:var(--orange); font-weight:600; margin-bottom:14px; }
 .mark-topic-text p{ font-size:14.5px; line-height:1.85; color:var(--text-soft); max-width:56ch; }
