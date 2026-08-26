@@ -293,7 +293,32 @@ button,a[href]{ cursor:pointer; }
 .on-paper .chapter-rule{ background:var(--paper-line); }
 
 /* ============================================================
-   01 — STORY
+   POSITIONING STATEMENT (between hero and chapter 01)
+   ============================================================ */
+.positioning{ background:var(--paper); padding:64px 0; border-top:1px solid var(--paper-line); border-bottom:1px solid var(--paper-line); }
+.positioning-tag{ font-size:10px; letter-spacing:.2em; color:var(--ink-muted); font-weight:600; margin-bottom:20px; }
+.positioning-quote{ font-size:clamp(19px,2.6vw,26px); font-weight:300; color:var(--text); line-height:1.65; letter-spacing:-.3px; max-width:900px; }
+.positioning-quote strong{ font-weight:700; color:var(--orange); }
+[data-lang="ar"] .positioning-quote{ font-weight:400; line-height:1.9; }
+
+/* ============================================================
+   01 — BRAND STRATEGY
+   ============================================================ */
+.strategy-grid{ display:grid; grid-template-columns:1fr 1fr; gap:var(--gap); }
+@media (max-width:760px){ .strategy-grid{ grid-template-columns:1fr; } }
+.strategy-card{ padding:40px; color:#fff; }
+.strategy-card.is-dark{ background:var(--ink); }
+.strategy-card.is-orange{ background:var(--orange); }
+.strategy-label{ font-size:10px; letter-spacing:.22em; font-weight:600; margin-bottom:16px; }
+.strategy-card.is-dark .strategy-label{ color:var(--orange); }
+.strategy-card.is-orange .strategy-label{ color:rgba(255,255,255,.7); }
+.strategy-card p{ font-size:14.5px; line-height:1.85; }
+.strategy-card.is-dark p{ color:rgba(255,255,255,.62); }
+.strategy-card.is-orange p{ color:rgba(255,255,255,.92); }
+[data-lang="ar"] .strategy-card p{ line-height:2.05; }
+
+/* ============================================================
+   02 — STORY
    ============================================================ */
 .story-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:64px; align-items:start; }
 @media (max-width:860px){ .story-grid{ grid-template-columns:1fr; gap:40px; } }
@@ -326,7 +351,7 @@ button,a[href]{ cursor:pointer; }
 .mark-topic-text strong{ color:var(--text); }
 
 /* ============================================================
-   02 — MISSION / VISION / VALUES
+   03 — MISSION / VISION / VALUES
    ============================================================ */
 .mv-grid{ display:grid; grid-template-columns:1fr 1fr; gap:var(--gap); margin-bottom:var(--gap); }
 @media (max-width:760px){ .mv-grid{ grid-template-columns:1fr; } }
@@ -337,18 +362,35 @@ button,a[href]{ cursor:pointer; }
 .mv-card p{ font-size:14.5px; line-height:1.8; color:rgba(255,255,255,.62); }
 [data-lang="ar"] .mv-card p{ line-height:2; }
 
-.values-row{ display:grid; grid-template-columns:repeat(5,1fr); gap:var(--gap); margin-bottom:var(--gap); }
-@media (max-width:760px){ .values-row{ grid-template-columns:repeat(2,1fr); } }
-.value-chip{ border:1px solid rgba(255,255,255,.1); padding:26px 18px; text-align:center; }
-.value-chip .en{ font-size:13px; font-weight:600; letter-spacing:.03em; color:#fff; }
-.value-chip .native{ font-size:11px; color:var(--white-muted); margin-top:6px; }
+.value-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:var(--gap); margin-bottom:var(--gap); }
+@media (max-width:900px){ .value-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:480px){ .value-grid{ grid-template-columns:1fr; } }
+.value-card{ border:1px solid rgba(255,255,255,.1); padding:28px 24px; position:relative; overflow:hidden; }
+.value-card .num{ font-family:var(--font-mono); font-size:44px; font-weight:800; color:rgba(255,255,255,.06); position:absolute; bottom:-6px; right:14px; line-height:1; pointer-events:none; }
+[data-lang="ar"] .value-card .num{ right:auto; left:14px; }
+.value-card h4{ position:relative; font-size:13px; font-weight:700; letter-spacing:.05em; color:#fff; margin-bottom:10px; }
+.value-card p{ position:relative; font-size:12.5px; line-height:1.75; color:var(--white-muted); }
+[data-lang="ar"] .value-card p{ line-height:2; }
 
 .promise{ background:var(--orange); padding:44px 40px; text-align:center; }
 .promise p{ font-size:clamp(17px,2.4vw,24px); font-weight:500; line-height:1.5; color:#fff; max-width:800px; margin:0 auto; }
 [data-lang="ar"] .promise p{ line-height:1.9; }
 
 /* ============================================================
-   03 — SERVICES
+   04 — BRAND PERSONALITY
+   ============================================================ */
+.personality-lead{ font-size:17px; line-height:1.9; color:var(--text-soft); max-width:840px; margin-bottom:48px; }
+[data-lang="ar"] .personality-lead{ font-size:18px; line-height:2.15; }
+.personality-lead em{ font-style:normal; color:var(--orange); font-weight:600; }
+.trait-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:var(--gap); }
+@media (max-width:760px){ .trait-grid{ grid-template-columns:repeat(2,1fr); } }
+.trait-chip{ border:1px solid var(--hairline); background:var(--white); padding:28px 20px; text-align:center; font-size:13px; font-weight:700; letter-spacing:.05em; color:var(--text); }
+.trait-chip.is-dark{ background:var(--ink); border-color:var(--ink); color:#fff; }
+.trait-chip.is-orange{ background:var(--orange); border-color:var(--orange); color:#fff; }
+.trait-chip.is-outline{ border-color:var(--orange); color:var(--orange); }
+
+/* ============================================================
+   05 — SERVICES
    ============================================================ */
 .svc-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gap); margin-bottom:56px; }
 @media (max-width:860px){ .svc-grid{ grid-template-columns:repeat(2,1fr); } }
@@ -383,7 +425,7 @@ button,a[href]{ cursor:pointer; }
 .trade-cell .native{ font-size:10px; color:var(--ink-muted); }
 
 /* ============================================================
-   BILLBOARD (type-as-hero break, between 03 and 04)
+   BILLBOARD (type-as-hero break, between 05 and 06)
    ============================================================ */
 .billboard{ background:var(--paper); padding:96px 0; border-top:1px solid var(--paper-line); border-bottom:1px solid var(--paper-line); }
 .billboard-text{ font-size:clamp(28px,5vw,58px); font-weight:800; letter-spacing:-1.5px; line-height:1.16; max-width:1000px; color:var(--text); }
@@ -391,7 +433,16 @@ button,a[href]{ cursor:pointer; }
 [data-lang="ar"] .billboard-text{ letter-spacing:0; line-height:1.55; font-weight:700; }
 
 /* ============================================================
-   04 — WHY DAR
+   USP STATEMENT (dark declarative block, between 02 and 03)
+   ============================================================ */
+.usp-block{ background:var(--ink); padding:72px 0; }
+.usp-headline{ font-size:clamp(24px,3.4vw,34px); font-weight:800; letter-spacing:-1px; line-height:1.25; color:#fff; max-width:900px; margin-bottom:18px; }
+[data-lang="ar"] .usp-headline{ letter-spacing:0; line-height:1.55; }
+.usp-body{ font-size:15px; line-height:1.85; color:rgba(255,255,255,.55); max-width:640px; }
+[data-lang="ar"] .usp-body{ line-height:2.1; }
+
+/* ============================================================
+   06 — WHY DAR
    ============================================================ */
 .stance-grid{ display:grid; grid-template-columns:1fr 1fr; gap:var(--gap); margin-bottom:var(--gap); }
 @media (max-width:760px){ .stance-grid{ grid-template-columns:1fr; } }
@@ -424,23 +475,14 @@ button,a[href]{ cursor:pointer; }
 .msg-text{ font-size:14px; line-height:1.8; color:var(--text-soft); }
 [data-lang="ar"] .msg-text{ line-height:2.1; }
 
-/* ============================================================
-   05 — PARTNERS
-   ============================================================ */
-.partner-grid{ display:grid; grid-template-columns:1fr 1fr; gap:var(--gap); }
-@media (max-width:860px){ .partner-grid{ grid-template-columns:1fr; } }
-.partner-card{ border:1px solid var(--hairline); padding:44px 40px; background:var(--white); display:flex; flex-direction:column; gap:22px; }
-.partner-kicker{ font-size:10px; letter-spacing:.2em; color:var(--orange); font-weight:600; }
-.partner-card h3{ font-size:22px; font-weight:700; letter-spacing:-.3px; }
-.partner-by{ font-size:12px; color:var(--ink-muted); }
-.partner-card p{ font-size:14px; line-height:1.85; color:var(--text-soft); }
-[data-lang="ar"] .partner-card p{ line-height:2.1; }
-.partner-stats{ display:flex; gap:28px; padding-top:18px; border-top:1px solid var(--hairline); }
-.partner-stat b{ display:block; font-size:24px; font-weight:800; color:var(--orange); letter-spacing:-.5px; }
-.partner-stat span{ font-size:10.5px; color:var(--ink-muted); letter-spacing:.05em; }
+.elevator{ border-inline-start:4px solid var(--orange); background:var(--paper); padding:36px 40px; margin-top:56px; }
+.elevator-label{ font-size:10px; letter-spacing:.22em; color:var(--orange); font-weight:600; margin-bottom:16px; }
+.elevator-text{ font-size:16px; font-weight:300; color:var(--text); line-height:1.9; letter-spacing:-.2px; }
+[data-lang="ar"] .elevator-text{ font-weight:400; line-height:2.15; }
+.elevator-text strong{ font-weight:700; }
 
 /* ============================================================
-   06 — CONTACT
+   07 — CONTACT
    ============================================================ */
 .contact{ position:relative; background:var(--ink); color:#fff; overflow:hidden; padding:110px 0; }
 .contact-ring{ position:absolute; border-radius:50%; border:1px solid rgba(255,255,255,.06); pointer-events:none; }
@@ -540,11 +582,12 @@ button,a[href]{ cursor:pointer; }
 <main class="page" data-lang="en" lang="en">
 
   <nav class="chapter-rail" aria-label="Chapter navigation">
+    <a href="#strategy-en" data-rail-target="strategy-en"><span class="dot"></span><span class="rail-label">Strategy</span></a>
     <a href="#story-en" data-rail-target="story-en"><span class="dot"></span><span class="rail-label">Story</span></a>
     <a href="#mission-en" data-rail-target="mission-en"><span class="dot"></span><span class="rail-label">Purpose</span></a>
+    <a href="#personality-en" data-rail-target="personality-en"><span class="dot"></span><span class="rail-label">Personality</span></a>
     <a href="#services-en" data-rail-target="services-en"><span class="dot"></span><span class="rail-label">Services</span></a>
     <a href="#why-en" data-rail-target="why-en"><span class="dot"></span><span class="rail-label">Why DAR</span></a>
-    <a href="#partners-en" data-rail-target="partners-en"><span class="dot"></span><span class="rail-label">Partners</span></a>
     <a href="#contact-en" data-rail-target="contact-en"><span class="dot"></span><span class="rail-label">Contact</span></a>
   </nav>
 
@@ -559,10 +602,10 @@ button,a[href]{ cursor:pointer; }
         </span>
       </a>
       <ul class="nav-links">
+        <li><a href="#strategy-en">Strategy</a></li>
         <li><a href="#story-en">Story</a></li>
         <li><a href="#services-en">Services</a></li>
         <li><a href="#why-en">Why DAR</a></li>
-        <li><a href="#partners-en">Partners</a></li>
       </ul>
       <a class="nav-cta" href="tel:+96179004108">Request a Quote</a>
       <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -586,7 +629,7 @@ button,a[href]{ cursor:pointer; }
       <div class="hero-stats stagger">
         <div class="hero-stat"><b>0%</b><span>Advance Payment Demanded</span></div>
         <div class="hero-stat"><b>15</b><span>Trades Covered</span></div>
-        <div class="hero-stat"><b>95+</b><span>Yrs Partner Expertise</span></div>
+        <div class="hero-stat"><b>5</b><span>Core Values</span></div>
         <div class="hero-stat"><b>3</b><span>Languages Served</span></div>
       </div>
       <div class="hero-strap">
@@ -605,13 +648,44 @@ button,a[href]{ cursor:pointer; }
     </div>
   </header>
 
-  <!-- 01 — STORY -->
+  <!-- POSITIONING STATEMENT -->
+  <section class="positioning reveal">
+    <div class="wrap">
+      <div class="positioning-tag">POSITIONING STATEMENT</div>
+      <p class="positioning-quote">For project owners who refuse to settle for broken promises, <strong>DAR</strong> is the full-service construction and finishing company that delivers every project — on time, on budget, to the highest standard — because your project deserves to be delivered exactly as you envisioned it.</p>
+    </div>
+  </section>
+
+  <!-- 01 — BRAND STRATEGY -->
+  <section id="strategy-en" class="chapter reveal">
+    <div class="wrap">
+      <div class="chapter-head">
+        <span class="chapter-eyebrow">BRAND STRATEGY</span>
+        <div class="chapter-rule"></div>
+        <span class="chapter-num mono">— 01/07</span>
+      </div>
+      <div class="chapter-kicker">Our Position</div>
+      <h2 style="margin-bottom:40px;">The Market Reality. The DAR Answer.</h2>
+      <div class="strategy-grid">
+        <div class="strategy-card is-dark">
+          <div class="strategy-label">THE MARKET REALITY</div>
+          <p>Lebanon's construction market is defined by broken promises, disappearing contractors, and project owners who have been let down too many times. Trust is the rarest commodity in this market.</p>
+        </div>
+        <div class="strategy-card is-orange">
+          <div class="strategy-label">THE DAR ANSWER</div>
+          <p>DAR does not compete on price. DAR competes on certainty. The client knows exactly what they're getting, exactly when they're getting it, and exactly what it costs. In a market where trust is the rarest commodity, DAR makes trust its product.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 — STORY -->
   <section id="story-en" class="chapter on-paper reveal">
     <div class="wrap">
       <div class="chapter-head">
         <span class="chapter-eyebrow">WHO WE ARE</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 01/06</span>
+        <span class="chapter-num mono">— 02/07</span>
       </div>
       <div class="chapter-kicker">Our Story</div>
       <h2 style="margin-bottom:40px;">A Declaration. Not Just a Company.</h2>
@@ -637,19 +711,21 @@ button,a[href]{ cursor:pointer; }
     </div>
   </section>
 
-  <section class="billboard reveal">
+  <!-- UNIQUE SELLING PROPOSITION — 11 -->
+  <section class="usp-block reveal">
     <div class="wrap">
-      <p class="billboard-text">DAR is the first Lebanese contractor to treat your home like a project — <em>managed, documented, delivered.</em></p>
+      <div class="usp-headline">DAR is the first Lebanese contractor that treats your home like a project — managed, documented, delivered.</div>
+      <p class="usp-body">Full service from design to final finish. Fixed timelines. Transparent costs. Professional communication throughout. No disappearing. No excuses. No surprises.</p>
     </div>
   </section>
 
-  <!-- 02 — MISSION / VISION / VALUES -->
+  <!-- 03 — MISSION / VISION / VALUES -->
   <section id="mission-en" class="chapter on-dark reveal">
     <div class="wrap">
       <div class="chapter-head">
         <span class="chapter-eyebrow">MISSION · VISION · VALUES</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 02/06</span>
+        <span class="chapter-num mono">— 03/07</span>
       </div>
       <div class="chapter-kicker">Purpose</div>
       <h2 style="margin-bottom:40px;color:#fff;">What We Stand For. Where We Are Going.</h2>
@@ -667,12 +743,12 @@ button,a[href]{ cursor:pointer; }
         </div>
       </div>
 
-      <div class="values-row stagger">
-        <div class="value-chip"><div class="en">Trust</div><div class="native">الثقة</div></div>
-        <div class="value-chip"><div class="en">Loyalty</div><div class="native">الولاء</div></div>
-        <div class="value-chip"><div class="en">Integrity</div><div class="native">النزاهة</div></div>
-        <div class="value-chip"><div class="en">Commitment</div><div class="native">الالتزام</div></div>
-        <div class="value-chip"><div class="en">Excellence</div><div class="native">التميّز</div></div>
+      <div class="value-grid stagger">
+        <div class="value-card"><span class="num mono">01</span><h4>PRECISION</h4><p>Every measurement, every finish, every deadline is non-negotiable. Precision is not a feature — it is the standard.</p></div>
+        <div class="value-card"><span class="num mono">02</span><h4>TRANSPARENCY</h4><p>Clients see every cost, every timeline, every decision. No surprises. No hidden figures. No excuses.</p></div>
+        <div class="value-card"><span class="num mono">03</span><h4>COMPLETION</h4><p>DAR finishes what it starts. Every time. This sounds basic. In Lebanon's market, it is revolutionary.</p></div>
+        <div class="value-card"><span class="num mono">04</span><h4>CRAFTSMANSHIP</h4><p>The quality of the finish reflects respect for the client. DAR does not cut corners because the client lives with those corners forever.</p></div>
+        <div class="value-card"><span class="num mono">05</span><h4>INTEGRITY</h4><p>The contract is the promise. The promise is kept.</p></div>
       </div>
 
       <div class="promise">
@@ -681,13 +757,33 @@ button,a[href]{ cursor:pointer; }
     </div>
   </section>
 
-  <!-- 03 — SERVICES -->
+  <!-- 04 — BRAND PERSONALITY -->
+  <section id="personality-en" class="chapter on-paper reveal">
+    <div class="wrap">
+      <div class="chapter-head">
+        <span class="chapter-eyebrow">BRAND PERSONALITY</span>
+        <div class="chapter-rule"></div>
+        <span class="chapter-num mono">— 04/07</span>
+      </div>
+      <div class="chapter-kicker">Character</div>
+      <h2 style="margin-bottom:40px;">Confident. Premium. Modern. Reliable.</h2>
+      <p class="personality-lead">DAR is the contractor who shows up on day one <em>and</em> on the last day. Who calls before you call them. Who points out a problem before it becomes expensive. Who takes pride in work that most people will never notice — because that invisible precision is what separates a house from a home.</p>
+      <div class="trait-grid stagger">
+        <div class="trait-chip is-dark">CONFIDENT</div>
+        <div class="trait-chip is-orange">PREMIUM</div>
+        <div class="trait-chip">MODERN</div>
+        <div class="trait-chip is-outline">RELIABLE</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 — SERVICES -->
   <section id="services-en" class="chapter reveal">
     <div class="wrap">
       <div class="chapter-head">
         <span class="chapter-eyebrow">SERVICES</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 03/06</span>
+        <span class="chapter-num mono">— 05/07</span>
       </div>
       <div class="chapter-kicker">What We Do</div>
       <h2 style="margin-bottom:40px;">Full-Service Delivery.</h2>
@@ -774,13 +870,13 @@ button,a[href]{ cursor:pointer; }
     </div>
   </section>
 
-  <!-- 04 — WHY DAR -->
+  <!-- 06 — WHY DAR -->
   <section id="why-en" class="chapter on-paper reveal">
     <div class="wrap">
       <div class="chapter-head">
         <span class="chapter-eyebrow">WHY DAR</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 04/06</span>
+        <span class="chapter-num mono">— 06/07</span>
       </div>
       <div class="chapter-kicker">Our Principles</div>
       <h2 style="margin-bottom:40px;">What We Stand By. What We Refuse.</h2>
@@ -837,52 +933,20 @@ button,a[href]{ cursor:pointer; }
           <p class="msg-text">DAR communicates proactively — updates, photos, decisions — so you're always in control, wherever you are.</p>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- 05 — PARTNERS -->
-  <section id="partners-en" class="chapter reveal">
-    <div class="wrap">
-      <div class="chapter-head">
-        <span class="chapter-eyebrow">OUR PARTNERS</span>
-        <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 05/06</span>
-      </div>
-      <div class="chapter-kicker">Materials &amp; Contracting</div>
-      <h2 style="margin-bottom:40px;">Global Expertise. Local Delivery.</h2>
-
-      <div class="partner-grid stagger">
-        <div class="partner-card">
-          <div class="partner-kicker">MATERIALS PARTNER</div>
-          <h3>DCP — British Building Materials</h3>
-          <div class="partner-by">Presented by Engineer Khalil Berkashi</div>
-          <p>DCP, the British building materials company, brings over 95 years of accumulated expertise in developing, manufacturing, and marketing innovative construction materials. DCP operates across North America, Europe, Africa, the Middle East, and Asia.</p>
-          <div class="partner-stats">
-            <div class="partner-stat"><b>95+</b><span>YEARS EXPERTISE</span></div>
-            <div class="partner-stat"><b>14</b><span>MANUFACTURING SITES</span></div>
-            <div class="partner-stat"><b>30+</b><span>COUNTRIES</span></div>
-          </div>
-        </div>
-        <div class="partner-card">
-          <div class="partner-kicker">CONTRACTING PARTNER</div>
-          <h3>HEK.HOUSE — Innovating Your Home</h3>
-          <div class="partner-by">Presented by Engineer Hussein Lhek</div>
-          <p>Founded in 2024, Hek House is a modern contracting company based in Lebanon, specializing in house construction, building renovation, infrastructure and road projects, in addition to trading construction materials and solar panels.</p>
-          <div class="partner-stats">
-            <div class="partner-stat"><b>2024</b><span>FOUNDED</span></div>
-            <div class="partner-stat"><b>LB</b><span>BASED IN LEBANON</span></div>
-          </div>
-        </div>
+      <div class="elevator">
+        <div class="elevator-label">30-SECOND PITCH</div>
+        <p class="elevator-text">&ldquo;DAR is a <strong>full-service construction and finishing company</strong> based in Lebanon. We manage every stage of the project — down to the last coat of paint — for clients who want it done right, on time, and without surprises. We started DAR because we saw what bad contractors do to people's homes and their savings. We built this company to be the answer to that. <strong>DAR means home. That's exactly what we protect.</strong>&rdquo;</p>
       </div>
     </div>
   </section>
 
-  <!-- 06 — CONTACT -->
+  <!-- 07 — CONTACT -->
   <section id="contact-en" class="contact reveal">
     <svg class="hero-pattern" width="100%" height="100%" preserveAspectRatio="none" style="opacity:.1;"><rect width="100%" height="100%" fill="url(#dar-pattern)"/></svg>
     <div class="contact-ring" style="width:520px;height:520px;left:50%;top:50%;transform:translate(-50%,-50%);"></div>
     <div class="wrap contact-inner">
-      <div class="contact-kicker">LET'S BUILD SOMETHING THAT LASTS — 06/06</div>
+      <div class="contact-kicker">LET'S BUILD SOMETHING THAT LASTS — 07/07</div>
       <h2>Your Long-Term Business Partner.</h2>
       <p class="contact-sub">Results first. Payment follows. Let's talk about your project.</p>
       <div class="contact-actions">
@@ -921,11 +985,12 @@ button,a[href]{ cursor:pointer; }
 <main class="page" data-lang="ar" lang="ar" dir="rtl" hidden>
 
   <nav class="chapter-rail" aria-label="التنقل بين الفصول">
+    <a href="#strategy-ar" data-rail-target="strategy-ar"><span class="dot"></span><span class="rail-label">استراتيجيتنا</span></a>
     <a href="#story-ar" data-rail-target="story-ar"><span class="dot"></span><span class="rail-label">قصتنا</span></a>
     <a href="#mission-ar" data-rail-target="mission-ar"><span class="dot"></span><span class="rail-label">الغاية</span></a>
+    <a href="#personality-ar" data-rail-target="personality-ar"><span class="dot"></span><span class="rail-label">شخصيتنا</span></a>
     <a href="#services-ar" data-rail-target="services-ar"><span class="dot"></span><span class="rail-label">خدماتنا</span></a>
     <a href="#why-ar" data-rail-target="why-ar"><span class="dot"></span><span class="rail-label">لماذا دار</span></a>
-    <a href="#partners-ar" data-rail-target="partners-ar"><span class="dot"></span><span class="rail-label">شركاؤنا</span></a>
     <a href="#contact-ar" data-rail-target="contact-ar"><span class="dot"></span><span class="rail-label">تواصل</span></a>
   </nav>
 
@@ -940,10 +1005,10 @@ button,a[href]{ cursor:pointer; }
         </span>
       </a>
       <ul class="nav-links">
+        <li><a href="#strategy-ar">استراتيجيتنا</a></li>
         <li><a href="#story-ar">قصتنا</a></li>
         <li><a href="#services-ar">خدماتنا</a></li>
         <li><a href="#why-ar">لماذا دار</a></li>
-        <li><a href="#partners-ar">شركاؤنا</a></li>
       </ul>
       <a class="nav-cta" href="tel:+96179004108">اطلب عرض سعر</a>
       <button type="button" class="nav-toggle" aria-label="القائمة" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -967,7 +1032,7 @@ button,a[href]{ cursor:pointer; }
       <div class="hero-stats stagger">
         <div class="hero-stat"><b>٠٪</b><span>دفعة مسبقة تُطلب</span></div>
         <div class="hero-stat"><b>١٥</b><span>مهنة نغطيها</span></div>
-        <div class="hero-stat"><b>+٩٥</b><span>سنة خبرة الشريك</span></div>
+        <div class="hero-stat"><b>٥</b><span>قيم جوهرية</span></div>
         <div class="hero-stat"><b>٣</b><span>لغات نخدم بها</span></div>
       </div>
       <div class="hero-strap">
@@ -986,13 +1051,44 @@ button,a[href]{ cursor:pointer; }
     </div>
   </header>
 
-  <!-- 01 — قصتنا -->
+  <!-- بيان تموضع العلامة التجارية -->
+  <section class="positioning reveal">
+    <div class="wrap">
+      <div class="positioning-tag">بيان التموضع</div>
+      <p class="positioning-quote">لأصحاب المشاريع الذين يرفضون القبول بالوعود المكسورة، <strong>دار</strong> هي شركة البناء والتشطيب المتكاملة التي تُسلّم كل مشروع — في الوقت المحدد، وفي حدود الميزانية، وبأعلى المعايير — لأن مشروعك يستحق أن يُنجز تماماً كما تخيّلته.</p>
+    </div>
+  </section>
+
+  <!-- 01 — استراتيجية العلامة التجارية -->
+  <section id="strategy-ar" class="chapter reveal">
+    <div class="wrap">
+      <div class="chapter-head">
+        <span class="chapter-eyebrow">استراتيجية العلامة التجارية</span>
+        <div class="chapter-rule"></div>
+        <span class="chapter-num mono">٠١/٠٧ —</span>
+      </div>
+      <div class="chapter-kicker">موقعنا في السوق</div>
+      <h2 style="margin-bottom:40px;">واقع السوق. جواب دار.</h2>
+      <div class="strategy-grid">
+        <div class="strategy-card is-dark">
+          <div class="strategy-label">واقع السوق</div>
+          <p>يتسم سوق البناء اللبناني بالوعود المكسورة والمقاولين المختفين وأصحاب المشاريع الذين خُذلوا مرات عديدة. الثقة هي أندر ما يمكن إيجاده في هذا السوق.</p>
+        </div>
+        <div class="strategy-card is-orange">
+          <div class="strategy-label">جواب دار</div>
+          <p>دار لا تنافس على السعر. دار تنافس على اليقين. يعرف العميل تماماً ما سيحصل عليه، ومتى سيحصل عليه، وكم سيكلّفه. في سوق تُعدّ فيه الثقة أندر السلع، تجعل دار من الثقة منتجها الأساسي.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 — قصتنا -->
   <section id="story-ar" class="chapter on-paper reveal">
     <div class="wrap">
       <div class="chapter-head">
         <span class="chapter-eyebrow">نحن من</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">٠١/٠٦ —</span>
+        <span class="chapter-num mono">٠٢/٠٧ —</span>
       </div>
       <div class="chapter-kicker">قصتنا</div>
       <h2 style="margin-bottom:40px;">بيان، لا مجرد شركة.</h2>
@@ -1018,19 +1114,21 @@ button,a[href]{ cursor:pointer; }
     </div>
   </section>
 
-  <section class="billboard reveal">
+  <!-- عرض القيمة الفريد — 11 -->
+  <section class="usp-block reveal">
     <div class="wrap">
-      <p class="billboard-text">دار هي أول مقاول لبناني يتعامل مع منزلك كمشروع — <em>مُدار، موثّق، مُسلَّم.</em></p>
+      <div class="usp-headline">دار هي أول مقاول لبناني يتعامل مع منزلك كمشروع — مُدار، موثّق، مُسلَّم.</div>
+      <p class="usp-body">خدمة متكاملة من التصميم إلى التشطيب النهائي. جداول زمنية ثابتة. تكاليف شفافة. تواصل احترافي طوال المشروع. لا اختفاء. لا أعذار. لا مفاجآت.</p>
     </div>
   </section>
 
-  <!-- 02 — الرسالة والرؤية والقيم -->
+  <!-- 03 — الرسالة والرؤية والقيم -->
   <section id="mission-ar" class="chapter on-dark reveal">
     <div class="wrap">
       <div class="chapter-head">
         <span class="chapter-eyebrow">رسالتنا رؤيتنا وقيمنا</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">٠٢/٠٦ —</span>
+        <span class="chapter-num mono">٠٣/٠٧ —</span>
       </div>
       <div class="chapter-kicker">الغاية</div>
       <h2 style="margin-bottom:40px;color:#fff;">ما نؤمن به، وإلى أين نمضي.</h2>
@@ -1048,12 +1146,12 @@ button,a[href]{ cursor:pointer; }
         </div>
       </div>
 
-      <div class="values-row stagger">
-        <div class="value-chip"><div class="en">الثقة</div><div class="native">Trust</div></div>
-        <div class="value-chip"><div class="en">الولاء</div><div class="native">Loyalty</div></div>
-        <div class="value-chip"><div class="en">النزاهة</div><div class="native">Integrity</div></div>
-        <div class="value-chip"><div class="en">الالتزام</div><div class="native">Commitment</div></div>
-        <div class="value-chip"><div class="en">التميّز</div><div class="native">Excellence</div></div>
+      <div class="value-grid stagger">
+        <div class="value-card"><span class="num mono">٠١</span><h4>الدقة</h4><p>كل قياس، كل تشطيب، كل موعد — غير قابل للتفاوض. الدقة ليست ميزة إضافية — إنها المعيار.</p></div>
+        <div class="value-card"><span class="num mono">٠٢</span><h4>الشفافية</h4><p>يرى العملاء كل تكلفة، كل جدول زمني، كل قرار. لا مفاجآت. لا أرقام مخفية. لا أعذار.</p></div>
+        <div class="value-card"><span class="num mono">٠٣</span><h4>الإتمام</h4><p>دار تُنهي ما تبدأه. في كل مرة. يبدو هذا بديهياً. في سوق لبنان، إنه ثوري.</p></div>
+        <div class="value-card"><span class="num mono">٠٤</span><h4>الحرفية</h4><p>جودة التشطيب تعكس احترام العميل. دار لا تتنازل عن التفاصيل لأن العميل سيعيش مع تلك التفاصيل إلى الأبد.</p></div>
+        <div class="value-card"><span class="num mono">٠٥</span><h4>النزاهة</h4><p>العقد هو الوعد. والوعد يُحترم.</p></div>
       </div>
 
       <div class="promise">
@@ -1062,13 +1160,33 @@ button,a[href]{ cursor:pointer; }
     </div>
   </section>
 
-  <!-- 03 — الخدمات -->
+  <!-- 04 — شخصية العلامة التجارية -->
+  <section id="personality-ar" class="chapter on-paper reveal">
+    <div class="wrap">
+      <div class="chapter-head">
+        <span class="chapter-eyebrow">شخصية العلامة التجارية</span>
+        <div class="chapter-rule"></div>
+        <span class="chapter-num mono">٠٤/٠٧ —</span>
+      </div>
+      <div class="chapter-kicker">شخصيتنا</div>
+      <h2 style="margin-bottom:40px;">واثقون. راقون. عصريون. موثوقون.</h2>
+      <p class="personality-lead">دار هي المقاول الذي يحضر في اليوم الأول <em>وفي</em> اليوم الأخير. الذي يتصل قبل أن تتصل به. الذي يشير إلى المشكلة قبل أن تصبح مكلفة. الذي يفخر بعمل لن يلاحظه معظم الناس — لأن تلك الدقة غير المرئية هي ما يفرق بين مجرد مبنى ومنزل حقيقي.</p>
+      <div class="trait-grid stagger">
+        <div class="trait-chip is-dark">واثق</div>
+        <div class="trait-chip is-orange">راقٍ</div>
+        <div class="trait-chip">عصري</div>
+        <div class="trait-chip is-outline">موثوق</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 — الخدمات -->
   <section id="services-ar" class="chapter reveal">
     <div class="wrap">
       <div class="chapter-head">
         <span class="chapter-eyebrow">الخدمات</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">٠٣/٠٦ —</span>
+        <span class="chapter-num mono">٠٥/٠٧ —</span>
       </div>
       <div class="chapter-kicker">ماذا نقدّم</div>
       <h2 style="margin-bottom:40px;">تقديم خدمات متكاملة.</h2>
@@ -1161,7 +1279,7 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-head">
         <span class="chapter-eyebrow">لماذا دار</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">٠٤/٠٦ —</span>
+        <span class="chapter-num mono">٠٦/٠٧ —</span>
       </div>
       <div class="chapter-kicker">مبادئنا</div>
       <h2 style="margin-bottom:40px;">ما نلتزم به، وما نرفضه.</h2>
@@ -1218,52 +1336,20 @@ button,a[href]{ cursor:pointer; }
           <p class="msg-text">تتواصل دار بشكل استباقي — تحديثات، صور، قرارات — حتى تظل دائماً في السيطرة، أينما كنت.</p>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- 05 — شركاؤنا -->
-  <section id="partners-ar" class="chapter reveal">
-    <div class="wrap">
-      <div class="chapter-head">
-        <span class="chapter-eyebrow">شريكنا</span>
-        <div class="chapter-rule"></div>
-        <span class="chapter-num mono">٠٥/٠٦ —</span>
-      </div>
-      <div class="chapter-kicker">المواد والمقاولات</div>
-      <h2 style="margin-bottom:40px;">خبرة عالمية. تنفيذ محلي.</h2>
-
-      <div class="partner-grid stagger">
-        <div class="partner-card">
-          <div class="partner-kicker">شريك المواد</div>
-          <h3>DCP — شركة مواد بناء بريطانية</h3>
-          <div class="partner-by">يقدّمها المهندس خليل بركاشي</div>
-          <p>لدى شركة DCP البريطانية للمواد الإنشائية أكثر من 95 عاماً من الخبرات المتراكمة في تطوير وتصنيع وتسويق مواد البناء المبتكرة، وتمتلك أعمالاً في أمريكا الشمالية وأوروبا وأفريقيا والشرق الأوسط وآسيا.</p>
-          <div class="partner-stats">
-            <div class="partner-stat"><b>+95</b><span>سنة خبرة</span></div>
-            <div class="partner-stat"><b>14</b><span>موقع تصنيع</span></div>
-            <div class="partner-stat"><b>+30</b><span>دولة</span></div>
-          </div>
-        </div>
-        <div class="partner-card">
-          <div class="partner-kicker">شريك المقاولات</div>
-          <h3>HEK.HOUSE — Innovating Your Home</h3>
-          <div class="partner-by">يقدّمها المهندس حسين لحك</div>
-          <p>تأسست شركة هيك هاوس عام 2024، وهي شركة مقاولات حديثة مقرها لبنان، متخصصة في بناء المنازل وترميم المباني ومشاريع البنية التحتية والطرق، بالإضافة إلى تجارة مواد البناء والألواح الشمسية.</p>
-          <div class="partner-stats">
-            <div class="partner-stat"><b>2024</b><span>سنة التأسيس</span></div>
-            <div class="partner-stat"><b>لبنان</b><span>المقر</span></div>
-          </div>
-        </div>
+      <div class="elevator">
+        <div class="elevator-label">الملعب في ٣٠ ثانية</div>
+        <p class="elevator-text">"دار هي <strong>شركة بناء وتشطيب متكاملة</strong> مقرها لبنان. ندير كل مرحلة من مراحل المشروع — حتى آخر طبقة طلاء — للعملاء الذين يريدون إنجاز العمل بشكل صحيح، في الوقت المحدد، وبدون مفاجآت. أسسنا دار لأننا رأينا ما يفعله المقاولون السيئون بمنازل الناس ومدخراتهم. بنينا هذه الشركة لتكون الجواب على ذلك. <strong>دار تعني المنزل. وهذا بالضبط ما نحميه.</strong></p>
       </div>
     </div>
   </section>
 
-  <!-- 06 — تواصل معنا -->
+  <!-- 07 — تواصل معنا -->
   <section id="contact-ar" class="contact reveal">
     <svg class="hero-pattern" width="100%" height="100%" preserveAspectRatio="none" style="opacity:.1;"><rect width="100%" height="100%" fill="url(#dar-pattern)"/></svg>
     <div class="contact-ring" style="width:520px;height:520px;left:50%;top:50%;transform:translate(-50%,-50%);"></div>
     <div class="wrap contact-inner">
-      <div class="contact-kicker">لنبنِ معاً شيئاً يدوم — ٠٦/٠٦</div>
+      <div class="contact-kicker">لنبنِ معاً شيئاً يدوم — ٠٧/٠٧</div>
       <h2>شريكك التجاري على المدى الطويل.</h2>
       <p class="contact-sub">النتيجة أولاً، والدفع لاحقاً. لنتحدث عن مشروعك.</p>
       <div class="contact-actions">
@@ -1302,11 +1388,12 @@ button,a[href]{ cursor:pointer; }
 <main class="page" data-lang="fr" lang="fr" hidden>
 
   <nav class="chapter-rail" aria-label="Navigation des chapitres">
+    <a href="#strategy-fr" data-rail-target="strategy-fr"><span class="dot"></span><span class="rail-label">Stratégie</span></a>
     <a href="#story-fr" data-rail-target="story-fr"><span class="dot"></span><span class="rail-label">Histoire</span></a>
     <a href="#mission-fr" data-rail-target="mission-fr"><span class="dot"></span><span class="rail-label">Raison d'Être</span></a>
+    <a href="#personality-fr" data-rail-target="personality-fr"><span class="dot"></span><span class="rail-label">Personnalité</span></a>
     <a href="#services-fr" data-rail-target="services-fr"><span class="dot"></span><span class="rail-label">Services</span></a>
     <a href="#why-fr" data-rail-target="why-fr"><span class="dot"></span><span class="rail-label">Pourquoi DAR</span></a>
-    <a href="#partners-fr" data-rail-target="partners-fr"><span class="dot"></span><span class="rail-label">Partenaires</span></a>
     <a href="#contact-fr" data-rail-target="contact-fr"><span class="dot"></span><span class="rail-label">Contact</span></a>
   </nav>
 
@@ -1321,10 +1408,10 @@ button,a[href]{ cursor:pointer; }
         </span>
       </a>
       <ul class="nav-links">
+        <li><a href="#strategy-fr">Stratégie</a></li>
         <li><a href="#story-fr">Histoire</a></li>
         <li><a href="#services-fr">Services</a></li>
         <li><a href="#why-fr">Pourquoi DAR</a></li>
-        <li><a href="#partners-fr">Partenaires</a></li>
       </ul>
       <a class="nav-cta" href="tel:+96179004108">Demander un devis</a>
       <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -1348,7 +1435,7 @@ button,a[href]{ cursor:pointer; }
       <div class="hero-stats stagger">
         <div class="hero-stat"><b>0%</b><span>Acompte Exigé</span></div>
         <div class="hero-stat"><b>15</b><span>Métiers Couverts</span></div>
-        <div class="hero-stat"><b>95+</b><span>Ans d'Expertise Partenaire</span></div>
+        <div class="hero-stat"><b>5</b><span>Valeurs Fondamentales</span></div>
         <div class="hero-stat"><b>3</b><span>Langues de Service</span></div>
       </div>
       <div class="hero-strap">
@@ -1367,13 +1454,44 @@ button,a[href]{ cursor:pointer; }
     </div>
   </header>
 
-  <!-- 01 — HISTOIRE -->
+  <!-- ÉNONCÉ DE POSITIONNEMENT -->
+  <section class="positioning reveal">
+    <div class="wrap">
+      <div class="positioning-tag">ÉNONCÉ DE POSITIONNEMENT</div>
+      <p class="positioning-quote">Pour les maîtres d'ouvrage qui refusent de se contenter de promesses non tenues, <strong>DAR</strong> est l'entreprise de construction et de finition intégrée qui livre chaque projet — dans les délais, dans le budget, selon les normes les plus élevées — parce que votre projet mérite d'être réalisé exactement comme vous l'avez imaginé.</p>
+    </div>
+  </section>
+
+  <!-- 01 — STRATÉGIE DE MARQUE -->
+  <section id="strategy-fr" class="chapter reveal">
+    <div class="wrap">
+      <div class="chapter-head">
+        <span class="chapter-eyebrow">STRATÉGIE DE MARQUE</span>
+        <div class="chapter-rule"></div>
+        <span class="chapter-num mono">— 01/07</span>
+      </div>
+      <div class="chapter-kicker">Notre Position</div>
+      <h2 style="margin-bottom:40px;">La Réalité du Marché. La Réponse de DAR.</h2>
+      <div class="strategy-grid">
+        <div class="strategy-card is-dark">
+          <div class="strategy-label">LA RÉALITÉ DU MARCHÉ</div>
+          <p>Le marché de la construction au Liban est marqué par des promesses non tenues, des entrepreneurs qui disparaissent, et des maîtres d'ouvrage déçus à maintes reprises. La confiance y est la ressource la plus rare.</p>
+        </div>
+        <div class="strategy-card is-orange">
+          <div class="strategy-label">LA RÉPONSE DE DAR</div>
+          <p>DAR ne rivalise pas sur le prix. DAR rivalise sur la certitude. Le client sait exactement ce qu'il obtient, quand il l'obtient, et combien cela coûte. Dans un marché où la confiance est la ressource la plus rare, DAR fait de la confiance son produit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 — HISTOIRE -->
   <section id="story-fr" class="chapter on-paper reveal">
     <div class="wrap">
       <div class="chapter-head">
         <span class="chapter-eyebrow">QUI SOMMES-NOUS</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 01/06</span>
+        <span class="chapter-num mono">— 02/07</span>
       </div>
       <div class="chapter-kicker">Notre Histoire</div>
       <h2 style="margin-bottom:40px;">Une Déclaration. Pas Seulement une Entreprise.</h2>
@@ -1399,19 +1517,21 @@ button,a[href]{ cursor:pointer; }
     </div>
   </section>
 
-  <section class="billboard reveal">
+  <!-- PROPOSITION DE VALEUR UNIQUE — 11 -->
+  <section class="usp-block reveal">
     <div class="wrap">
-      <p class="billboard-text">DAR est le premier entrepreneur libanais à traiter votre maison comme un projet — <em>géré, documenté, livré.</em></p>
+      <div class="usp-headline">DAR est le premier entrepreneur libanais à traiter votre maison comme un projet — géré, documenté, livré.</div>
+      <p class="usp-body">Service complet, de la conception à la finition. Délais fixes. Coûts transparents. Communication professionnelle tout au long du projet. Pas de disparition. Pas d'excuses. Pas de surprises.</p>
     </div>
   </section>
 
-  <!-- 02 — MISSION / VISION / VALEURS -->
+  <!-- 03 — MISSION / VISION / VALEURS -->
   <section id="mission-fr" class="chapter on-dark reveal">
     <div class="wrap">
       <div class="chapter-head">
         <span class="chapter-eyebrow">MISSION · VISION · VALEURS</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 02/06</span>
+        <span class="chapter-num mono">— 03/07</span>
       </div>
       <div class="chapter-kicker">Raison d'Être</div>
       <h2 style="margin-bottom:40px;color:#fff;">Ce Que Nous Défendons. Où Nous Allons.</h2>
@@ -1429,12 +1549,12 @@ button,a[href]{ cursor:pointer; }
         </div>
       </div>
 
-      <div class="values-row stagger">
-        <div class="value-chip"><div class="en">Confiance</div><div class="native">الثقة</div></div>
-        <div class="value-chip"><div class="en">Loyauté</div><div class="native">الولاء</div></div>
-        <div class="value-chip"><div class="en">Intégrité</div><div class="native">النزاهة</div></div>
-        <div class="value-chip"><div class="en">Engagement</div><div class="native">الالتزام</div></div>
-        <div class="value-chip"><div class="en">Excellence</div><div class="native">التميّز</div></div>
+      <div class="value-grid stagger">
+        <div class="value-card"><span class="num mono">01</span><h4>PRÉCISION</h4><p>Chaque mesure, chaque finition, chaque échéance est non négociable. La précision n'est pas une option — c'est la norme.</p></div>
+        <div class="value-card"><span class="num mono">02</span><h4>TRANSPARENCE</h4><p>Les clients voient chaque coût, chaque délai, chaque décision. Aucune surprise. Aucun chiffre caché. Aucune excuse.</p></div>
+        <div class="value-card"><span class="num mono">03</span><h4>ACHÈVEMENT</h4><p>DAR termine ce qu'elle commence. À chaque fois. Cela semble élémentaire. Sur le marché libanais, c'est révolutionnaire.</p></div>
+        <div class="value-card"><span class="num mono">04</span><h4>ARTISANAT</h4><p>La qualité de la finition reflète le respect du client. DAR ne fait aucun compromis, car le client vivra avec ces détails pour toujours.</p></div>
+        <div class="value-card"><span class="num mono">05</span><h4>INTÉGRITÉ</h4><p>Le contrat est la promesse. La promesse est tenue.</p></div>
       </div>
 
       <div class="promise">
@@ -1443,13 +1563,33 @@ button,a[href]{ cursor:pointer; }
     </div>
   </section>
 
-  <!-- 03 — SERVICES -->
+  <!-- 04 — PERSONNALITÉ DE LA MARQUE -->
+  <section id="personality-fr" class="chapter on-paper reveal">
+    <div class="wrap">
+      <div class="chapter-head">
+        <span class="chapter-eyebrow">PERSONNALITÉ DE LA MARQUE</span>
+        <div class="chapter-rule"></div>
+        <span class="chapter-num mono">— 04/07</span>
+      </div>
+      <div class="chapter-kicker">Notre Caractère</div>
+      <h2 style="margin-bottom:40px;">Confiante. Haut de Gamme. Moderne. Fiable.</h2>
+      <p class="personality-lead">DAR est l'entrepreneur qui se présente le premier jour <em>et</em> le dernier jour. Qui appelle avant que vous n'appeliez. Qui signale un problème avant qu'il ne devienne coûteux. Qui est fier d'un travail que la plupart des gens ne remarqueront jamais — car cette précision invisible est ce qui distingue une maison d'un foyer.</p>
+      <div class="trait-grid stagger">
+        <div class="trait-chip is-dark">CONFIANTE</div>
+        <div class="trait-chip is-orange">HAUT DE GAMME</div>
+        <div class="trait-chip">MODERNE</div>
+        <div class="trait-chip is-outline">FIABLE</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 — SERVICES -->
   <section id="services-fr" class="chapter reveal">
     <div class="wrap">
       <div class="chapter-head">
         <span class="chapter-eyebrow">NOS SERVICES</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 03/06</span>
+        <span class="chapter-num mono">— 05/07</span>
       </div>
       <div class="chapter-kicker">Ce Que Nous Faisons</div>
       <h2 style="margin-bottom:40px;">Une Prestation Complète.</h2>
@@ -1542,7 +1682,7 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-head">
         <span class="chapter-eyebrow">POURQUOI DAR</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 04/06</span>
+        <span class="chapter-num mono">— 06/07</span>
       </div>
       <div class="chapter-kicker">Nos Principes</div>
       <h2 style="margin-bottom:40px;">Ce Que Nous Défendons. Ce Que Nous Refusons.</h2>
@@ -1599,52 +1739,20 @@ button,a[href]{ cursor:pointer; }
           <p class="msg-text">DAR communique de manière proactive — mises à jour, photos, décisions — pour que vous gardiez toujours le contrôle, où que vous soyez.</p>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- 05 — PARTENAIRES -->
-  <section id="partners-fr" class="chapter reveal">
-    <div class="wrap">
-      <div class="chapter-head">
-        <span class="chapter-eyebrow">NOTRE PARTENAIRE</span>
-        <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 05/06</span>
-      </div>
-      <div class="chapter-kicker">Matériaux &amp; Entreprise</div>
-      <h2 style="margin-bottom:40px;">Une Expertise Mondiale. Une Livraison Locale.</h2>
-
-      <div class="partner-grid stagger">
-        <div class="partner-card">
-          <div class="partner-kicker">PARTENAIRE MATÉRIAUX</div>
-          <h3>DCP — Matériaux de Construction Britanniques</h3>
-          <div class="partner-by">Présenté par l'ingénieur Khalil Berkashi</div>
-          <p>DCP, l'entreprise britannique de matériaux de construction, apporte plus de 95 ans d'expertise dans le développement, la fabrication et la commercialisation de matériaux de construction innovants, en Amérique du Nord, en Europe, en Afrique, au Moyen-Orient et en Asie.</p>
-          <div class="partner-stats">
-            <div class="partner-stat"><b>95+</b><span>ANS D'EXPERTISE</span></div>
-            <div class="partner-stat"><b>14</b><span>SITES DE FABRICATION</span></div>
-            <div class="partner-stat"><b>30+</b><span>PAYS</span></div>
-          </div>
-        </div>
-        <div class="partner-card">
-          <div class="partner-kicker">PARTENAIRE ENTREPRENEUR</div>
-          <h3>HEK.HOUSE — Innovating Your Home</h3>
-          <div class="partner-by">Présenté par l'ingénieur Hussein Lhek</div>
-          <p>Fondée en 2024, Hek House est une entreprise de construction moderne basée au Liban, spécialisée dans la construction de maisons, la rénovation de bâtiments, les infrastructures et les projets routiers, ainsi que le commerce de matériaux de construction et de panneaux solaires.</p>
-          <div class="partner-stats">
-            <div class="partner-stat"><b>2024</b><span>FONDÉE</span></div>
-            <div class="partner-stat"><b>LB</b><span>BASÉE AU LIBAN</span></div>
-          </div>
-        </div>
+      <div class="elevator">
+        <div class="elevator-label">LE PITCH DE 30 SECONDES</div>
+        <p class="elevator-text">&laquo;&nbsp;DAR est une <strong>entreprise de construction et de finition intégrée</strong> basée au Liban. Nous gérons chaque étape du projet — jusqu'à la dernière couche de peinture — pour les clients qui veulent un travail bien fait, dans les délais, et sans surprises. Nous avons créé DAR parce que nous avons vu ce que de mauvais entrepreneurs faisaient aux maisons et aux économies des gens. Nous avons bâti cette entreprise pour être la réponse à cela. <strong>DAR signifie foyer. C'est exactement ce que nous protégeons.</strong>&nbsp;&raquo;</p>
       </div>
     </div>
   </section>
 
-  <!-- 06 — CONTACT -->
+  <!-- 07 — CONTACT -->
   <section id="contact-fr" class="contact reveal">
     <svg class="hero-pattern" width="100%" height="100%" preserveAspectRatio="none" style="opacity:.1;"><rect width="100%" height="100%" fill="url(#dar-pattern)"/></svg>
     <div class="contact-ring" style="width:520px;height:520px;left:50%;top:50%;transform:translate(-50%,-50%);"></div>
     <div class="wrap contact-inner">
-      <div class="contact-kicker">CONSTRUISONS ENSEMBLE — 06/06</div>
+      <div class="contact-kicker">CONSTRUISONS ENSEMBLE — 07/07</div>
       <h2>Votre Partenaire Commercial à Long Terme.</h2>
       <p class="contact-sub">Le résultat d'abord. Le paiement suit. Parlons de votre projet.</p>
       <div class="contact-actions">
