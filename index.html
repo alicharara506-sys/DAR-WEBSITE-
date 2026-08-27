@@ -97,10 +97,10 @@ button,a[href]{ cursor:pointer; }
 
 /* ---------- staggered scroll reveal (GSAP-equivalent: 0.08s stagger, ~500ms, power2-out, capped at 8) ---------- */
 .stagger > *{
-  opacity:0; transform:perspective(1000px) rotateX(16deg) translateY(24px); transform-origin:50% 100%;
-  transition:opacity .6s cubic-bezier(.25,.46,.45,.94), transform .6s cubic-bezier(.25,.46,.45,.94);
+  opacity:0; transform:perspective(1000px) rotateX(16deg) translateY(24px) scale(.82); transform-origin:50% 100%;
+  transition:opacity .5s cubic-bezier(.34,1.56,.64,1), transform .5s cubic-bezier(.34,1.56,.64,1);
 }
-.stagger.in > *{ opacity:1; transform:perspective(1000px) rotateX(0deg) translateY(0); }
+.stagger.in > *{ opacity:1; transform:perspective(1000px) rotateX(0deg) translateY(0) scale(1); }
 .stagger > *:nth-child(1){ transition-delay:0ms; }
 .stagger > *:nth-child(2){ transition-delay:80ms; }
 .stagger > *:nth-child(3){ transition-delay:160ms; }
@@ -135,24 +135,6 @@ button,a[href]{ cursor:pointer; }
   transition:transform .45s cubic-bezier(.16,1,.3,1), opacity .4s ease;
 }
 .site-modal.is-open .site-modal-panel{ transform:perspective(1400px) rotateX(0deg) scale(1); opacity:1; }
-.site-modal-close{
-  position:absolute; top:14px; inset-inline-end:14px; z-index:2; width:36px; height:36px; border-radius:50%;
-  background:rgba(255,255,255,.12); color:#fff; border:none; font-size:20px; line-height:1;
-  display:flex; align-items:center; justify-content:center; transition:background .2s ease;
-}
-.site-modal-close:hover{ background:rgba(255,255,255,.24); }
-.site-modal-nav{
-  position:absolute; top:50%; transform:translateY(-50%); z-index:2; width:44px; height:44px; border-radius:50%;
-  background:rgba(255,255,255,.1); color:#fff; border:none; font-size:24px; line-height:1;
-  display:flex; align-items:center; justify-content:center; transition:background .2s ease,opacity .2s ease;
-}
-.site-modal-nav:hover{ background:rgba(255,255,255,.22); }
-.site-modal-prev{ inset-inline-start:14px; }
-.site-modal-next{ inset-inline-end:14px; }
-.site-modal-prev::before{ content:'\2039'; }
-.site-modal-next::before{ content:'\203A'; }
-.site-modal-panel[dir="rtl"] .site-modal-prev::before{ content:'\203A'; }
-.site-modal-panel[dir="rtl"] .site-modal-next::before{ content:'\2039'; }
 .site-modal-content{ padding:8px; }
 .site-modal-content .modal-card-inner{
   transform:scale(1); transition:none; cursor:default; pointer-events:none;
@@ -610,8 +592,8 @@ button,a[href]{ cursor:pointer; }
 .footer-social .icon{ width:16px; height:16px; }
 
 /* fade-in on scroll */
-.reveal{ opacity:0; transform:perspective(1200px) rotateX(10deg) translateY(18px); transform-origin:50% 100%; transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94); }
-.reveal.in{ opacity:1; transform:perspective(1200px) rotateX(0deg) translateY(0); }
+.reveal{ opacity:0; transform:perspective(1200px) rotateX(10deg) translateY(18px) scale(.92); transform-origin:50% 100%; transition:opacity .55s cubic-bezier(.34,1.56,.64,1),transform .55s cubic-bezier(.34,1.56,.64,1); }
+.reveal.in{ opacity:1; transform:perspective(1200px) rotateX(0deg) translateY(0) scale(1); }
 
 </style>
 </head>
@@ -763,7 +745,7 @@ button,a[href]{ cursor:pointer; }
       </div>
       <div class="chapter-kicker">Our Position</div>
       <h2 style="margin-bottom:40px;">The Market Reality. The DAR Answer.</h2>
-      <div class="strategy-grid">
+      <div class="strategy-grid stagger">
         <div class="strategy-card is-dark tilt3d">
           <div class="strategy-label">THE MARKET REALITY</div>
           <p>Lebanon's construction market is defined by broken promises, disappearing contractors, and project owners who have been let down too many times. Trust is the rarest commodity in this market.</p>
@@ -1197,7 +1179,7 @@ button,a[href]{ cursor:pointer; }
       </div>
       <div class="chapter-kicker">موقعنا في السوق</div>
       <h2 style="margin-bottom:40px;">واقع السوق. جواب دار.</h2>
-      <div class="strategy-grid">
+      <div class="strategy-grid stagger">
         <div class="strategy-card is-dark tilt3d">
           <div class="strategy-label">واقع السوق</div>
           <p>يتسم سوق البناء اللبناني بالوعود المكسورة والمقاولين المختفين وأصحاب المشاريع الذين خُذلوا مرات عديدة. الثقة هي أندر ما يمكن إيجاده في هذا السوق.</p>
@@ -1631,7 +1613,7 @@ button,a[href]{ cursor:pointer; }
       </div>
       <div class="chapter-kicker">Notre Position</div>
       <h2 style="margin-bottom:40px;">La Réalité du Marché. La Réponse de DAR.</h2>
-      <div class="strategy-grid">
+      <div class="strategy-grid stagger">
         <div class="strategy-card is-dark tilt3d">
           <div class="strategy-label">LA RÉALITÉ DU MARCHÉ</div>
           <p>Le marché de la construction au Liban est marqué par des promesses non tenues, des entrepreneurs qui disparaissent, et des maîtres d'ouvrage déçus à maintes reprises. La confiance y est la ressource la plus rare.</p>
@@ -2092,24 +2074,16 @@ button,a[href]{ cursor:pointer; }
     });
   }
 
-  /* ---------- sitewide interactive 3D popup ---------- */
+  /* ---------- sitewide interactive 3D popup (click a card to expand; click outside or Esc to dismiss) ---------- */
   var modal = document.createElement('div');
   modal.className = 'site-modal';
   modal.innerHTML =
     '<div class="site-modal-panel" tabindex="-1">' +
-      '<button type="button" class="site-modal-close" aria-label="Close">&times;</button>' +
-      '<button type="button" class="site-modal-nav site-modal-prev" aria-label="Previous"></button>' +
-      '<button type="button" class="site-modal-nav site-modal-next" aria-label="Next"></button>' +
       '<div class="site-modal-content"></div>' +
     '</div>';
   document.body.appendChild(modal);
   var modalPanel = modal.querySelector('.site-modal-panel');
   var modalContent = modal.querySelector('.site-modal-content');
-  var modalPrev = modal.querySelector('.site-modal-prev');
-  var modalNext = modal.querySelector('.site-modal-next');
-  var modalGroup = [];
-  var modalIndex = -1;
-  var groupSelectors = '.trades-grid, .value-grid, .mv-grid, .strategy-grid, .agent-grid, .svc-grid, .trait-grid';
 
   function renderModalCard(el){
     modalContent.innerHTML = '';
@@ -2122,16 +2096,7 @@ button,a[href]{ cursor:pointer; }
   }
 
   function openModal(el){
-    var group = el.closest(groupSelectors);
-    modalGroup = group ? Array.prototype.filter.call(group.children, function(c){
-      return c.classList.contains('tc') || c.classList.contains('tilt3d');
-    }) : [el];
-    modalIndex = modalGroup.indexOf(el);
-    if(modalIndex === -1){ modalGroup = [el]; modalIndex = 0; }
-    renderModalCard(modalGroup[modalIndex]);
-    var multi = modalGroup.length > 1;
-    modalPrev.style.display = multi ? '' : 'none';
-    modalNext.style.display = multi ? '' : 'none';
+    renderModalCard(el);
     modal.classList.add('is-open');
     document.documentElement.style.overflow = 'hidden';
   }
@@ -2142,24 +2107,13 @@ button,a[href]{ cursor:pointer; }
     modalPanel.style.transform = '';
   }
 
-  function stepModal(dir){
-    if(modalGroup.length < 2) return;
-    modalIndex = (modalIndex + dir + modalGroup.length) % modalGroup.length;
-    renderModalCard(modalGroup[modalIndex]);
-  }
-
   document.querySelectorAll('.tc, .tilt3d').forEach(function(el){
     el.addEventListener('click', function(){ openModal(el); });
   });
-  modal.querySelector('.site-modal-close').addEventListener('click', closeModal);
   modal.addEventListener('click', function(e){ if(e.target === modal) closeModal(); });
-  modalPrev.addEventListener('click', function(){ stepModal(-1); });
-  modalNext.addEventListener('click', function(){ stepModal(1); });
   document.addEventListener('keydown', function(e){
     if(!modal.classList.contains('is-open')) return;
     if(e.key === 'Escape') closeModal();
-    else if(e.key === 'ArrowRight') stepModal(1);
-    else if(e.key === 'ArrowLeft') stepModal(-1);
   });
 
   if(!reduceMotion && hasFinePointer){
