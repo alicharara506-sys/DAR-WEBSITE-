@@ -424,6 +424,28 @@ button,a[href]{ cursor:pointer; }
 .trade-cell .en{ font-size:11.5px; font-weight:600; }
 .trade-cell .native{ font-size:10px; color:var(--ink-muted); }
 
+/* ---------- 3D tilt photo cards (trades with sourced photography) ---------- */
+.tc{
+  position:relative; aspect-ratio:4/5; border-radius:4px; overflow:hidden; cursor:pointer;
+  background:linear-gradient(150deg,#2b2b2b,#111111) center/cover;
+  transform-style:preserve-3d; transform:perspective(900px) rotateX(0) rotateY(0) scale3d(1,1,1);
+  transition:transform .5s cubic-bezier(.23,1,.32,1), box-shadow .5s ease;
+  box-shadow:0 8px 20px -12px rgba(0,0,0,.35);
+}
+.tc.is-tilting{ transition:transform .08s linear; box-shadow:0 24px 40px -16px rgba(0,0,0,.45); }
+.tc-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transform:translateZ(0) scale(1.001); }
+.tc-shade{ position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,.82) 0%,rgba(0,0,0,.25) 46%,rgba(0,0,0,0) 68%); }
+.tc-glare{
+  position:absolute; inset:0; opacity:0; transition:opacity .4s ease; mix-blend-mode:overlay;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,.55), rgba(255,255,255,0) 60%);
+}
+.tc.is-tilting .tc-glare{ opacity:1; }
+.tc-body{ position:absolute; left:0; right:0; bottom:0; padding:16px 14px; transform:translateZ(40px); }
+.tc-en{ font-size:12.5px; font-weight:700; color:#fff; letter-spacing:.02em; }
+.tc-native{ font-size:10.5px; color:rgba(255,255,255,.65); margin-top:2px; }
+[data-lang="ar"] .tc-body{ text-align:right; }
+@media (prefers-reduced-motion:reduce){ .tc, .tc-glare{ transition:none; } }
+
 /* ============================================================
    BILLBOARD (type-as-hero break, between 05 and 06)
    ============================================================ */
@@ -862,18 +884,17 @@ button,a[href]{ cursor:pointer; }
 
       <div class="trades-label">EVERY TRADE. EVERY CRAFT.</div>
       <div class="trades-grid stagger">
-        <div class="trade-cell"><svg class="icon"><use href="#i-paintbrush"/></svg><div class="en">Interior Painting</div><div class="native">طلاء داخلي</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-paintbrush"/></svg><div class="en">Exterior Painting</div><div class="native">طلاء خارجي</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-gypsum"/></svg><div class="en">Gypsum Ceilings</div><div class="native">أسقف جبس بورد</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-ceiling"/></svg><div class="en">PVC Ceilings</div><div class="native">أسقف PVC</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-metal"/></svg><div class="en">Metallic Ceilings</div><div class="native">أسقف معدنية</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-flooring"/></svg><div class="en">Epoxy Flooring</div><div class="native">أرضيات إيبوكسي</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-tile"/></svg><div class="en">Tiles</div><div class="native">بلاط</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-marble"/></svg><div class="en">Marble</div><div class="native">رخام</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-granite"/></svg><div class="en">Granite</div><div class="native">غرانيت</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-pavers"/></svg><div class="en">Interlocking Pavers</div><div class="native">بلاط إنترلوك</div></div>
+        <div class="tc" data-photo="interior-painting"><img class="tc-img" src="assets/trades/interior-painting.jpg" alt="Interior Painting" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Interior Painting</div><div class="tc-native">طلاء داخلي</div></div></div>
+        <div class="tc" data-photo="gypsum-ceilings"><img class="tc-img" src="assets/trades/gypsum-ceilings.jpg" alt="Gypsum Ceilings" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Gypsum Ceilings</div><div class="tc-native">أسقف جبس بورد</div></div></div>
+        <div class="tc" data-photo="pvc-ceilings"><img class="tc-img" src="assets/trades/pvc-ceilings.jpg" alt="PVC Ceilings" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">PVC Ceilings</div><div class="tc-native">أسقف PVC</div></div></div>
+        <div class="tc" data-photo="metallic-ceilings"><img class="tc-img" src="assets/trades/metallic-ceilings.jpg" alt="Metallic Ceilings" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Metallic Ceilings</div><div class="tc-native">أسقف معدنية</div></div></div>
+        <div class="tc" data-photo="epoxy-flooring"><img class="tc-img" src="assets/trades/epoxy-flooring.jpg" alt="Epoxy Flooring" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Epoxy Flooring</div><div class="tc-native">أرضيات إيبوكسي</div></div></div>
+        <div class="tc" data-photo="tiles"><img class="tc-img" src="assets/trades/tiles.jpg" alt="Tiles" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Tiles</div><div class="tc-native">بلاط</div></div></div>
+        <div class="tc" data-photo="marble"><img class="tc-img" src="assets/trades/marble.jpg" alt="Marble" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Marble</div><div class="tc-native">رخام</div></div></div>
+        <div class="tc" data-photo="granite"><img class="tc-img" src="assets/trades/granite.jpg" alt="Granite" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Granite</div><div class="tc-native">غرانيت</div></div></div>
+        <div class="tc" data-photo="interlocking-pavers"><img class="tc-img" src="assets/trades/interlocking-pavers.jpg" alt="Interlocking Pavers" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Interlocking Pavers</div><div class="tc-native">بلاط إنترلوك</div></div></div>
         <div class="trade-cell"><svg class="icon"><use href="#i-concrete"/></svg><div class="en">Textured Concrete</div><div class="native">خرسانة مزخرفة</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-breaker"/></svg><div class="en">Electrical Panels</div><div class="native">لوحات كهربائية</div></div>
+        <div class="tc" data-photo="electrical-panels"><img class="tc-img" src="assets/trades/electrical-panels.jpg" alt="Electrical Panels" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Electrical Panels</div><div class="tc-native">لوحات كهربائية</div></div></div>
         <div class="trade-cell"><svg class="icon"><use href="#i-pipe"/></svg><div class="en">PVC Plumbing</div><div class="native">سباكة PVC</div></div>
         <div class="trade-cell"><svg class="icon"><use href="#i-bolt"/></svg><div class="en">Electrical Wiring</div><div class="native">تمديدات كهربائية</div></div>
         <div class="trade-cell"><svg class="icon"><use href="#i-faucet"/></svg><div class="en">Plumbing System</div><div class="native">أنظمة سباكة</div></div>
@@ -1301,18 +1322,17 @@ button,a[href]{ cursor:pointer; }
 
       <div class="trades-label">كل مهنة. كل حرفة.</div>
       <div class="trades-grid stagger">
-        <div class="trade-cell"><svg class="icon"><use href="#i-paintbrush"/></svg><div class="en">طلاء داخلي</div><div class="native" dir="ltr">Interior Painting</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-paintbrush"/></svg><div class="en">طلاء خارجي</div><div class="native" dir="ltr">Exterior Painting</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-gypsum"/></svg><div class="en">أسقف جبس بورد</div><div class="native" dir="ltr">Gypsum</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-ceiling"/></svg><div class="en">أسقف PVC</div><div class="native" dir="ltr">PVC Ceilings</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-metal"/></svg><div class="en">أسقف معدنية</div><div class="native" dir="ltr">Metallic</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-flooring"/></svg><div class="en">أرضيات إيبوكسي</div><div class="native" dir="ltr">Epoxy</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-tile"/></svg><div class="en">بلاط</div><div class="native" dir="ltr">Tiles</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-marble"/></svg><div class="en">رخام</div><div class="native" dir="ltr">Marble</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-granite"/></svg><div class="en">غرانيت</div><div class="native" dir="ltr">Granite</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-pavers"/></svg><div class="en">بلاط إنترلوك</div><div class="native" dir="ltr">Pavers</div></div>
+        <div class="tc" data-photo="interior-painting"><img class="tc-img" src="assets/trades/interior-painting.jpg" alt="طلاء داخلي" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">طلاء داخلي</div><div class="tc-native" dir="ltr">Interior Painting</div></div></div>
+        <div class="tc" data-photo="gypsum-ceilings"><img class="tc-img" src="assets/trades/gypsum-ceilings.jpg" alt="أسقف جبس بورد" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">أسقف جبس بورد</div><div class="tc-native" dir="ltr">Gypsum</div></div></div>
+        <div class="tc" data-photo="pvc-ceilings"><img class="tc-img" src="assets/trades/pvc-ceilings.jpg" alt="أسقف PVC" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">أسقف PVC</div><div class="tc-native" dir="ltr">PVC Ceilings</div></div></div>
+        <div class="tc" data-photo="metallic-ceilings"><img class="tc-img" src="assets/trades/metallic-ceilings.jpg" alt="أسقف معدنية" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">أسقف معدنية</div><div class="tc-native" dir="ltr">Metallic</div></div></div>
+        <div class="tc" data-photo="epoxy-flooring"><img class="tc-img" src="assets/trades/epoxy-flooring.jpg" alt="أرضيات إيبوكسي" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">أرضيات إيبوكسي</div><div class="tc-native" dir="ltr">Epoxy</div></div></div>
+        <div class="tc" data-photo="tiles"><img class="tc-img" src="assets/trades/tiles.jpg" alt="بلاط" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">بلاط</div><div class="tc-native" dir="ltr">Tiles</div></div></div>
+        <div class="tc" data-photo="marble"><img class="tc-img" src="assets/trades/marble.jpg" alt="رخام" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">رخام</div><div class="tc-native" dir="ltr">Marble</div></div></div>
+        <div class="tc" data-photo="granite"><img class="tc-img" src="assets/trades/granite.jpg" alt="غرانيت" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">غرانيت</div><div class="tc-native" dir="ltr">Granite</div></div></div>
+        <div class="tc" data-photo="interlocking-pavers"><img class="tc-img" src="assets/trades/interlocking-pavers.jpg" alt="بلاط إنترلوك" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">بلاط إنترلوك</div><div class="tc-native" dir="ltr">Pavers</div></div></div>
         <div class="trade-cell"><svg class="icon"><use href="#i-concrete"/></svg><div class="en">خرسانة مزخرفة</div><div class="native" dir="ltr">Concrete</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-breaker"/></svg><div class="en">لوحات كهربائية</div><div class="native" dir="ltr">Panels</div></div>
+        <div class="tc" data-photo="electrical-panels"><img class="tc-img" src="assets/trades/electrical-panels.jpg" alt="لوحات كهربائية" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">لوحات كهربائية</div><div class="tc-native" dir="ltr">Panels</div></div></div>
         <div class="trade-cell"><svg class="icon"><use href="#i-pipe"/></svg><div class="en">سباكة PVC</div><div class="native" dir="ltr">PVC Plumbing</div></div>
         <div class="trade-cell"><svg class="icon"><use href="#i-bolt"/></svg><div class="en">تمديدات كهربائية</div><div class="native" dir="ltr">Wiring</div></div>
         <div class="trade-cell"><svg class="icon"><use href="#i-faucet"/></svg><div class="en">أنظمة سباكة</div><div class="native" dir="ltr">Plumbing System</div></div>
@@ -1740,18 +1760,17 @@ button,a[href]{ cursor:pointer; }
 
       <div class="trades-label">CHAQUE MÉTIER. CHAQUE SAVOIR-FAIRE.</div>
       <div class="trades-grid stagger">
-        <div class="trade-cell"><svg class="icon"><use href="#i-paintbrush"/></svg><div class="en">Peinture Intérieure</div><div class="native">طلاء داخلي</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-paintbrush"/></svg><div class="en">Peinture Extérieure</div><div class="native">طلاء خارجي</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-gypsum"/></svg><div class="en">Plafonds Plâtre</div><div class="native">أسقف جبس بورد</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-ceiling"/></svg><div class="en">Plafonds PVC</div><div class="native">أسقف PVC</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-metal"/></svg><div class="en">Plafonds Métalliques</div><div class="native">أسقف معدنية</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-flooring"/></svg><div class="en">Époxy</div><div class="native">أرضيات إيبوكسي</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-tile"/></svg><div class="en">Carrelage</div><div class="native">بلاط</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-marble"/></svg><div class="en">Marbre</div><div class="native">رخام</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-granite"/></svg><div class="en">Granit</div><div class="native">غرانيت</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-pavers"/></svg><div class="en">Pavés Autobloquants</div><div class="native">بلاط إنترلوك</div></div>
+        <div class="tc" data-photo="interior-painting"><img class="tc-img" src="assets/trades/interior-painting.jpg" alt="Peinture Intérieure" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Peinture Intérieure</div><div class="tc-native">طلاء داخلي</div></div></div>
+        <div class="tc" data-photo="gypsum-ceilings"><img class="tc-img" src="assets/trades/gypsum-ceilings.jpg" alt="Plafonds Plâtre" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Plafonds Plâtre</div><div class="tc-native">أسقف جبس بورد</div></div></div>
+        <div class="tc" data-photo="pvc-ceilings"><img class="tc-img" src="assets/trades/pvc-ceilings.jpg" alt="Plafonds PVC" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Plafonds PVC</div><div class="tc-native">أسقف PVC</div></div></div>
+        <div class="tc" data-photo="metallic-ceilings"><img class="tc-img" src="assets/trades/metallic-ceilings.jpg" alt="Plafonds Métalliques" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Plafonds Métalliques</div><div class="tc-native">أسقف معدنية</div></div></div>
+        <div class="tc" data-photo="epoxy-flooring"><img class="tc-img" src="assets/trades/epoxy-flooring.jpg" alt="Époxy" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Époxy</div><div class="tc-native">أرضيات إيبوكسي</div></div></div>
+        <div class="tc" data-photo="tiles"><img class="tc-img" src="assets/trades/tiles.jpg" alt="Carrelage" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Carrelage</div><div class="tc-native">بلاط</div></div></div>
+        <div class="tc" data-photo="marble"><img class="tc-img" src="assets/trades/marble.jpg" alt="Marbre" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Marbre</div><div class="tc-native">رخام</div></div></div>
+        <div class="tc" data-photo="granite"><img class="tc-img" src="assets/trades/granite.jpg" alt="Granit" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Granit</div><div class="tc-native">غرانيت</div></div></div>
+        <div class="tc" data-photo="interlocking-pavers"><img class="tc-img" src="assets/trades/interlocking-pavers.jpg" alt="Pavés Autobloquants" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Pavés Autobloquants</div><div class="tc-native">بلاط إنترلوك</div></div></div>
         <div class="trade-cell"><svg class="icon"><use href="#i-concrete"/></svg><div class="en">Béton Décoratif</div><div class="native">خرسانة مزخرفة</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-breaker"/></svg><div class="en">Tableaux Électriques</div><div class="native">لوحات كهربائية</div></div>
+        <div class="tc" data-photo="electrical-panels"><img class="tc-img" src="assets/trades/electrical-panels.jpg" alt="Tableaux Électriques" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Tableaux Électriques</div><div class="tc-native">لوحات كهربائية</div></div></div>
         <div class="trade-cell"><svg class="icon"><use href="#i-pipe"/></svg><div class="en">Plomberie PVC</div><div class="native">سباكة PVC</div></div>
         <div class="trade-cell"><svg class="icon"><use href="#i-bolt"/></svg><div class="en">Câblage Électrique</div><div class="native">تمديدات كهربائية</div></div>
         <div class="trade-cell"><svg class="icon"><use href="#i-faucet"/></svg><div class="en">Système Plomberie</div><div class="native">أنظمة سباكة</div></div>
@@ -2000,6 +2019,31 @@ button,a[href]{ cursor:pointer; }
       });
     }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
     Object.keys(railMap).forEach(function(id){ railIO.observe(document.getElementById(id)); });
+  }
+
+  /* ---------- 3D tilt photo cards ---------- */
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasFinePointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+  if(!reduceMotion && hasFinePointer){
+    document.querySelectorAll('.tc').forEach(function(card){
+      var maxTilt = 12;
+      function onMove(e){
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width;
+        var py = (e.clientY - r.top) / r.height;
+        var rotY = (px - 0.5) * maxTilt * 2;
+        var rotX = (0.5 - py) * maxTilt * 2;
+        card.style.transform = 'perspective(900px) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) scale3d(1.04,1.04,1.04)';
+        card.style.setProperty('--mx', (px * 100) + '%');
+        card.style.setProperty('--my', (py * 100) + '%');
+      }
+      card.addEventListener('mouseenter', function(){ card.classList.add('is-tilting'); });
+      card.addEventListener('mousemove', onMove);
+      card.addEventListener('mouseleave', function(){
+        card.classList.remove('is-tilting');
+        card.style.transform = 'perspective(900px) rotateX(0) rotateY(0) scale3d(1,1,1)';
+      });
+    });
   }
 })();
 </script>
