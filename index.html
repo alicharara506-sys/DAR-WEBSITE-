@@ -117,6 +117,61 @@ button,a[href]{ cursor:pointer; }
 }
 .tilt3d.is-tilting{ transition:transform .08s linear; }
 @media (prefers-reduced-motion:reduce){ .tilt3d{ transition:none; } }
+.tc, .tilt3d{ cursor:pointer; }
+
+/* ---------- sitewide interactive 3D popup (click any card to expand) ---------- */
+.site-modal{
+  position:fixed; inset:0; z-index:200; display:flex; align-items:center; justify-content:center;
+  padding:32px; opacity:0; visibility:hidden; pointer-events:none;
+  background:rgba(10,9,8,.72); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+  transition:opacity .35s ease, visibility 0s linear .35s;
+}
+.site-modal.is-open{ opacity:1; visibility:visible; pointer-events:auto; transition:opacity .35s ease; }
+.site-modal-panel{
+  position:relative; width:min(640px,100%); max-height:86vh; overflow:auto;
+  background:var(--ink); border-radius:6px; border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 40px 80px -20px rgba(0,0,0,.75), 0 0 0 1px rgba(0,0,0,.3);
+  transform:perspective(1400px) rotateX(8deg) scale(.92); opacity:0;
+  transition:transform .45s cubic-bezier(.16,1,.3,1), opacity .4s ease;
+}
+.site-modal.is-open .site-modal-panel{ transform:perspective(1400px) rotateX(0deg) scale(1); opacity:1; }
+.site-modal-close{
+  position:absolute; top:14px; inset-inline-end:14px; z-index:2; width:36px; height:36px; border-radius:50%;
+  background:rgba(255,255,255,.12); color:#fff; border:none; font-size:20px; line-height:1;
+  display:flex; align-items:center; justify-content:center; transition:background .2s ease;
+}
+.site-modal-close:hover{ background:rgba(255,255,255,.24); }
+.site-modal-nav{
+  position:absolute; top:50%; transform:translateY(-50%); z-index:2; width:44px; height:44px; border-radius:50%;
+  background:rgba(255,255,255,.1); color:#fff; border:none; font-size:24px; line-height:1;
+  display:flex; align-items:center; justify-content:center; transition:background .2s ease,opacity .2s ease;
+}
+.site-modal-nav:hover{ background:rgba(255,255,255,.22); }
+.site-modal-prev{ inset-inline-start:14px; }
+.site-modal-next{ inset-inline-end:14px; }
+.site-modal-prev::before{ content:'\2039'; }
+.site-modal-next::before{ content:'\203A'; }
+.site-modal-panel[dir="rtl"] .site-modal-prev::before{ content:'\203A'; }
+.site-modal-panel[dir="rtl"] .site-modal-next::before{ content:'\2039'; }
+.site-modal-content{ padding:8px; }
+.site-modal-content .modal-card-inner{
+  transform:scale(1); transition:none; cursor:default; pointer-events:none;
+}
+.site-modal-content .tc{ aspect-ratio:4/5; width:100%; max-height:70vh; box-shadow:none; }
+.site-modal-content .mv-card,
+.site-modal-content .value-card,
+.site-modal-content .strategy-card,
+.site-modal-content .agent-card,
+.site-modal-content .svc-card,
+.site-modal-content .trait-chip{ border:none; padding:44px 40px; }
+.site-modal-content .value-card{ background:rgba(255,255,255,.04); }
+@media (max-width:560px){
+  .site-modal{ padding:16px; }
+  .site-modal-content .mv-card, .site-modal-content .value-card,
+  .site-modal-content .strategy-card, .site-modal-content .agent-card,
+  .site-modal-content .svc-card, .site-modal-content .trait-chip{ padding:32px 24px; }
+}
+@media (prefers-reduced-motion:reduce){ .site-modal, .site-modal-panel{ transition:none; } }
 
 /* ---------- shared layout helpers ---------- */
 .wrap{ max-width:var(--wrap); margin:0 auto; padding:0 28px; }
@@ -2035,6 +2090,88 @@ button,a[href]{ cursor:pointer; }
         card.style.transform = 'perspective(900px) rotateX(0) rotateY(0) scale3d(1,1,1)';
       });
     });
+  }
+
+  /* ---------- sitewide interactive 3D popup ---------- */
+  var modal = document.createElement('div');
+  modal.className = 'site-modal';
+  modal.innerHTML =
+    '<div class="site-modal-panel" tabindex="-1">' +
+      '<button type="button" class="site-modal-close" aria-label="Close">&times;</button>' +
+      '<button type="button" class="site-modal-nav site-modal-prev" aria-label="Previous"></button>' +
+      '<button type="button" class="site-modal-nav site-modal-next" aria-label="Next"></button>' +
+      '<div class="site-modal-content"></div>' +
+    '</div>';
+  document.body.appendChild(modal);
+  var modalPanel = modal.querySelector('.site-modal-panel');
+  var modalContent = modal.querySelector('.site-modal-content');
+  var modalPrev = modal.querySelector('.site-modal-prev');
+  var modalNext = modal.querySelector('.site-modal-next');
+  var modalGroup = [];
+  var modalIndex = -1;
+  var groupSelectors = '.trades-grid, .value-grid, .mv-grid, .strategy-grid, .agent-grid, .svc-grid, .trait-grid';
+
+  function renderModalCard(el){
+    modalContent.innerHTML = '';
+    var clone = el.cloneNode(true);
+    clone.classList.add('modal-card-inner');
+    clone.removeAttribute('style');
+    modalContent.appendChild(clone);
+    var langRoot = el.closest('[data-lang]');
+    modalPanel.dir = (langRoot && langRoot.getAttribute('data-lang') === 'ar') ? 'rtl' : 'ltr';
+  }
+
+  function openModal(el){
+    var group = el.closest(groupSelectors);
+    modalGroup = group ? Array.prototype.filter.call(group.children, function(c){
+      return c.classList.contains('tc') || c.classList.contains('tilt3d');
+    }) : [el];
+    modalIndex = modalGroup.indexOf(el);
+    if(modalIndex === -1){ modalGroup = [el]; modalIndex = 0; }
+    renderModalCard(modalGroup[modalIndex]);
+    var multi = modalGroup.length > 1;
+    modalPrev.style.display = multi ? '' : 'none';
+    modalNext.style.display = multi ? '' : 'none';
+    modal.classList.add('is-open');
+    document.documentElement.style.overflow = 'hidden';
+  }
+
+  function closeModal(){
+    modal.classList.remove('is-open');
+    document.documentElement.style.overflow = '';
+    modalPanel.style.transform = '';
+  }
+
+  function stepModal(dir){
+    if(modalGroup.length < 2) return;
+    modalIndex = (modalIndex + dir + modalGroup.length) % modalGroup.length;
+    renderModalCard(modalGroup[modalIndex]);
+  }
+
+  document.querySelectorAll('.tc, .tilt3d').forEach(function(el){
+    el.addEventListener('click', function(){ openModal(el); });
+  });
+  modal.querySelector('.site-modal-close').addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e){ if(e.target === modal) closeModal(); });
+  modalPrev.addEventListener('click', function(){ stepModal(-1); });
+  modalNext.addEventListener('click', function(){ stepModal(1); });
+  document.addEventListener('keydown', function(e){
+    if(!modal.classList.contains('is-open')) return;
+    if(e.key === 'Escape') closeModal();
+    else if(e.key === 'ArrowRight') stepModal(1);
+    else if(e.key === 'ArrowLeft') stepModal(-1);
+  });
+
+  if(!reduceMotion && hasFinePointer){
+    modalPanel.addEventListener('mousemove', function(e){
+      var r = modalPanel.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width;
+      var py = (e.clientY - r.top) / r.height;
+      var rotY = (px - 0.5) * 10;
+      var rotX = (0.5 - py) * 10;
+      modalPanel.style.transform = 'perspective(1400px) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg)';
+    });
+    modalPanel.addEventListener('mouseleave', function(){ modalPanel.style.transform = ''; });
   }
 })();
 </script>
