@@ -44,7 +44,6 @@
      footer, etc.) in both themes — only these adapt with the toggle. */
   --text:#111111;
   --text-soft:#4a4a4a;
-  --nav-bg:rgba(255,255,255,.88);
 
   --font-en:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   --font-ar:'Cairo','Segoe UI',sans-serif;
@@ -63,7 +62,6 @@
   --ink-muted:rgba(255,255,255,.55);
   --text:#ffffff;
   --text-soft:rgba(255,255,255,.72);
-  --nav-bg:rgba(17,17,17,.9);
 }
 
 *,*::before,*::after{box-sizing:border-box;}
@@ -168,21 +166,16 @@ button,a[href]{ cursor:pointer; }
 .mark{ display:inline-flex; align-items:flex-start; flex-shrink:0; direction:ltr; }
 .mark .circle{ border-radius:50%; border-style:solid; flex-shrink:0; }
 .mark .vline{ flex-shrink:0; }
-.mark .word{ font-family:var(--font-wordmark); font-weight:900; line-height:.9; letter-spacing:-1px; }
+.mark .word{ font-family:var(--font-wordmark); font-weight:900; line-height:.9; letter-spacing:-.0125em; }
 .mark .tag{ font-family:Arial,sans-serif; font-weight:400; opacity:.6; white-space:nowrap; }
 .mark-wrap{ display:inline-flex; flex-direction:column; }
 
-/* nav-sized mark */
-.nav-mark .circle{ width:9px; height:9px; border-width:1.5px; margin-top:3px; margin-right:5px; }
-.nav-mark .vline{ width:2px; height:30px; }
-.nav-mark .word{ font-size:22px; }
-.nav-mark .tag{ font-size:6.5px; letter-spacing:.14em; margin-top:2px; }
-
-/* footer-sized mark */
-.foot-mark .circle{ width:9px; height:9px; border-width:1.5px; margin-top:3px; margin-right:5px; border-color:var(--orange); }
-.foot-mark .vline{ width:2px; height:30px; background:var(--orange); }
-.foot-mark .word{ font-size:22px; color:#fff; }
-.foot-mark .tag{ font-size:6.5px; letter-spacing:.14em; margin-top:2px; color:var(--white-muted); }
+/* nav & footer marks — both sit on the permanent brand-black bar, so they use the
+   exact primary-logo treatment: orange ring + line, white wordmark, muted grey tag */
+.nav-mark .circle, .foot-mark .circle{ width:9px; height:9px; border-width:1.5px; margin-top:3px; margin-right:5px; border-color:var(--orange); }
+.nav-mark .vline, .foot-mark .vline{ width:2px; height:30px; background:var(--orange); }
+.nav-mark .word, .foot-mark .word{ font-size:22px; color:#fff; }
+.nav-mark .tag, .foot-mark .tag{ font-size:6.5px; letter-spacing:.14em; margin-top:2px; color:var(--white-muted); }
 
 /* ============================================================
    LANGUAGE SWITCH (fixed, chrome — not translated)
@@ -234,13 +227,12 @@ button,a[href]{ cursor:pointer; }
    ============================================================ */
 .nav{
   position:sticky; top:38px; z-index:100;
-  background:var(--nav-bg); backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--hairline);
-  transition:background .25s,border-color .25s;
+  background:rgba(17,17,17,.94); backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.1);
 }
 .nav-inner{ position:relative; display:flex; align-items:center; justify-content:space-between; padding:14px 28px; gap:24px; }
 .nav-links{ display:flex; align-items:center; gap:28px; list-style:none; margin:0; padding:0; }
-.nav-links a{ font-size:12.5px; font-weight:500; letter-spacing:.02em; color:var(--text); opacity:.72; transition:opacity .15s; }
+.nav-links a{ font-size:12.5px; font-weight:500; letter-spacing:.02em; color:#fff; opacity:.72; transition:opacity .15s; }
 .nav-links a:hover{ opacity:1; }
 .nav-cta{
   display:inline-flex; align-items:center; min-height:44px;
@@ -250,7 +242,7 @@ button,a[href]{ cursor:pointer; }
 }
 .nav-cta:hover{ background:#c04418; }
 .nav-toggle{ display:none; border:none; background:none; cursor:pointer; padding:6px; flex-shrink:0; }
-.nav-toggle span{ display:block; width:20px; height:2px; background:var(--text); margin:4px 0; transition:transform .2s,opacity .2s; }
+.nav-toggle span{ display:block; width:20px; height:2px; background:#fff; margin:4px 0; transition:transform .2s,opacity .2s; }
 .nav-toggle[aria-expanded="true"] span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] span:nth-child(2){ opacity:0; }
 .nav-toggle[aria-expanded="true"] span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
@@ -258,8 +250,8 @@ button,a[href]{ cursor:pointer; }
   .nav-links{
     display:none; position:absolute; top:100%; inset-inline:0;
     flex-direction:column; align-items:flex-start; gap:2px;
-    background:var(--white); border-bottom:1px solid var(--hairline);
-    padding:8px 28px 18px; box-shadow:0 12px 24px rgba(0,0,0,.06);
+    background:rgba(17,17,17,.98); border-bottom:1px solid rgba(255,255,255,.1);
+    padding:8px 28px 18px; box-shadow:0 12px 24px rgba(0,0,0,.3);
   }
   .nav-links.open{ display:flex; }
   .nav-links a{ display:block; padding:10px 0; width:100%; opacity:.8; }
@@ -673,8 +665,8 @@ button,a[href]{ cursor:pointer; }
   <nav class="nav">
     <div class="nav-inner wrap" style="padding-left:0;padding-right:0;">
       <a href="#top" class="mark nav-mark">
-        <span class="circle" style="border-color:var(--text);"></span>
-        <span class="vline" style="background:var(--text);"></span>
+        <span class="circle"></span>
+        <span class="vline"></span>
         <span class="mark-wrap">
           <span class="word">DAR</span>
           <span class="tag">Trading &amp; Contracting</span>
@@ -1107,8 +1099,8 @@ button,a[href]{ cursor:pointer; }
   <nav class="nav">
     <div class="nav-inner wrap" style="padding-left:0;padding-right:0;">
       <a href="#top-ar" class="mark nav-mark">
-        <span class="circle" style="border-color:var(--text);"></span>
-        <span class="vline" style="background:var(--text);"></span>
+        <span class="circle"></span>
+        <span class="vline"></span>
         <span class="mark-wrap">
           <span class="word">DAR</span>
           <span class="tag" dir="ltr">Trading &amp; Contracting</span>
@@ -1541,8 +1533,8 @@ button,a[href]{ cursor:pointer; }
   <nav class="nav">
     <div class="nav-inner wrap" style="padding-left:0;padding-right:0;">
       <a href="#top-fr" class="mark nav-mark">
-        <span class="circle" style="border-color:var(--text);"></span>
-        <span class="vline" style="background:var(--text);"></span>
+        <span class="circle"></span>
+        <span class="vline"></span>
         <span class="mark-wrap">
           <span class="word">DAR</span>
           <span class="tag">Trading &amp; Contracting</span>
