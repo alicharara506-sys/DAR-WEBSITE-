@@ -482,7 +482,23 @@ button,a[href]{ cursor:pointer; }
 .elevator-text strong{ font-weight:700; }
 
 /* ============================================================
-   07 — CONTACT
+   07 — AUTHORIZED AGENT
+   ============================================================ */
+.agent-lead{ font-size:15px; line-height:1.85; color:var(--text-soft); max-width:720px; margin-bottom:48px; }
+[data-lang="ar"] .agent-lead{ line-height:2.1; }
+.agent-grid{ display:grid; grid-template-columns:1fr 1fr; gap:var(--gap); }
+@media (max-width:860px){ .agent-grid{ grid-template-columns:1fr; } }
+.agent-card{ border:1px solid var(--hairline); padding:44px 40px; background:var(--white); display:flex; flex-direction:column; gap:22px; }
+.agent-kicker{ font-size:10px; letter-spacing:.2em; color:var(--orange); font-weight:600; }
+.agent-card h3{ font-size:22px; font-weight:700; letter-spacing:-.3px; }
+.agent-card p{ font-size:14px; line-height:1.85; color:var(--text-soft); }
+[data-lang="ar"] .agent-card p{ line-height:2.1; }
+.agent-stats{ display:flex; gap:28px; padding-top:18px; border-top:1px solid var(--hairline); }
+.agent-stat b{ display:block; font-size:24px; font-weight:800; color:var(--orange); letter-spacing:-.5px; }
+.agent-stat span{ font-size:10.5px; color:var(--ink-muted); letter-spacing:.05em; }
+
+/* ============================================================
+   08 — CONTACT
    ============================================================ */
 .contact{ position:relative; background:var(--ink); color:#fff; overflow:hidden; padding:110px 0; }
 .contact-ring{ position:absolute; border-radius:50%; border:1px solid rgba(255,255,255,.06); pointer-events:none; }
@@ -588,6 +604,7 @@ button,a[href]{ cursor:pointer; }
     <a href="#personality-en" data-rail-target="personality-en"><span class="dot"></span><span class="rail-label">Personality</span></a>
     <a href="#services-en" data-rail-target="services-en"><span class="dot"></span><span class="rail-label">Services</span></a>
     <a href="#why-en" data-rail-target="why-en"><span class="dot"></span><span class="rail-label">Why DAR</span></a>
+    <a href="#agent-en" data-rail-target="agent-en"><span class="dot"></span><span class="rail-label">Agent</span></a>
     <a href="#contact-en" data-rail-target="contact-en"><span class="dot"></span><span class="rail-label">Contact</span></a>
   </nav>
 
@@ -662,7 +679,7 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-head">
         <span class="chapter-eyebrow">BRAND STRATEGY</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 01/07</span>
+        <span class="chapter-num mono">— 01/08</span>
       </div>
       <div class="chapter-kicker">Our Position</div>
       <h2 style="margin-bottom:40px;">The Market Reality. The DAR Answer.</h2>
@@ -685,7 +702,7 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-head">
         <span class="chapter-eyebrow">WHO WE ARE</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 02/07</span>
+        <span class="chapter-num mono">— 02/08</span>
       </div>
       <div class="chapter-kicker">Our Story</div>
       <h2 style="margin-bottom:40px;">A Declaration. Not Just a Company.</h2>
@@ -725,7 +742,7 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-head">
         <span class="chapter-eyebrow">MISSION · VISION · VALUES</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 03/07</span>
+        <span class="chapter-num mono">— 03/08</span>
       </div>
       <div class="chapter-kicker">Purpose</div>
       <h2 style="margin-bottom:40px;color:#fff;">What We Stand For. Where We Are Going.</h2>
@@ -763,7 +780,7 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-head">
         <span class="chapter-eyebrow">BRAND PERSONALITY</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 04/07</span>
+        <span class="chapter-num mono">— 04/08</span>
       </div>
       <div class="chapter-kicker">Character</div>
       <h2 style="margin-bottom:40px;">Confident. Premium. Modern. Reliable.</h2>
@@ -783,7 +800,7 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-head">
         <span class="chapter-eyebrow">SERVICES</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 05/07</span>
+        <span class="chapter-num mono">— 05/08</span>
       </div>
       <div class="chapter-kicker">What We Do</div>
       <h2 style="margin-bottom:40px;">Full-Service Delivery.</h2>
@@ -876,7 +893,7 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-head">
         <span class="chapter-eyebrow">WHY DAR</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 06/07</span>
+        <span class="chapter-num mono">— 06/08</span>
       </div>
       <div class="chapter-kicker">Our Principles</div>
       <h2 style="margin-bottom:40px;">What We Stand By. What We Refuse.</h2>
@@ -941,12 +958,47 @@ button,a[href]{ cursor:pointer; }
     </div>
   </section>
 
-  <!-- 07 — CONTACT -->
+  <!-- 07 — AUTHORIZED AGENT -->
+  <section id="agent-en" class="chapter reveal">
+    <div class="wrap">
+      <div class="chapter-head">
+        <span class="chapter-eyebrow">AUTHORIZED AGENT</span>
+        <div class="chapter-rule"></div>
+        <span class="chapter-num mono">— 07/08</span>
+      </div>
+      <div class="chapter-kicker">Materials &amp; Tools</div>
+      <h2 style="margin-bottom:24px;">Backed by Brands You Trust.</h2>
+      <p class="agent-lead">DAR is the authorized agent in Lebanon for the material and tool brands behind every project we deliver.</p>
+
+      <div class="agent-grid stagger">
+        <div class="agent-card">
+          <div class="agent-kicker">TOOLS PARTNER</div>
+          <h3>TOTAL — Professional Tools &amp; Hardware</h3>
+          <p>TOTAL supplies a complete range of power tools, hand tools, and construction equipment trusted by professionals across the region. DAR is the authorized agent bringing TOTAL's full line to every job site.</p>
+          <div class="agent-stats">
+            <div class="agent-stat"><b>14</b><span>PRODUCT CATEGORIES</span></div>
+            <div class="agent-stat"><b>2016</b><span>IN LEBANON</span></div>
+          </div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-kicker">PAINTS PARTNER</div>
+          <h3>BMA Paints — Lebanon's Leading Paint Manufacturer</h3>
+          <p>Family-owned since 1980, BMA Paints is Lebanon's leading paint and coatings manufacturer, exporting to over 30 countries. DAR is proud to apply BMA's full range across every finishing project.</p>
+          <div class="agent-stats">
+            <div class="agent-stat"><b>45+</b><span>YEARS EXPERIENCE</span></div>
+            <div class="agent-stat"><b>30+</b><span>COUNTRIES EXPORTED</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 — CONTACT -->
   <section id="contact-en" class="contact reveal">
     <svg class="hero-pattern" width="100%" height="100%" preserveAspectRatio="none" style="opacity:.1;"><rect width="100%" height="100%" fill="url(#dar-pattern)"/></svg>
     <div class="contact-ring" style="width:520px;height:520px;left:50%;top:50%;transform:translate(-50%,-50%);"></div>
     <div class="wrap contact-inner">
-      <div class="contact-kicker">LET'S BUILD SOMETHING THAT LASTS — 07/07</div>
+      <div class="contact-kicker">LET'S BUILD SOMETHING THAT LASTS — 08/08</div>
       <h2>Your Long-Term Business Partner.</h2>
       <p class="contact-sub">Results first. Payment follows. Let's talk about your project.</p>
       <div class="contact-actions">
@@ -991,6 +1043,7 @@ button,a[href]{ cursor:pointer; }
     <a href="#personality-ar" data-rail-target="personality-ar"><span class="dot"></span><span class="rail-label">شخصيتنا</span></a>
     <a href="#services-ar" data-rail-target="services-ar"><span class="dot"></span><span class="rail-label">خدماتنا</span></a>
     <a href="#why-ar" data-rail-target="why-ar"><span class="dot"></span><span class="rail-label">لماذا دار</span></a>
+    <a href="#agent-ar" data-rail-target="agent-ar"><span class="dot"></span><span class="rail-label">الوكيل</span></a>
     <a href="#contact-ar" data-rail-target="contact-ar"><span class="dot"></span><span class="rail-label">تواصل</span></a>
   </nav>
 
@@ -1065,7 +1118,7 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-head">
         <span class="chapter-eyebrow">استراتيجية العلامة التجارية</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">٠١/٠٧ —</span>
+        <span class="chapter-num mono">٠١/٠٨ —</span>
       </div>
       <div class="chapter-kicker">موقعنا في السوق</div>
       <h2 style="margin-bottom:40px;">واقع السوق. جواب دار.</h2>
@@ -1088,7 +1141,7 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-head">
         <span class="chapter-eyebrow">نحن من</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">٠٢/٠٧ —</span>
+        <span class="chapter-num mono">٠٢/٠٨ —</span>
       </div>
       <div class="chapter-kicker">قصتنا</div>
       <h2 style="margin-bottom:40px;">بيان، لا مجرد شركة.</h2>
@@ -1128,7 +1181,7 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-head">
         <span class="chapter-eyebrow">رسالتنا رؤيتنا وقيمنا</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">٠٣/٠٧ —</span>
+        <span class="chapter-num mono">٠٣/٠٨ —</span>
       </div>
       <div class="chapter-kicker">الغاية</div>
       <h2 style="margin-bottom:40px;color:#fff;">ما نؤمن به، وإلى أين نمضي.</h2>
@@ -1166,7 +1219,7 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-head">
         <span class="chapter-eyebrow">شخصية العلامة التجارية</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">٠٤/٠٧ —</span>
+        <span class="chapter-num mono">٠٤/٠٨ —</span>
       </div>
       <div class="chapter-kicker">شخصيتنا</div>
       <h2 style="margin-bottom:40px;">واثقون. راقون. عصريون. موثوقون.</h2>
@@ -1186,7 +1239,7 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-head">
         <span class="chapter-eyebrow">الخدمات</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">٠٥/٠٧ —</span>
+        <span class="chapter-num mono">٠٥/٠٨ —</span>
       </div>
       <div class="chapter-kicker">ماذا نقدّم</div>
       <h2 style="margin-bottom:40px;">تقديم خدمات متكاملة.</h2>
@@ -1279,7 +1332,7 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-head">
         <span class="chapter-eyebrow">لماذا دار</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">٠٦/٠٧ —</span>
+        <span class="chapter-num mono">٠٦/٠٨ —</span>
       </div>
       <div class="chapter-kicker">مبادئنا</div>
       <h2 style="margin-bottom:40px;">ما نلتزم به، وما نرفضه.</h2>
@@ -1344,12 +1397,47 @@ button,a[href]{ cursor:pointer; }
     </div>
   </section>
 
-  <!-- 07 — تواصل معنا -->
+  <!-- 07 — الوكيل المعتمد -->
+  <section id="agent-ar" class="chapter reveal">
+    <div class="wrap">
+      <div class="chapter-head">
+        <span class="chapter-eyebrow">الوكيل المعتمد</span>
+        <div class="chapter-rule"></div>
+        <span class="chapter-num mono">٠٧/٠٨ —</span>
+      </div>
+      <div class="chapter-kicker">المواد والعدد</div>
+      <h2 style="margin-bottom:24px;">بدعم من علامات تجارية تثق بها.</h2>
+      <p class="agent-lead">دار هي الوكيل المعتمد في لبنان لعلامات المواد والعدد التي تقف خلف كل مشروع ننفذه.</p>
+
+      <div class="agent-grid stagger">
+        <div class="agent-card">
+          <div class="agent-kicker">شريك العدد</div>
+          <h3>TOTAL — عدد وأدوات احترافية</h3>
+          <p>توفّر TOTAL مجموعة متكاملة من العدد الكهربائية واليدوية ومعدات البناء التي يثق بها المحترفون في المنطقة. دار هي الوكيل المعتمد الذي يوفّر خط TOTAL الكامل في كل موقع عمل.</p>
+          <div class="agent-stats">
+            <div class="agent-stat"><b>١٤</b><span>فئة منتجات</span></div>
+            <div class="agent-stat"><b>٢٠١٦</b><span>في لبنان</span></div>
+          </div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-kicker">شريك الدهانات</div>
+          <h3>BMA Paints — الرائدة في صناعة الدهانات بلبنان</h3>
+          <p>تأسست عام ١٩٨٠ كشركة عائلية، وتُعدّ BMA Paints الشركة الرائدة في تصنيع الدهانات والطلاءات في لبنان، وتُصدّر إلى أكثر من ٣٠ دولة. تفخر دار بتطبيق كامل مجموعة BMA في كل مشروع تشطيب.</p>
+          <div class="agent-stats">
+            <div class="agent-stat"><b>+٤٥</b><span>سنة خبرة</span></div>
+            <div class="agent-stat"><b>+٣٠</b><span>دولة تصدير</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 — تواصل معنا -->
   <section id="contact-ar" class="contact reveal">
     <svg class="hero-pattern" width="100%" height="100%" preserveAspectRatio="none" style="opacity:.1;"><rect width="100%" height="100%" fill="url(#dar-pattern)"/></svg>
     <div class="contact-ring" style="width:520px;height:520px;left:50%;top:50%;transform:translate(-50%,-50%);"></div>
     <div class="wrap contact-inner">
-      <div class="contact-kicker">لنبنِ معاً شيئاً يدوم — ٠٧/٠٧</div>
+      <div class="contact-kicker">لنبنِ معاً شيئاً يدوم — ٠٨/٠٨</div>
       <h2>شريكك التجاري على المدى الطويل.</h2>
       <p class="contact-sub">النتيجة أولاً، والدفع لاحقاً. لنتحدث عن مشروعك.</p>
       <div class="contact-actions">
@@ -1394,6 +1482,7 @@ button,a[href]{ cursor:pointer; }
     <a href="#personality-fr" data-rail-target="personality-fr"><span class="dot"></span><span class="rail-label">Personnalité</span></a>
     <a href="#services-fr" data-rail-target="services-fr"><span class="dot"></span><span class="rail-label">Services</span></a>
     <a href="#why-fr" data-rail-target="why-fr"><span class="dot"></span><span class="rail-label">Pourquoi DAR</span></a>
+    <a href="#agent-fr" data-rail-target="agent-fr"><span class="dot"></span><span class="rail-label">Agent</span></a>
     <a href="#contact-fr" data-rail-target="contact-fr"><span class="dot"></span><span class="rail-label">Contact</span></a>
   </nav>
 
@@ -1468,7 +1557,7 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-head">
         <span class="chapter-eyebrow">STRATÉGIE DE MARQUE</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 01/07</span>
+        <span class="chapter-num mono">— 01/08</span>
       </div>
       <div class="chapter-kicker">Notre Position</div>
       <h2 style="margin-bottom:40px;">La Réalité du Marché. La Réponse de DAR.</h2>
@@ -1491,7 +1580,7 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-head">
         <span class="chapter-eyebrow">QUI SOMMES-NOUS</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 02/07</span>
+        <span class="chapter-num mono">— 02/08</span>
       </div>
       <div class="chapter-kicker">Notre Histoire</div>
       <h2 style="margin-bottom:40px;">Une Déclaration. Pas Seulement une Entreprise.</h2>
@@ -1531,7 +1620,7 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-head">
         <span class="chapter-eyebrow">MISSION · VISION · VALEURS</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 03/07</span>
+        <span class="chapter-num mono">— 03/08</span>
       </div>
       <div class="chapter-kicker">Raison d'Être</div>
       <h2 style="margin-bottom:40px;color:#fff;">Ce Que Nous Défendons. Où Nous Allons.</h2>
@@ -1569,7 +1658,7 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-head">
         <span class="chapter-eyebrow">PERSONNALITÉ DE LA MARQUE</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 04/07</span>
+        <span class="chapter-num mono">— 04/08</span>
       </div>
       <div class="chapter-kicker">Notre Caractère</div>
       <h2 style="margin-bottom:40px;">Confiante. Haut de Gamme. Moderne. Fiable.</h2>
@@ -1589,7 +1678,7 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-head">
         <span class="chapter-eyebrow">NOS SERVICES</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 05/07</span>
+        <span class="chapter-num mono">— 05/08</span>
       </div>
       <div class="chapter-kicker">Ce Que Nous Faisons</div>
       <h2 style="margin-bottom:40px;">Une Prestation Complète.</h2>
@@ -1682,7 +1771,7 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-head">
         <span class="chapter-eyebrow">POURQUOI DAR</span>
         <div class="chapter-rule"></div>
-        <span class="chapter-num mono">— 06/07</span>
+        <span class="chapter-num mono">— 06/08</span>
       </div>
       <div class="chapter-kicker">Nos Principes</div>
       <h2 style="margin-bottom:40px;">Ce Que Nous Défendons. Ce Que Nous Refusons.</h2>
@@ -1747,12 +1836,47 @@ button,a[href]{ cursor:pointer; }
     </div>
   </section>
 
-  <!-- 07 — CONTACT -->
+  <!-- 07 — AGENT AGRÉÉ -->
+  <section id="agent-fr" class="chapter reveal">
+    <div class="wrap">
+      <div class="chapter-head">
+        <span class="chapter-eyebrow">AGENT AGRÉÉ</span>
+        <div class="chapter-rule"></div>
+        <span class="chapter-num mono">— 07/08</span>
+      </div>
+      <div class="chapter-kicker">Matériaux &amp; Outillage</div>
+      <h2 style="margin-bottom:24px;">Soutenus par des Marques de Confiance.</h2>
+      <p class="agent-lead">DAR est l'agent agréé au Liban pour les marques de matériaux et d'outillage derrière chaque projet que nous réalisons.</p>
+
+      <div class="agent-grid stagger">
+        <div class="agent-card">
+          <div class="agent-kicker">PARTENAIRE OUTILLAGE</div>
+          <h3>TOTAL — Outillage et Matériel Professionnel</h3>
+          <p>TOTAL propose une gamme complète d'outils électroportatifs, d'outils à main et d'équipements de construction, reconnue par les professionnels de la région. DAR est l'agent agréé qui met toute la gamme TOTAL à disposition de chaque chantier.</p>
+          <div class="agent-stats">
+            <div class="agent-stat"><b>14</b><span>CATÉGORIES DE PRODUITS</span></div>
+            <div class="agent-stat"><b>2016</b><span>AU LIBAN</span></div>
+          </div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-kicker">PARTENAIRE PEINTURE</div>
+          <h3>BMA Paints — Leader de la Peinture au Liban</h3>
+          <p>Entreprise familiale fondée en 1980, BMA Paints est le principal fabricant de peintures et revêtements au Liban, exportant vers plus de 30 pays. DAR applique fièrement toute la gamme BMA sur chaque projet de finition.</p>
+          <div class="agent-stats">
+            <div class="agent-stat"><b>45+</b><span>ANS D'EXPÉRIENCE</span></div>
+            <div class="agent-stat"><b>30+</b><span>PAYS D'EXPORTATION</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 — CONTACT -->
   <section id="contact-fr" class="contact reveal">
     <svg class="hero-pattern" width="100%" height="100%" preserveAspectRatio="none" style="opacity:.1;"><rect width="100%" height="100%" fill="url(#dar-pattern)"/></svg>
     <div class="contact-ring" style="width:520px;height:520px;left:50%;top:50%;transform:translate(-50%,-50%);"></div>
     <div class="wrap contact-inner">
-      <div class="contact-kicker">CONSTRUISONS ENSEMBLE — 07/07</div>
+      <div class="contact-kicker">CONSTRUISONS ENSEMBLE — 08/08</div>
       <h2>Votre Partenaire Commercial à Long Terme.</h2>
       <p class="contact-sub">Le résultat d'abord. Le paiement suit. Parlons de votre projet.</p>
       <div class="contact-actions">
