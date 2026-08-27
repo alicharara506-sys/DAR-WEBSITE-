@@ -97,10 +97,10 @@ button,a[href]{ cursor:pointer; }
 
 /* ---------- staggered scroll reveal (GSAP-equivalent: 0.08s stagger, ~500ms, power2-out, capped at 8) ---------- */
 .stagger > *{
-  opacity:0; transform:translateY(24px);
-  transition:opacity .5s cubic-bezier(.25,.46,.45,.94), transform .5s cubic-bezier(.25,.46,.45,.94);
+  opacity:0; transform:perspective(1000px) rotateX(16deg) translateY(24px); transform-origin:50% 100%;
+  transition:opacity .6s cubic-bezier(.25,.46,.45,.94), transform .6s cubic-bezier(.25,.46,.45,.94);
 }
-.stagger.in > *{ opacity:1; transform:none; }
+.stagger.in > *{ opacity:1; transform:perspective(1000px) rotateX(0deg) translateY(0); }
 .stagger > *:nth-child(1){ transition-delay:0ms; }
 .stagger > *:nth-child(2){ transition-delay:80ms; }
 .stagger > *:nth-child(3){ transition-delay:160ms; }
@@ -109,6 +109,14 @@ button,a[href]{ cursor:pointer; }
 .stagger > *:nth-child(6){ transition-delay:400ms; }
 .stagger > *:nth-child(7){ transition-delay:480ms; }
 .stagger > *:nth-child(n+8){ transition-delay:560ms; }
+
+/* ---------- sitewide 3D hover-tilt (cursor-tracked perspective tilt on major cards) ---------- */
+.tilt3d{
+  transform:perspective(900px) rotateX(0) rotateY(0) scale3d(1,1,1);
+  transition:transform .5s cubic-bezier(.23,1,.32,1);
+}
+.tilt3d.is-tilting{ transition:transform .08s linear; }
+@media (prefers-reduced-motion:reduce){ .tilt3d{ transition:none; } }
 
 /* ---------- shared layout helpers ---------- */
 .wrap{ max-width:var(--wrap); margin:0 auto; padding:0 28px; }
@@ -419,11 +427,6 @@ button,a[href]{ cursor:pointer; }
 .trades-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:var(--gap); }
 @media (max-width:760px){ .trades-grid{ grid-template-columns:repeat(3,1fr); } }
 @media (max-width:480px){ .trades-grid{ grid-template-columns:repeat(2,1fr); } }
-.trade-cell{ border:1px solid var(--hairline); padding:22px 14px; display:flex; flex-direction:column; align-items:center; gap:10px; text-align:center; }
-.trade-cell .icon{ width:24px; height:24px; color:var(--text); }
-.trade-cell .en{ font-size:11.5px; font-weight:600; }
-.trade-cell .native{ font-size:10px; color:var(--ink-muted); }
-
 /* ---------- 3D tilt photo cards (trades with sourced photography) ---------- */
 .tc{
   position:relative; aspect-ratio:4/5; border-radius:4px; overflow:hidden; cursor:pointer;
@@ -552,8 +555,8 @@ button,a[href]{ cursor:pointer; }
 .footer-social .icon{ width:16px; height:16px; }
 
 /* fade-in on scroll */
-.reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s ease,transform .6s ease; }
-.reveal.in{ opacity:1; transform:none; }
+.reveal{ opacity:0; transform:perspective(1200px) rotateX(10deg) translateY(18px); transform-origin:50% 100%; transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94); }
+.reveal.in{ opacity:1; transform:perspective(1200px) rotateX(0deg) translateY(0); }
 
 </style>
 </head>
@@ -706,11 +709,11 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-kicker">Our Position</div>
       <h2 style="margin-bottom:40px;">The Market Reality. The DAR Answer.</h2>
       <div class="strategy-grid">
-        <div class="strategy-card is-dark">
+        <div class="strategy-card is-dark tilt3d">
           <div class="strategy-label">THE MARKET REALITY</div>
           <p>Lebanon's construction market is defined by broken promises, disappearing contractors, and project owners who have been let down too many times. Trust is the rarest commodity in this market.</p>
         </div>
-        <div class="strategy-card is-orange">
+        <div class="strategy-card is-orange tilt3d">
           <div class="strategy-label">THE DAR ANSWER</div>
           <p>DAR does not compete on price. DAR competes on certainty. The client knows exactly what they're getting, exactly when they're getting it, and exactly what it costs. In a market where trust is the rarest commodity, DAR makes trust its product.</p>
         </div>
@@ -770,12 +773,12 @@ button,a[href]{ cursor:pointer; }
       <h2 style="margin-bottom:40px;color:#fff;">What We Stand For. Where We Are Going.</h2>
 
       <div class="mv-grid stagger">
-        <div class="mv-card">
+        <div class="mv-card tilt3d">
           <div class="mv-label">MISSION</div>
           <h3>Deliver With Integrity. Every Time.</h3>
           <p>To deliver complete construction and finishing with the precision, transparency, and professionalism that our clients deserve.</p>
         </div>
-        <div class="mv-card">
+        <div class="mv-card tilt3d">
           <div class="mv-label">VISION</div>
           <h3>The Most Trusted Name in Construction.</h3>
           <p>To be among the most trusted long-term companies in the construction industry — the name every client recommends without hesitation.</p>
@@ -783,11 +786,11 @@ button,a[href]{ cursor:pointer; }
       </div>
 
       <div class="value-grid stagger">
-        <div class="value-card"><span class="num mono">01</span><h4>PRECISION</h4><p>Every measurement, every finish, every deadline is non-negotiable. Precision is not a feature — it is the standard.</p></div>
-        <div class="value-card"><span class="num mono">02</span><h4>TRANSPARENCY</h4><p>Clients see every cost, every timeline, every decision. No surprises. No hidden figures. No excuses.</p></div>
-        <div class="value-card"><span class="num mono">03</span><h4>COMPLETION</h4><p>DAR finishes what it starts. Every time. This sounds basic. In Lebanon's market, it is revolutionary.</p></div>
-        <div class="value-card"><span class="num mono">04</span><h4>CRAFTSMANSHIP</h4><p>The quality of the finish reflects respect for the client. DAR does not cut corners because the client lives with those corners forever.</p></div>
-        <div class="value-card"><span class="num mono">05</span><h4>INTEGRITY</h4><p>The contract is the promise. The promise is kept.</p></div>
+        <div class="value-card tilt3d"><span class="num mono">01</span><h4>PRECISION</h4><p>Every measurement, every finish, every deadline is non-negotiable. Precision is not a feature — it is the standard.</p></div>
+        <div class="value-card tilt3d"><span class="num mono">02</span><h4>TRANSPARENCY</h4><p>Clients see every cost, every timeline, every decision. No surprises. No hidden figures. No excuses.</p></div>
+        <div class="value-card tilt3d"><span class="num mono">03</span><h4>COMPLETION</h4><p>DAR finishes what it starts. Every time. This sounds basic. In Lebanon's market, it is revolutionary.</p></div>
+        <div class="value-card tilt3d"><span class="num mono">04</span><h4>CRAFTSMANSHIP</h4><p>The quality of the finish reflects respect for the client. DAR does not cut corners because the client lives with those corners forever.</p></div>
+        <div class="value-card tilt3d"><span class="num mono">05</span><h4>INTEGRITY</h4><p>The contract is the promise. The promise is kept.</p></div>
       </div>
 
       <div class="promise">
@@ -808,10 +811,10 @@ button,a[href]{ cursor:pointer; }
       <h2 style="margin-bottom:40px;">Confident. Premium. Modern. Reliable.</h2>
       <p class="personality-lead">DAR is the contractor who shows up on day one <em>and</em> on the last day. Who calls before you call them. Who points out a problem before it becomes expensive. Who takes pride in work that most people will never notice — because that invisible precision is what separates a house from a home.</p>
       <div class="trait-grid stagger">
-        <div class="trait-chip is-dark">CONFIDENT</div>
-        <div class="trait-chip is-orange">PREMIUM</div>
-        <div class="trait-chip">MODERN</div>
-        <div class="trait-chip is-outline">RELIABLE</div>
+        <div class="trait-chip is-dark tilt3d">CONFIDENT</div>
+        <div class="trait-chip is-orange tilt3d">PREMIUM</div>
+        <div class="trait-chip tilt3d">MODERN</div>
+        <div class="trait-chip is-outline tilt3d">RELIABLE</div>
       </div>
     </div>
   </section>
@@ -828,7 +831,7 @@ button,a[href]{ cursor:pointer; }
       <h2 style="margin-bottom:40px;">Full-Service Delivery.</h2>
 
       <div class="svc-grid stagger">
-        <div class="svc-card">
+        <div class="svc-card tilt3d">
           <svg class="icon"><use href="#i-flooring"/></svg>
           <h3>Flooring</h3>
           <div class="native">الأرضيات</div>
@@ -836,31 +839,31 @@ button,a[href]{ cursor:pointer; }
             <span class="svc-tag">Epoxy</span><span class="svc-tag">Tiles</span><span class="svc-tag">Natural Stone</span><span class="svc-tag">Artificial Stone</span><span class="svc-tag">Interlocking Pavers</span><span class="svc-tag">Textured Concrete</span>
           </div>
         </div>
-        <div class="svc-card">
+        <div class="svc-card tilt3d">
           <svg class="icon"><use href="#i-paintbrush"/></svg>
           <h3>Painting</h3>
           <div class="native">أعمال الطلاء</div>
           <div class="svc-tags"><span class="svc-tag">Interior Painting</span><span class="svc-tag">Exterior Painting</span></div>
         </div>
-        <div class="svc-card">
+        <div class="svc-card tilt3d">
           <svg class="icon"><use href="#i-gypsum"/></svg>
           <h3>Ceilings</h3>
           <div class="native">أعمال الأسقف</div>
           <div class="svc-tags"><span class="svc-tag">Gypsum Board</span><span class="svc-tag">PVC</span><span class="svc-tag">Metallic Systems</span></div>
         </div>
-        <div class="svc-card">
+        <div class="svc-card tilt3d">
           <svg class="icon"><use href="#i-faucet"/></svg>
           <h3>Plumbing</h3>
           <div class="native">السباكة</div>
           <p>Complete plumbing systems — drainage and water supply — installed to code and fully tested before handover.</p>
         </div>
-        <div class="svc-card">
+        <div class="svc-card tilt3d">
           <svg class="icon"><use href="#i-bulb"/></svg>
           <h3>Electrical</h3>
           <div class="native">الكهرباء</div>
           <p>Full electrical installations — cabling, distribution boards, and lighting. Safe, certified, and built to last.</p>
         </div>
-        <div class="svc-card">
+        <div class="svc-card tilt3d">
           <svg class="icon"><use href="#i-blueprint"/></svg>
           <h3>Design &amp; Project Management</h3>
           <div class="native">الإدارة والتصميم</div>
@@ -893,11 +896,7 @@ button,a[href]{ cursor:pointer; }
         <div class="tc" data-photo="marble"><img class="tc-img" src="assets/trades/marble.jpg" alt="Marble" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Marble</div><div class="tc-native">رخام</div></div></div>
         <div class="tc" data-photo="granite"><img class="tc-img" src="assets/trades/granite.jpg" alt="Granite" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Granite</div><div class="tc-native">غرانيت</div></div></div>
         <div class="tc" data-photo="interlocking-pavers"><img class="tc-img" src="assets/trades/interlocking-pavers.jpg" alt="Interlocking Pavers" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Interlocking Pavers</div><div class="tc-native">بلاط إنترلوك</div></div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-concrete"/></svg><div class="en">Textured Concrete</div><div class="native">خرسانة مزخرفة</div></div>
         <div class="tc" data-photo="electrical-panels"><img class="tc-img" src="assets/trades/electrical-panels.jpg" alt="Electrical Panels" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Electrical Panels</div><div class="tc-native">لوحات كهربائية</div></div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-pipe"/></svg><div class="en">PVC Plumbing</div><div class="native">سباكة PVC</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-bolt"/></svg><div class="en">Electrical Wiring</div><div class="native">تمديدات كهربائية</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-faucet"/></svg><div class="en">Plumbing System</div><div class="native">أنظمة سباكة</div></div>
       </div>
     </div>
   </section>
@@ -992,7 +991,7 @@ button,a[href]{ cursor:pointer; }
       <p class="agent-lead">DAR is the authorized agent in Lebanon for the material and tool brands behind every project we deliver.</p>
 
       <div class="agent-grid stagger">
-        <div class="agent-card">
+        <div class="agent-card tilt3d">
           <div class="agent-kicker">TOOLS PARTNER</div>
           <h3>TOTAL — Professional Tools &amp; Hardware</h3>
           <p>TOTAL supplies a complete range of power tools, hand tools, and construction equipment trusted by professionals across the region. DAR is the authorized agent bringing TOTAL's full line to every job site.</p>
@@ -1001,7 +1000,7 @@ button,a[href]{ cursor:pointer; }
             <div class="agent-stat"><b>2016</b><span>IN LEBANON</span></div>
           </div>
         </div>
-        <div class="agent-card">
+        <div class="agent-card tilt3d">
           <div class="agent-kicker">PAINTS PARTNER</div>
           <h3>BMA Paints — Lebanon's Leading Paint Manufacturer</h3>
           <p>Family-owned since 1980, BMA Paints is Lebanon's leading paint and coatings manufacturer, exporting to over 30 countries. DAR is proud to apply BMA's full range across every finishing project.</p>
@@ -1144,11 +1143,11 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-kicker">موقعنا في السوق</div>
       <h2 style="margin-bottom:40px;">واقع السوق. جواب دار.</h2>
       <div class="strategy-grid">
-        <div class="strategy-card is-dark">
+        <div class="strategy-card is-dark tilt3d">
           <div class="strategy-label">واقع السوق</div>
           <p>يتسم سوق البناء اللبناني بالوعود المكسورة والمقاولين المختفين وأصحاب المشاريع الذين خُذلوا مرات عديدة. الثقة هي أندر ما يمكن إيجاده في هذا السوق.</p>
         </div>
-        <div class="strategy-card is-orange">
+        <div class="strategy-card is-orange tilt3d">
           <div class="strategy-label">جواب دار</div>
           <p>دار لا تنافس على السعر. دار تنافس على اليقين. يعرف العميل تماماً ما سيحصل عليه، ومتى سيحصل عليه، وكم سيكلّفه. في سوق تُعدّ فيه الثقة أندر السلع، تجعل دار من الثقة منتجها الأساسي.</p>
         </div>
@@ -1208,12 +1207,12 @@ button,a[href]{ cursor:pointer; }
       <h2 style="margin-bottom:40px;color:#fff;">ما نؤمن به، وإلى أين نمضي.</h2>
 
       <div class="mv-grid stagger">
-        <div class="mv-card">
+        <div class="mv-card tilt3d">
           <div class="mv-label">رسالتنا</div>
           <h3>الالتزام بالنزاهة، في كل مرة.</h3>
           <p>تقديم أعمال البناء والتشطيب الكاملة بالدقة والشفافية والاحترافية التي يستحقها عملاؤنا.</p>
         </div>
-        <div class="mv-card">
+        <div class="mv-card tilt3d">
           <div class="mv-label">رؤيتنا</div>
           <h3>الاسم الأكثر ثقةً في قطاع البناء.</h3>
           <p>أن نكون من أكثر الشركات ثقةً على المدى البعيد في قطاع البناء — الاسم الذي يوصي به كل عميل دون تردد.</p>
@@ -1221,11 +1220,11 @@ button,a[href]{ cursor:pointer; }
       </div>
 
       <div class="value-grid stagger">
-        <div class="value-card"><span class="num mono">٠١</span><h4>الدقة</h4><p>كل قياس، كل تشطيب، كل موعد — غير قابل للتفاوض. الدقة ليست ميزة إضافية — إنها المعيار.</p></div>
-        <div class="value-card"><span class="num mono">٠٢</span><h4>الشفافية</h4><p>يرى العملاء كل تكلفة، كل جدول زمني، كل قرار. لا مفاجآت. لا أرقام مخفية. لا أعذار.</p></div>
-        <div class="value-card"><span class="num mono">٠٣</span><h4>الإتمام</h4><p>دار تُنهي ما تبدأه. في كل مرة. يبدو هذا بديهياً. في سوق لبنان، إنه ثوري.</p></div>
-        <div class="value-card"><span class="num mono">٠٤</span><h4>الحرفية</h4><p>جودة التشطيب تعكس احترام العميل. دار لا تتنازل عن التفاصيل لأن العميل سيعيش مع تلك التفاصيل إلى الأبد.</p></div>
-        <div class="value-card"><span class="num mono">٠٥</span><h4>النزاهة</h4><p>العقد هو الوعد. والوعد يُحترم.</p></div>
+        <div class="value-card tilt3d"><span class="num mono">٠١</span><h4>الدقة</h4><p>كل قياس، كل تشطيب، كل موعد — غير قابل للتفاوض. الدقة ليست ميزة إضافية — إنها المعيار.</p></div>
+        <div class="value-card tilt3d"><span class="num mono">٠٢</span><h4>الشفافية</h4><p>يرى العملاء كل تكلفة، كل جدول زمني، كل قرار. لا مفاجآت. لا أرقام مخفية. لا أعذار.</p></div>
+        <div class="value-card tilt3d"><span class="num mono">٠٣</span><h4>الإتمام</h4><p>دار تُنهي ما تبدأه. في كل مرة. يبدو هذا بديهياً. في سوق لبنان، إنه ثوري.</p></div>
+        <div class="value-card tilt3d"><span class="num mono">٠٤</span><h4>الحرفية</h4><p>جودة التشطيب تعكس احترام العميل. دار لا تتنازل عن التفاصيل لأن العميل سيعيش مع تلك التفاصيل إلى الأبد.</p></div>
+        <div class="value-card tilt3d"><span class="num mono">٠٥</span><h4>النزاهة</h4><p>العقد هو الوعد. والوعد يُحترم.</p></div>
       </div>
 
       <div class="promise">
@@ -1246,10 +1245,10 @@ button,a[href]{ cursor:pointer; }
       <h2 style="margin-bottom:40px;">واثقون. راقون. عصريون. موثوقون.</h2>
       <p class="personality-lead">دار هي المقاول الذي يحضر في اليوم الأول <em>وفي</em> اليوم الأخير. الذي يتصل قبل أن تتصل به. الذي يشير إلى المشكلة قبل أن تصبح مكلفة. الذي يفخر بعمل لن يلاحظه معظم الناس — لأن تلك الدقة غير المرئية هي ما يفرق بين مجرد مبنى ومنزل حقيقي.</p>
       <div class="trait-grid stagger">
-        <div class="trait-chip is-dark">واثق</div>
-        <div class="trait-chip is-orange">راقٍ</div>
-        <div class="trait-chip">عصري</div>
-        <div class="trait-chip is-outline">موثوق</div>
+        <div class="trait-chip is-dark tilt3d">واثق</div>
+        <div class="trait-chip is-orange tilt3d">راقٍ</div>
+        <div class="trait-chip tilt3d">عصري</div>
+        <div class="trait-chip is-outline tilt3d">موثوق</div>
       </div>
     </div>
   </section>
@@ -1266,7 +1265,7 @@ button,a[href]{ cursor:pointer; }
       <h2 style="margin-bottom:40px;">تقديم خدمات متكاملة.</h2>
 
       <div class="svc-grid stagger">
-        <div class="svc-card">
+        <div class="svc-card tilt3d">
           <svg class="icon"><use href="#i-flooring"/></svg>
           <h3>الأرضيات</h3>
           <div class="native" dir="ltr">Flooring</div>
@@ -1274,31 +1273,31 @@ button,a[href]{ cursor:pointer; }
             <span class="svc-tag">إيبوكسي</span><span class="svc-tag">بلاط</span><span class="svc-tag">حجر طبيعي</span><span class="svc-tag">حجر صناعي</span><span class="svc-tag">إنترلوك</span><span class="svc-tag">خرسانة مزخرفة</span>
           </div>
         </div>
-        <div class="svc-card">
+        <div class="svc-card tilt3d">
           <svg class="icon"><use href="#i-paintbrush"/></svg>
           <h3>أعمال الطلاء</h3>
           <div class="native" dir="ltr">Painting</div>
           <div class="svc-tags"><span class="svc-tag">طلاء داخلي</span><span class="svc-tag">طلاء خارجي</span></div>
         </div>
-        <div class="svc-card">
+        <div class="svc-card tilt3d">
           <svg class="icon"><use href="#i-gypsum"/></svg>
           <h3>أعمال الأسقف</h3>
           <div class="native" dir="ltr">Ceilings</div>
           <div class="svc-tags"><span class="svc-tag">جبس بورد</span><span class="svc-tag">PVC</span><span class="svc-tag">أنظمة معدنية</span></div>
         </div>
-        <div class="svc-card">
+        <div class="svc-card tilt3d">
           <svg class="icon"><use href="#i-faucet"/></svg>
           <h3>السباكة</h3>
           <div class="native" dir="ltr">Plumbing</div>
           <p>أنظمة سباكة كاملة — تصريف وتغذية مياه — مُركّبة وفق المعايير ومُختبرة بالكامل قبل التسليم.</p>
         </div>
-        <div class="svc-card">
+        <div class="svc-card tilt3d">
           <svg class="icon"><use href="#i-bulb"/></svg>
           <h3>الكهرباء</h3>
           <div class="native" dir="ltr">Electrical</div>
           <p>تمديدات كهربائية كاملة — أسلاك، لوحات توزيع، وإنارة. آمنة ومعتمدة ومصمّمة لتدوم.</p>
         </div>
-        <div class="svc-card">
+        <div class="svc-card tilt3d">
           <svg class="icon"><use href="#i-blueprint"/></svg>
           <h3>الإدارة والتصميم</h3>
           <div class="native" dir="ltr">Design &amp; PM</div>
@@ -1331,11 +1330,7 @@ button,a[href]{ cursor:pointer; }
         <div class="tc" data-photo="marble"><img class="tc-img" src="assets/trades/marble.jpg" alt="رخام" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">رخام</div><div class="tc-native" dir="ltr">Marble</div></div></div>
         <div class="tc" data-photo="granite"><img class="tc-img" src="assets/trades/granite.jpg" alt="غرانيت" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">غرانيت</div><div class="tc-native" dir="ltr">Granite</div></div></div>
         <div class="tc" data-photo="interlocking-pavers"><img class="tc-img" src="assets/trades/interlocking-pavers.jpg" alt="بلاط إنترلوك" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">بلاط إنترلوك</div><div class="tc-native" dir="ltr">Pavers</div></div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-concrete"/></svg><div class="en">خرسانة مزخرفة</div><div class="native" dir="ltr">Concrete</div></div>
         <div class="tc" data-photo="electrical-panels"><img class="tc-img" src="assets/trades/electrical-panels.jpg" alt="لوحات كهربائية" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">لوحات كهربائية</div><div class="tc-native" dir="ltr">Panels</div></div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-pipe"/></svg><div class="en">سباكة PVC</div><div class="native" dir="ltr">PVC Plumbing</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-bolt"/></svg><div class="en">تمديدات كهربائية</div><div class="native" dir="ltr">Wiring</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-faucet"/></svg><div class="en">أنظمة سباكة</div><div class="native" dir="ltr">Plumbing System</div></div>
       </div>
     </div>
   </section>
@@ -1430,7 +1425,7 @@ button,a[href]{ cursor:pointer; }
       <p class="agent-lead">دار هي الوكيل المعتمد في لبنان لعلامات المواد والعدد التي تقف خلف كل مشروع ننفذه.</p>
 
       <div class="agent-grid stagger">
-        <div class="agent-card">
+        <div class="agent-card tilt3d">
           <div class="agent-kicker">شريك العدد</div>
           <h3>TOTAL — عدد وأدوات احترافية</h3>
           <p>توفّر TOTAL مجموعة متكاملة من العدد الكهربائية واليدوية ومعدات البناء التي يثق بها المحترفون في المنطقة. دار هي الوكيل المعتمد الذي يوفّر خط TOTAL الكامل في كل موقع عمل.</p>
@@ -1439,7 +1434,7 @@ button,a[href]{ cursor:pointer; }
             <div class="agent-stat"><b>٢٠١٦</b><span>في لبنان</span></div>
           </div>
         </div>
-        <div class="agent-card">
+        <div class="agent-card tilt3d">
           <div class="agent-kicker">شريك الدهانات</div>
           <h3>BMA Paints — الرائدة في صناعة الدهانات بلبنان</h3>
           <p>تأسست عام ١٩٨٠ كشركة عائلية، وتُعدّ BMA Paints الشركة الرائدة في تصنيع الدهانات والطلاءات في لبنان، وتُصدّر إلى أكثر من ٣٠ دولة. تفخر دار بتطبيق كامل مجموعة BMA في كل مشروع تشطيب.</p>
@@ -1582,11 +1577,11 @@ button,a[href]{ cursor:pointer; }
       <div class="chapter-kicker">Notre Position</div>
       <h2 style="margin-bottom:40px;">La Réalité du Marché. La Réponse de DAR.</h2>
       <div class="strategy-grid">
-        <div class="strategy-card is-dark">
+        <div class="strategy-card is-dark tilt3d">
           <div class="strategy-label">LA RÉALITÉ DU MARCHÉ</div>
           <p>Le marché de la construction au Liban est marqué par des promesses non tenues, des entrepreneurs qui disparaissent, et des maîtres d'ouvrage déçus à maintes reprises. La confiance y est la ressource la plus rare.</p>
         </div>
-        <div class="strategy-card is-orange">
+        <div class="strategy-card is-orange tilt3d">
           <div class="strategy-label">LA RÉPONSE DE DAR</div>
           <p>DAR ne rivalise pas sur le prix. DAR rivalise sur la certitude. Le client sait exactement ce qu'il obtient, quand il l'obtient, et combien cela coûte. Dans un marché où la confiance est la ressource la plus rare, DAR fait de la confiance son produit.</p>
         </div>
@@ -1646,12 +1641,12 @@ button,a[href]{ cursor:pointer; }
       <h2 style="margin-bottom:40px;color:#fff;">Ce Que Nous Défendons. Où Nous Allons.</h2>
 
       <div class="mv-grid stagger">
-        <div class="mv-card">
+        <div class="mv-card tilt3d">
           <div class="mv-label">MISSION</div>
           <h3>Livrer Avec Intégrité. À Chaque Fois.</h3>
           <p>Livrer des travaux de construction et de finition complets avec la précision, la transparence et le professionnalisme que nos clients méritent.</p>
         </div>
-        <div class="mv-card">
+        <div class="mv-card tilt3d">
           <div class="mv-label">VISION</div>
           <h3>Le Nom le Plus Fiable de la Construction.</h3>
           <p>Faire partie des entreprises les plus fiables sur le long terme dans le secteur de la construction — le nom que chaque client recommande sans hésitation.</p>
@@ -1659,11 +1654,11 @@ button,a[href]{ cursor:pointer; }
       </div>
 
       <div class="value-grid stagger">
-        <div class="value-card"><span class="num mono">01</span><h4>PRÉCISION</h4><p>Chaque mesure, chaque finition, chaque échéance est non négociable. La précision n'est pas une option — c'est la norme.</p></div>
-        <div class="value-card"><span class="num mono">02</span><h4>TRANSPARENCE</h4><p>Les clients voient chaque coût, chaque délai, chaque décision. Aucune surprise. Aucun chiffre caché. Aucune excuse.</p></div>
-        <div class="value-card"><span class="num mono">03</span><h4>ACHÈVEMENT</h4><p>DAR termine ce qu'elle commence. À chaque fois. Cela semble élémentaire. Sur le marché libanais, c'est révolutionnaire.</p></div>
-        <div class="value-card"><span class="num mono">04</span><h4>ARTISANAT</h4><p>La qualité de la finition reflète le respect du client. DAR ne fait aucun compromis, car le client vivra avec ces détails pour toujours.</p></div>
-        <div class="value-card"><span class="num mono">05</span><h4>INTÉGRITÉ</h4><p>Le contrat est la promesse. La promesse est tenue.</p></div>
+        <div class="value-card tilt3d"><span class="num mono">01</span><h4>PRÉCISION</h4><p>Chaque mesure, chaque finition, chaque échéance est non négociable. La précision n'est pas une option — c'est la norme.</p></div>
+        <div class="value-card tilt3d"><span class="num mono">02</span><h4>TRANSPARENCE</h4><p>Les clients voient chaque coût, chaque délai, chaque décision. Aucune surprise. Aucun chiffre caché. Aucune excuse.</p></div>
+        <div class="value-card tilt3d"><span class="num mono">03</span><h4>ACHÈVEMENT</h4><p>DAR termine ce qu'elle commence. À chaque fois. Cela semble élémentaire. Sur le marché libanais, c'est révolutionnaire.</p></div>
+        <div class="value-card tilt3d"><span class="num mono">04</span><h4>ARTISANAT</h4><p>La qualité de la finition reflète le respect du client. DAR ne fait aucun compromis, car le client vivra avec ces détails pour toujours.</p></div>
+        <div class="value-card tilt3d"><span class="num mono">05</span><h4>INTÉGRITÉ</h4><p>Le contrat est la promesse. La promesse est tenue.</p></div>
       </div>
 
       <div class="promise">
@@ -1684,10 +1679,10 @@ button,a[href]{ cursor:pointer; }
       <h2 style="margin-bottom:40px;">Confiante. Haut de Gamme. Moderne. Fiable.</h2>
       <p class="personality-lead">DAR est l'entrepreneur qui se présente le premier jour <em>et</em> le dernier jour. Qui appelle avant que vous n'appeliez. Qui signale un problème avant qu'il ne devienne coûteux. Qui est fier d'un travail que la plupart des gens ne remarqueront jamais — car cette précision invisible est ce qui distingue une maison d'un foyer.</p>
       <div class="trait-grid stagger">
-        <div class="trait-chip is-dark">CONFIANTE</div>
-        <div class="trait-chip is-orange">HAUT DE GAMME</div>
-        <div class="trait-chip">MODERNE</div>
-        <div class="trait-chip is-outline">FIABLE</div>
+        <div class="trait-chip is-dark tilt3d">CONFIANTE</div>
+        <div class="trait-chip is-orange tilt3d">HAUT DE GAMME</div>
+        <div class="trait-chip tilt3d">MODERNE</div>
+        <div class="trait-chip is-outline tilt3d">FIABLE</div>
       </div>
     </div>
   </section>
@@ -1704,7 +1699,7 @@ button,a[href]{ cursor:pointer; }
       <h2 style="margin-bottom:40px;">Une Prestation Complète.</h2>
 
       <div class="svc-grid stagger">
-        <div class="svc-card">
+        <div class="svc-card tilt3d">
           <svg class="icon"><use href="#i-flooring"/></svg>
           <h3>Revêtements de Sol</h3>
           <div class="native">الأرضيات</div>
@@ -1712,31 +1707,31 @@ button,a[href]{ cursor:pointer; }
             <span class="svc-tag">Époxy</span><span class="svc-tag">Carrelage</span><span class="svc-tag">Pierre Naturelle</span><span class="svc-tag">Pierre Artificielle</span><span class="svc-tag">Pavés Autobloquants</span><span class="svc-tag">Béton Décoratif</span>
           </div>
         </div>
-        <div class="svc-card">
+        <div class="svc-card tilt3d">
           <svg class="icon"><use href="#i-paintbrush"/></svg>
           <h3>Peinture</h3>
           <div class="native">أعمال الطلاء</div>
           <div class="svc-tags"><span class="svc-tag">Peinture Intérieure</span><span class="svc-tag">Peinture Extérieure</span></div>
         </div>
-        <div class="svc-card">
+        <div class="svc-card tilt3d">
           <svg class="icon"><use href="#i-gypsum"/></svg>
           <h3>Plafonds</h3>
           <div class="native">أعمال الأسقف</div>
           <div class="svc-tags"><span class="svc-tag">Plâtre</span><span class="svc-tag">PVC</span><span class="svc-tag">Systèmes Métalliques</span></div>
         </div>
-        <div class="svc-card">
+        <div class="svc-card tilt3d">
           <svg class="icon"><use href="#i-faucet"/></svg>
           <h3>Plomberie</h3>
           <div class="native">السباكة</div>
           <p>Systèmes de plomberie complets — évacuation et alimentation en eau — installés aux normes et entièrement testés avant la livraison.</p>
         </div>
-        <div class="svc-card">
+        <div class="svc-card tilt3d">
           <svg class="icon"><use href="#i-bulb"/></svg>
           <h3>Électricité</h3>
           <div class="native">الكهرباء</div>
           <p>Installations électriques complètes — câblage, tableaux de distribution et éclairage. Sûres, certifiées et durables.</p>
         </div>
-        <div class="svc-card">
+        <div class="svc-card tilt3d">
           <svg class="icon"><use href="#i-blueprint"/></svg>
           <h3>Conception &amp; Gestion de Projet</h3>
           <div class="native">الإدارة والتصميم</div>
@@ -1769,11 +1764,7 @@ button,a[href]{ cursor:pointer; }
         <div class="tc" data-photo="marble"><img class="tc-img" src="assets/trades/marble.jpg" alt="Marbre" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Marbre</div><div class="tc-native">رخام</div></div></div>
         <div class="tc" data-photo="granite"><img class="tc-img" src="assets/trades/granite.jpg" alt="Granit" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Granit</div><div class="tc-native">غرانيت</div></div></div>
         <div class="tc" data-photo="interlocking-pavers"><img class="tc-img" src="assets/trades/interlocking-pavers.jpg" alt="Pavés Autobloquants" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Pavés Autobloquants</div><div class="tc-native">بلاط إنترلوك</div></div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-concrete"/></svg><div class="en">Béton Décoratif</div><div class="native">خرسانة مزخرفة</div></div>
         <div class="tc" data-photo="electrical-panels"><img class="tc-img" src="assets/trades/electrical-panels.jpg" alt="Tableaux Électriques" loading="lazy" onerror="this.remove()"><div class="tc-shade"></div><div class="tc-glare"></div><div class="tc-body"><div class="tc-en">Tableaux Électriques</div><div class="tc-native">لوحات كهربائية</div></div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-pipe"/></svg><div class="en">Plomberie PVC</div><div class="native">سباكة PVC</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-bolt"/></svg><div class="en">Câblage Électrique</div><div class="native">تمديدات كهربائية</div></div>
-        <div class="trade-cell"><svg class="icon"><use href="#i-faucet"/></svg><div class="en">Système Plomberie</div><div class="native">أنظمة سباكة</div></div>
       </div>
     </div>
   </section>
@@ -1868,7 +1859,7 @@ button,a[href]{ cursor:pointer; }
       <p class="agent-lead">DAR est l'agent agréé au Liban pour les marques de matériaux et d'outillage derrière chaque projet que nous réalisons.</p>
 
       <div class="agent-grid stagger">
-        <div class="agent-card">
+        <div class="agent-card tilt3d">
           <div class="agent-kicker">PARTENAIRE OUTILLAGE</div>
           <h3>TOTAL — Outillage et Matériel Professionnel</h3>
           <p>TOTAL propose une gamme complète d'outils électroportatifs, d'outils à main et d'équipements de construction, reconnue par les professionnels de la région. DAR est l'agent agréé qui met toute la gamme TOTAL à disposition de chaque chantier.</p>
@@ -1877,7 +1868,7 @@ button,a[href]{ cursor:pointer; }
             <div class="agent-stat"><b>2016</b><span>AU LIBAN</span></div>
           </div>
         </div>
-        <div class="agent-card">
+        <div class="agent-card tilt3d">
           <div class="agent-kicker">PARTENAIRE PEINTURE</div>
           <h3>BMA Paints — Leader de la Peinture au Liban</h3>
           <p>Entreprise familiale fondée en 1980, BMA Paints est le principal fabricant de peintures et revêtements au Liban, exportant vers plus de 30 pays. DAR applique fièrement toute la gamme BMA sur chaque projet de finition.</p>
@@ -1993,7 +1984,7 @@ button,a[href]{ cursor:pointer; }
   if('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
-        if(entry.isIntersecting){ entry.target.classList.add('in'); io.unobserve(entry.target); }
+        entry.target.classList.toggle('in', entry.isIntersecting);
       });
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal, .stagger').forEach(function(el){ io.observe(el); });
@@ -2021,12 +2012,12 @@ button,a[href]{ cursor:pointer; }
     Object.keys(railMap).forEach(function(id){ railIO.observe(document.getElementById(id)); });
   }
 
-  /* ---------- 3D tilt photo cards ---------- */
+  /* ---------- sitewide 3D hover-tilt (photo cards + major card grids) ---------- */
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var hasFinePointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
   if(!reduceMotion && hasFinePointer){
-    document.querySelectorAll('.tc').forEach(function(card){
-      var maxTilt = 12;
+    document.querySelectorAll('.tc, .tilt3d').forEach(function(card){
+      var maxTilt = card.classList.contains('tc') ? 12 : 8;
       function onMove(e){
         var r = card.getBoundingClientRect();
         var px = (e.clientX - r.left) / r.width;
