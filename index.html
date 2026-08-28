@@ -115,9 +115,9 @@ button,a[href]{ cursor:pointer; }
 }
 .tilt3d.is-tilting{ transition:transform .08s linear; }
 @media (prefers-reduced-motion:reduce){ .tilt3d{ transition:none; } }
-.tc, .tilt3d{ cursor:pointer; }
+.tilt3d{ cursor:pointer; }
 
-/* ---------- sitewide interactive 3D popup (click any card to expand) ---------- */
+/* ---------- sitewide interactive 3D popup (click a card to expand; trade photos are hover-only, not clickable) ---------- */
 .site-modal{
   position:fixed; inset:0; z-index:200; display:flex; align-items:center; justify-content:center;
   padding:32px; opacity:0; visibility:hidden; pointer-events:none;
@@ -137,7 +137,6 @@ button,a[href]{ cursor:pointer; }
 .site-modal-content .modal-card-inner{
   transform:scale(1); transition:none; cursor:default; pointer-events:none;
 }
-.site-modal-content .tc{ aspect-ratio:4/5; width:100%; max-height:70vh; box-shadow:none; }
 .site-modal-content .mv-card,
 .site-modal-content .value-card,
 .site-modal-content .strategy-card,
@@ -2099,7 +2098,7 @@ button,a[href]{ cursor:pointer; }
     modalPanel.style.transform = '';
   }
 
-  document.querySelectorAll('.tc, .tilt3d').forEach(function(el){
+  document.querySelectorAll('.tilt3d').forEach(function(el){
     el.addEventListener('click', function(){ openModal(el); });
   });
   modal.addEventListener('click', function(e){ if(e.target === modal) closeModal(); });
