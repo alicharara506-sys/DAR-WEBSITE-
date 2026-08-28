@@ -2214,12 +2214,15 @@ button,a[href]{ cursor:pointer; }
       var group = new THREE.Group();
       var markMat = new THREE.MeshStandardMaterial({ color: 0xd94f1e, roughness: 0.45, metalness: 0.35 });
 
-      var ring = new THREE.Mesh(new THREE.TorusGeometry(0.55, 0.09, 24, 48), markMat);
-      ring.position.set(-0.75, 0.85, 0);
+      /* proportions taken directly from .hero-big-mark: circle 110px diameter,
+         margin-right 26px gap, vline 18px wide x 320px tall -- so the circle
+         and line sit clearly apart, exactly like the flat logo beside it */
+      var ring = new THREE.Mesh(new THREE.TorusGeometry(0.42, 0.08, 24, 48), markMat);
+      ring.position.set(-0.736, 1.0, 0);
       group.add(ring);
 
-      var vline = new THREE.Mesh(new THREE.BoxGeometry(0.22, 2.6, 0.22), markMat);
-      vline.position.set(0, -0.2, 0);
+      var vline = new THREE.Mesh(new THREE.BoxGeometry(0.164, 2.909, 0.164), markMat);
+      vline.position.set(0.082, 0.0455, 0);
       group.add(vline);
 
       /* normalize so the assembly is centered at the origin and a fixed
