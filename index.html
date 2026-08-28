@@ -2266,7 +2266,7 @@ button,a[href]{ cursor:pointer; }
       var raf = null;
       function tick(){
         if(!mounted) return;
-        group.rotation.y += 0.006;
+        group.rotation.y += 0.0105;
         group.rotation.x += (pointerY * 0.12 - group.rotation.x) * 0.04;
         group.rotation.z += ((-pointerX * 0.08) - group.rotation.z) * 0.04;
         renderer.render(scene, camera);
