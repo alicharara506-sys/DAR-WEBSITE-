@@ -181,19 +181,19 @@ button,a[href]{ cursor:pointer; }
    ============================================================ */
 .lang-bar{
   position:sticky; top:0; z-index:200;
-  background:var(--ink); height:38px;
+  background:var(--ink); height:44px;
   display:flex; align-items:center; justify-content:flex-end;
   padding:0 20px; gap:2px;
 }
 .lang-bar button{
   border:none; background:transparent; color:var(--white-muted);
   font-size:10px; letter-spacing:.12em; font-weight:600; font-family:var(--font-en);
-  padding:9px 13px; min-height:32px; border-radius:999px; cursor:pointer; transition:background .18s,color .18s;
+  padding:9px 13px; min-height:40px; border-radius:999px; cursor:pointer; transition:background .18s,color .18s;
 }
 .lang-bar button:hover{ color:#fff; }
 .lang-bar button[data-lang-btn][aria-pressed="true"]{ background:var(--orange); color:#fff; }
 .lang-bar-sep{ width:1px; height:16px; background:rgba(255,255,255,.15); margin:0 6px; flex-shrink:0; }
-#theme-toggle{ display:flex; align-items:center; justify-content:center; width:32px; padding:0; }
+#theme-toggle{ display:flex; align-items:center; justify-content:center; width:40px; min-height:40px; padding:0; }
 #theme-toggle .icon{ width:15px; height:15px; }
 #theme-toggle .theme-icon-moon{ display:none; }
 :root[data-theme="dark"] #theme-toggle .theme-icon-sun{ display:none; }
@@ -225,7 +225,7 @@ button,a[href]{ cursor:pointer; }
    NAV
    ============================================================ */
 .nav{
-  position:sticky; top:38px; z-index:100;
+  position:sticky; top:44px; z-index:100;
   background:rgba(17,17,17,.94); backdrop-filter:blur(10px);
   border-bottom:1px solid rgba(255,255,255,.1);
 }
@@ -240,7 +240,7 @@ button,a[href]{ cursor:pointer; }
   transition:background .18s;
 }
 .nav-cta:hover{ background:#c04418; }
-.nav-toggle{ display:none; border:none; background:none; cursor:pointer; padding:6px; flex-shrink:0; }
+.nav-toggle{ display:none; align-items:center; justify-content:center; min-width:44px; min-height:44px; border:none; background:none; cursor:pointer; padding:6px; flex-shrink:0; }
 .nav-toggle span{ display:block; width:20px; height:2px; background:#fff; margin:4px 0; transition:transform .2s,opacity .2s; }
 .nav-toggle[aria-expanded="true"] span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] span:nth-child(2){ opacity:0; }
@@ -255,7 +255,7 @@ button,a[href]{ cursor:pointer; }
   .nav-links.open{ display:flex; }
   .nav-links a{ display:block; padding:10px 0; width:100%; opacity:.8; }
   .nav-cta{ display:none; }
-  .nav-toggle{ display:block; }
+  .nav-toggle{ display:flex; flex-direction:column; }
 }
 
 /* ============================================================
@@ -270,10 +270,16 @@ button,a[href]{ cursor:pointer; }
 .hero-ring{ position:absolute; border-radius:50%; border:1px solid rgba(255,255,255,.07); pointer-events:none; }
 .hero-inner{ position:relative; z-index:1; width:100%; }
 .hero-grid{ display:grid; grid-template-columns:1.2fr .8fr; gap:24px; align-items:center; }
-@media (max-width:960px){ .hero-grid{ grid-template-columns:1fr; } .hero-visual{ display:none; } }
-.hero-visual{ position:relative; height:420px; display:flex; align-items:center; justify-content:center; }
-.hero-visual-ring{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:50%; border:1px solid rgba(255,255,255,.09); pointer-events:none; }
-.hero-big-mark{ position:relative; z-index:1; display:inline-flex; align-items:flex-start; }
+.hero-visual{ position:relative; height:420px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+@media (max-width:960px){ .hero-grid{ grid-template-columns:1fr; } }
+@media (max-width:639px){ .hero-visual{ display:none; } }
+@media (min-width:640px) and (max-width:960px){ .hero-visual{ width:100%; height:280px; max-width:320px; margin:0 auto; } .hero-big-mark .circle{ width:76px; height:76px; border-width:8px; margin-right:18px; } .hero-big-mark .vline{ width:12px; height:220px; } }
+.hero-visual-ring{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:50%; border:1px solid rgba(255,255,255,.09); pointer-events:none; transition:opacity .5s ease; }
+.hero-3d-canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; opacity:0; transition:opacity .8s ease; }
+.hero-3d-canvas.is-ready{ opacity:1; }
+.hero-visual.has-3d .hero-visual-ring, .hero-visual.has-3d .hero-big-mark{ opacity:0; }
+@media (prefers-reduced-motion:reduce){ .hero-3d-canvas{ display:none; } .hero-visual.has-3d .hero-visual-ring, .hero-visual.has-3d .hero-big-mark{ opacity:1; } }
+.hero-big-mark{ position:relative; z-index:1; display:inline-flex; align-items:flex-start; transition:opacity .5s ease; }
 .hero-big-mark .circle{ width:110px; height:110px; border:11px solid var(--orange); margin-top:6px; margin-right:26px; }
 .hero-big-mark .vline{ width:18px; height:320px; background:var(--orange); }
 .hero-eyebrow{
@@ -295,7 +301,7 @@ button,a[href]{ cursor:pointer; }
 .hero-stat b{ display:block; font-size:26px; font-weight:800; color:var(--orange); letter-spacing:-.5px; }
 .hero-stat span{ display:block; font-size:9.5px; letter-spacing:.13em; color:var(--white-faint); margin-top:7px; font-weight:600; text-transform:uppercase; line-height:1.4; }
 .btn{
-  display:inline-flex; align-items:center; gap:10px; font-size:13px; font-weight:600; letter-spacing:.04em;
+  display:inline-flex; align-items:center; justify-content:center; min-height:44px; gap:10px; font-size:13px; font-weight:600; letter-spacing:.04em;
   padding:15px 28px; border-radius:999px; transition:transform .18s,background .18s,color .18s,border-color .18s;
 }
 .btn-primary{ background:var(--orange); color:#fff; }
@@ -573,9 +579,9 @@ button,a[href]{ cursor:pointer; }
 .footer{ background:var(--ink); color:#fff; padding:36px 0; border-top:1px solid rgba(255,255,255,.1); }
 .footer-inner{ display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; }
 .footer-copy{ font-size:10.5px; letter-spacing:.1em; color:var(--white-faint); }
-.footer-social{ display:flex; align-items:center; gap:10px; }
+.footer-social{ display:flex; align-items:center; gap:8px; }
 .footer-social a{
-  display:flex; align-items:center; justify-content:center; width:36px; height:36px;
+  display:flex; align-items:center; justify-content:center; width:44px; height:44px;
   border-radius:50%; border:1px solid rgba(255,255,255,.16); color:rgba(255,255,255,.6);
   transition:background .18s,color .18s,border-color .18s;
 }
@@ -709,6 +715,7 @@ button,a[href]{ cursor:pointer; }
       </div>
       </div>
       <div class="hero-visual" aria-hidden="true">
+        <canvas class="hero-3d-canvas"></canvas>
         <div class="hero-visual-ring" style="width:400px;height:400px;"></div>
         <div class="hero-visual-ring" style="width:270px;height:270px;"></div>
         <div class="hero-visual-ring" style="width:150px;height:150px;"></div>
@@ -1143,6 +1150,7 @@ button,a[href]{ cursor:pointer; }
       </div>
       </div>
       <div class="hero-visual" aria-hidden="true">
+        <canvas class="hero-3d-canvas"></canvas>
         <div class="hero-visual-ring" style="width:400px;height:400px;"></div>
         <div class="hero-visual-ring" style="width:270px;height:270px;"></div>
         <div class="hero-visual-ring" style="width:150px;height:150px;"></div>
@@ -1577,6 +1585,7 @@ button,a[href]{ cursor:pointer; }
       </div>
       </div>
       <div class="hero-visual" aria-hidden="true">
+        <canvas class="hero-3d-canvas"></canvas>
         <div class="hero-visual-ring" style="width:400px;height:400px;"></div>
         <div class="hero-visual-ring" style="width:270px;height:270px;"></div>
         <div class="hero-visual-ring" style="width:150px;height:150px;"></div>
@@ -2020,6 +2029,40 @@ button,a[href]{ cursor:pointer; }
     document.querySelectorAll('.reveal, .stagger').forEach(function(el){ el.classList.add('in'); });
   }
 
+  /* ---------- hero stat count-up (animates only on first entering the viewport) ---------- */
+  (function(){
+    var reduceMotionStats = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduceMotionStats || !('IntersectionObserver' in window)) return;
+    var arabicIndicDigits = '٠١٢٣٤٥٦٧٨٩';
+    function leadingNumber(str){
+      var m = str.match(/^([0-9٠-٩]+)/);
+      if(!m) return null;
+      var normalized = m[1].replace(/[٠-٩]/g, function(ch){ return String(arabicIndicDigits.indexOf(ch)); });
+      return parseInt(normalized, 10);
+    }
+    var statIO = new IntersectionObserver(function(entries, obs){
+      entries.forEach(function(entry){
+        if(!entry.isIntersecting) return;
+        entry.target.querySelectorAll('.hero-stat b').forEach(function(el){
+          var target = leadingNumber(el.textContent);
+          if(target === null) return;
+          var original = el.textContent;
+          var start = performance.now();
+          var duration = 900;
+          function frame(now){
+            var t = Math.min(1, (now - start) / duration);
+            var eased = 1 - Math.pow(1 - t, 3);
+            el.textContent = Math.round(target * eased);
+            if(t < 1){ requestAnimationFrame(frame); } else { el.textContent = original; }
+          }
+          requestAnimationFrame(frame);
+        });
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('.hero-stats').forEach(function(el){ statIO.observe(el); });
+  })();
+
   var railLinks = document.querySelectorAll('.chapter-rail a');
   if('IntersectionObserver' in window && railLinks.length){
     var railMap = {};
@@ -2117,6 +2160,170 @@ button,a[href]{ cursor:pointer; }
       modalPanel.style.transform = 'perspective(1400px) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg)';
     });
     modalPanel.addEventListener('mouseleave', function(){ modalPanel.style.transform = ''; });
+  }
+})();
+</script>
+
+<script>
+/* ---------- hero 3D architectural visualization (progressive enhancement) ----------
+   Loads Three.js only when a hero-visual container is actually visible and laid out
+   (mobile hides .hero-visual entirely below 960px, so this never fetches on mobile).
+   Skips entirely on prefers-reduced-motion or missing WebGL — the existing CSS ring
+   fallback already markup'd in .hero-visual stays visible and is the permanent fallback. */
+(function(){
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduceMotion) return;
+
+  function hasWebGL(){
+    try{
+      var c = document.createElement('canvas');
+      return !!(window.WebGLRenderingContext && (c.getContext('webgl2') || c.getContext('webgl')));
+    }catch(e){ return false; }
+  }
+  if(!hasWebGL()) return;
+
+  var current = null; // { dispose() }
+
+  function initOn(canvas){
+    var container = canvas.closest('.hero-visual');
+    if(!container || !container.offsetWidth || !container.offsetHeight) return;
+
+    import('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js').then(function(THREE){
+      if(current) current.dispose();
+
+      var isNarrow = window.innerWidth < 1280;
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
+      camera.position.set(2.4, 1.6, 3.4);
+      camera.lookAt(0, 0, 0);
+
+      var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: !isNarrow });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isNarrow ? 1.5 : 2));
+
+      var ambient = new THREE.AmbientLight(0xffffff, 0.75);
+      var key = new THREE.DirectionalLight(0xffffff, 1.3);
+      key.position.set(3, 4, 2);
+      var fill = new THREE.DirectionalLight(0xffffff, 0.35);
+      fill.position.set(-2, 0.5, 3);
+      var accent = new THREE.DirectionalLight(0xd94f1e, 1.2);
+      accent.position.set(-3, 1, -2);
+      scene.add(ambient, key, fill, accent);
+
+      /* "architectural assembly": loose cluster of building-massing blocks */
+      var group = new THREE.Group();
+      var darkMat = new THREE.MeshStandardMaterial({ color: 0x35322d, roughness: 0.75, metalness: 0.25 });
+      var midMat = new THREE.MeshStandardMaterial({ color: 0x5a554d, roughness: 0.7, metalness: 0.2 });
+      var accentMat = new THREE.MeshStandardMaterial({ color: 0xd94f1e, roughness: 0.5, metalness: 0.15 });
+
+      var blocks = [
+        { size: [1.1, 1.8, 1.1], pos: [-0.9, 0.0, 0.1], mat: darkMat },
+        { size: [0.7, 1.1, 0.7], pos: [0.35, -0.35, 0.5], mat: midMat },
+        { size: [0.5, 2.3, 0.5], pos: [0.95, 0.2, -0.3], mat: darkMat },
+        { size: [1.4, 0.4, 0.9], pos: [-0.2, -1.05, -0.4], mat: midMat },
+        { size: [0.3, 1.0, 0.3], pos: [0.95, 0.2, -0.3], mat: accentMat, offset: [0, 1.65, 0] }
+      ];
+      blocks.forEach(function(b){
+        var mesh = new THREE.Mesh(new THREE.BoxGeometry(b.size[0], b.size[1], b.size[2]), b.mat);
+        var ox = b.offset ? b.offset[0] : 0, oy = b.offset ? b.offset[1] : 0, oz = b.offset ? b.offset[2] : 0;
+        mesh.position.set(b.pos[0] + ox, b.pos[1] + oy, b.pos[2] + oz);
+        group.add(mesh);
+      });
+
+      /* normalize so the assembly is centered at the origin and a fixed
+         apparent size, regardless of the hand-placed block coordinates above */
+      var box = new THREE.Box3().setFromObject(group);
+      var center = box.getCenter(new THREE.Vector3());
+      var size = box.getSize(new THREE.Vector3());
+      var normalizeScale = 2.1 / Math.max(size.x, size.y, size.z, 0.001);
+      group.children.forEach(function(m){ m.position.sub(center); });
+      group.scale.setScalar(normalizeScale);
+      group.rotation.y = 0.4;
+      scene.add(group);
+
+      var mounted = true;
+      var pointerX = 0, pointerY = 0;
+      var hasFinePointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+
+      function onPointerMove(e){
+        var r = container.getBoundingClientRect();
+        pointerX = ((e.clientX - r.left) / r.width - 0.5) * 2;
+        pointerY = ((e.clientY - r.top) / r.height - 0.5) * 2;
+      }
+      if(hasFinePointer){ container.addEventListener('mousemove', onPointerMove); }
+
+      function resize(){
+        var w = container.clientWidth, h = container.clientHeight;
+        if(!w || !h) return;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+      resize();
+      var ro = null;
+      if('ResizeObserver' in window){
+        ro = new ResizeObserver(resize);
+        ro.observe(container);
+      } else {
+        window.addEventListener('resize', resize);
+      }
+
+      var raf = null;
+      function tick(){
+        if(!mounted) return;
+        group.rotation.y += 0.0016;
+        group.rotation.x += (pointerY * 0.12 - group.rotation.x) * 0.04;
+        group.rotation.z += ((-pointerX * 0.08) - group.rotation.z) * 0.04;
+        renderer.render(scene, camera);
+        raf = requestAnimationFrame(tick);
+      }
+      tick();
+      canvas.classList.add('is-ready');
+      container.classList.add('has-3d');
+
+      current = {
+        canvas: canvas,
+        dispose: function(){
+          mounted = false;
+          if(raf) cancelAnimationFrame(raf);
+          if(ro) ro.disconnect(); else window.removeEventListener('resize', resize);
+          if(hasFinePointer) container.removeEventListener('mousemove', onPointerMove);
+          canvas.classList.remove('is-ready');
+          container.classList.remove('has-3d');
+          renderer.dispose();
+        }
+      };
+    }).catch(function(){ /* network/module failure: fallback rings stay visible */ });
+  }
+
+  function activeCanvas(){
+    var main = document.querySelector('main.page:not([hidden])');
+    return main ? main.querySelector('.hero-3d-canvas') : null;
+  }
+
+  var startCanvas = activeCanvas();
+  if(startCanvas){
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries, obs){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){ initOn(entry.target.querySelector('.hero-3d-canvas') || startCanvas); obs.disconnect(); }
+        });
+      }, { threshold: 0.1 });
+      io.observe(startCanvas.closest('.hero-visual'));
+    } else {
+      initOn(startCanvas);
+    }
+  }
+
+  /* re-anchor to the newly visible language's hero-visual on language switch */
+  var pages = document.querySelectorAll('main.page');
+  if(pages.length && 'MutationObserver' in window){
+    var mo = new MutationObserver(function(){
+      var c = activeCanvas();
+      if(c && (!current || c !== (current.canvas))) {
+        initOn(c);
+      }
+    });
+    pages.forEach(function(p){ mo.observe(p, { attributes: true, attributeFilter: ['hidden'] }); });
   }
 })();
 </script>
