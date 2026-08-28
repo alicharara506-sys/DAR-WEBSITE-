@@ -2209,25 +2209,18 @@ button,a[href]{ cursor:pointer; }
       accent.position.set(-3, 1, -2);
       scene.add(ambient, key, fill, accent);
 
-      /* "architectural assembly": loose cluster of building-massing blocks */
+      /* DAR mark, extruded into 3D: the ring + vertical line from the brand's own
+         logo (see .mark/.circle/.vline in the CSS), not an abstract shape */
       var group = new THREE.Group();
-      var darkMat = new THREE.MeshStandardMaterial({ color: 0x35322d, roughness: 0.75, metalness: 0.25 });
-      var midMat = new THREE.MeshStandardMaterial({ color: 0x5a554d, roughness: 0.7, metalness: 0.2 });
-      var accentMat = new THREE.MeshStandardMaterial({ color: 0xd94f1e, roughness: 0.5, metalness: 0.15 });
+      var markMat = new THREE.MeshStandardMaterial({ color: 0xd94f1e, roughness: 0.45, metalness: 0.35 });
 
-      var blocks = [
-        { size: [1.1, 1.8, 1.1], pos: [-0.9, 0.0, 0.1], mat: darkMat },
-        { size: [0.7, 1.1, 0.7], pos: [0.35, -0.35, 0.5], mat: midMat },
-        { size: [0.5, 2.3, 0.5], pos: [0.95, 0.2, -0.3], mat: darkMat },
-        { size: [1.4, 0.4, 0.9], pos: [-0.2, -1.05, -0.4], mat: midMat },
-        { size: [0.3, 1.0, 0.3], pos: [0.95, 0.2, -0.3], mat: accentMat, offset: [0, 1.65, 0] }
-      ];
-      blocks.forEach(function(b){
-        var mesh = new THREE.Mesh(new THREE.BoxGeometry(b.size[0], b.size[1], b.size[2]), b.mat);
-        var ox = b.offset ? b.offset[0] : 0, oy = b.offset ? b.offset[1] : 0, oz = b.offset ? b.offset[2] : 0;
-        mesh.position.set(b.pos[0] + ox, b.pos[1] + oy, b.pos[2] + oz);
-        group.add(mesh);
-      });
+      var ring = new THREE.Mesh(new THREE.TorusGeometry(0.55, 0.09, 24, 48), markMat);
+      ring.position.set(-0.75, 0.85, 0);
+      group.add(ring);
+
+      var vline = new THREE.Mesh(new THREE.BoxGeometry(0.22, 2.6, 0.22), markMat);
+      vline.position.set(0, -0.2, 0);
+      group.add(vline);
 
       /* normalize so the assembly is centered at the origin and a fixed
          apparent size, regardless of the hand-placed block coordinates above */
