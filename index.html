@@ -262,10 +262,12 @@ button,a[href]{ cursor:pointer; }
    HERO
    ============================================================ */
 .hero{
-  position:relative; background:var(--ink); color:#fff; overflow:hidden;
+  position:relative; background:var(--orange); color:#fff; overflow:hidden;
   padding:120px 0 96px;
   min-height:88vh; display:flex; flex-direction:column; justify-content:center;
+  --hero-mark:#fff; --hero-accent:var(--ink);
 }
+:root[data-theme="dark"] .hero{ background:var(--ink); --hero-mark:var(--orange); --hero-accent:var(--orange); }
 .hero-pattern{ position:absolute; inset:0; opacity:.16; pointer-events:none; transition:opacity .3s ease; }
 /* first-page brand pattern: hidden by default, reveals in a soft circle that
    follows the mouse (desktop) or a finger (touch) -- same in light and dark theme */
@@ -274,7 +276,8 @@ button,a[href]{ cursor:pointer; }
   mask-image:radial-gradient(circle 380px at var(--mx,50%) var(--my,50%), #000 0%, transparent 100%);
   -webkit-mask-image:radial-gradient(circle 380px at var(--mx,50%) var(--my,50%), #000 0%, transparent 100%);
 }
-/* dark theme: orange rings + muted grey lines instead of plain black */
+.hero .hero-pattern rect{ fill:url(#dar-pattern-light); }
+/* dark theme: orange rings + muted grey lines instead of white-on-orange */
 :root[data-theme="dark"] .hero .hero-pattern rect{ fill:url(#dar-pattern-dark); }
 .hero.is-pattern-live .hero-pattern{ opacity:1; }
 .hero-ring{ position:absolute; border-radius:50%; border:1px solid rgba(255,255,255,.07); pointer-events:none; }
@@ -290,8 +293,8 @@ button,a[href]{ cursor:pointer; }
 .hero-visual.has-3d .hero-visual-ring, .hero-visual.has-3d .hero-big-mark{ opacity:0; }
 @media (prefers-reduced-motion:reduce){ .hero-3d-canvas{ display:none; } .hero-visual.has-3d .hero-visual-ring, .hero-visual.has-3d .hero-big-mark{ opacity:1; } }
 .hero-big-mark{ position:relative; z-index:1; display:inline-flex; align-items:flex-start; transition:opacity .5s ease; }
-.hero-big-mark .circle{ width:110px; height:110px; border:11px solid var(--orange); margin-top:6px; margin-right:26px; }
-.hero-big-mark .vline{ width:18px; height:320px; background:var(--orange); }
+.hero-big-mark .circle{ width:110px; height:110px; border:11px solid var(--hero-mark); margin-top:6px; margin-right:26px; }
+.hero-big-mark .vline{ width:18px; height:320px; background:var(--hero-mark); }
 .hero-eyebrow{
   font-size:11px; letter-spacing:.28em; color:var(--white-muted); font-weight:600;
   display:flex; align-items:center; gap:14px; margin-bottom:34px;
@@ -301,14 +304,14 @@ button,a[href]{ cursor:pointer; }
   font-size:clamp(40px,7vw,84px); font-weight:800; letter-spacing:-2.5px; line-height:.98;
   margin-bottom:28px;
 }
-.hero h1 em{ font-style:normal; color:var(--orange); }
+.hero h1 em{ font-style:normal; color:var(--hero-accent); }
 [data-lang="ar"] .hero h1{ letter-spacing:0; font-weight:700; line-height:1.15; }
 .hero-sub{ max-width:560px; font-size:18px; line-height:1.75; color:rgba(255,255,255,.72); margin-bottom:44px; }
 [data-lang="ar"] .hero-sub{ font-size:19px; line-height:2; }
 .hero-actions{ display:flex; flex-wrap:wrap; gap:14px; margin-bottom:56px; }
 .hero-stats{ display:grid; grid-template-columns:repeat(4,auto); gap:36px; margin-bottom:44px; }
 @media (max-width:640px){ .hero-stats{ grid-template-columns:repeat(2,1fr); gap:24px 32px; } }
-.hero-stat b{ display:block; font-size:26px; font-weight:800; color:var(--orange); letter-spacing:-.5px; }
+.hero-stat b{ display:block; font-size:26px; font-weight:800; color:var(--hero-accent); letter-spacing:-.5px; }
 .hero-stat span{ display:block; font-size:9.5px; letter-spacing:.13em; color:var(--white-faint); margin-top:7px; font-weight:600; text-transform:uppercase; line-height:1.4; }
 .btn{
   display:inline-flex; align-items:center; justify-content:center; min-height:44px; gap:10px; font-size:13px; font-weight:600; letter-spacing:.04em;
@@ -316,6 +319,9 @@ button,a[href]{ cursor:pointer; }
 }
 .btn-primary{ background:var(--orange); color:#fff; }
 .btn-primary:hover{ background:#c04418; transform:translateY(-1px); }
+/* the hero's own background is orange, so its primary CTA needs its own contrast */
+.hero .btn-primary{ background:var(--hero-accent); }
+.hero .btn-primary:hover{ background:var(--hero-accent); opacity:.85; }
 .btn-ghost{ border:1px solid rgba(255,255,255,.28); color:#fff; }
 .btn-ghost:hover{ border-color:#fff; transform:translateY(-1px); }
 .hero-strap{
@@ -616,6 +622,10 @@ button,a[href]{ cursor:pointer; }
 <pattern id="dar-pattern-dark" x="0" y="0" width="64" height="64" patternUnits="userSpaceOnUse" patternTransform="rotate(20)">
   <circle cx="12" cy="12" r="9" fill="none" stroke="#d94f1e" stroke-width="1.4"/>
   <line x1="34" y1="2" x2="34" y2="22" stroke="#6b6459" stroke-width="2.6"/>
+</pattern>
+<pattern id="dar-pattern-light" x="0" y="0" width="64" height="64" patternUnits="userSpaceOnUse" patternTransform="rotate(20)">
+  <circle cx="12" cy="12" r="9" fill="none" stroke="#ffffff" stroke-width="1.4"/>
+  <line x1="34" y1="2" x2="34" y2="22" stroke="#ffffff" stroke-width="2.6" opacity=".55"/>
 </pattern>
 
 <symbol id="i-hammer" viewBox="0 0 24 24"><path d="M9 4.5L6 7.5L4.5 6L3 7.5L6 10.5L7.5 9L10.5 12L4.5 18C4.1 18.4 4.1 19 4.5 19.5L5.5 20.5C5.9 20.9 6.5 20.9 6.9 20.5L15 12.4L16.5 13.9L18 12.4L14.1 8.5L15.6 7L12 3.4L10.5 4.9L9 4.5Z"/></symbol>
@@ -2252,7 +2262,8 @@ button,a[href]{ cursor:pointer; }
       /* DAR mark, extruded into 3D: the ring + vertical line from the brand's own
          logo (see .mark/.circle/.vline in the CSS), not an abstract shape */
       var group = new THREE.Group();
-      var markMat = new THREE.MeshStandardMaterial({ color: 0xd94f1e, roughness: 0.45, metalness: 0.35 });
+      var isDarkNow = document.documentElement.getAttribute('data-theme') === 'dark';
+      var markMat = new THREE.MeshStandardMaterial({ color: isDarkNow ? 0xd94f1e : 0xffffff, roughness: 0.45, metalness: 0.35 });
 
       /* proportions taken directly from .hero-big-mark: circle 110px diameter,
          margin-right 26px gap, vline 18px wide x 320px tall -- so the circle
@@ -2318,6 +2329,7 @@ button,a[href]{ cursor:pointer; }
 
       current = {
         canvas: canvas,
+        markMat: markMat,
         dispose: function(){
           mounted = false;
           if(raf) cancelAnimationFrame(raf);
@@ -2360,6 +2372,16 @@ button,a[href]{ cursor:pointer; }
       }
     });
     pages.forEach(function(p){ mo.observe(p, { attributes: true, attributeFilter: ['hidden'] }); });
+  }
+
+  /* keep the 3D mark's color in sync with the light/dark toggle */
+  if('MutationObserver' in window){
+    var themeMo = new MutationObserver(function(){
+      if(!current || !current.markMat) return;
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      current.markMat.color.set(isDark ? 0xd94f1e : 0xffffff);
+    });
+    themeMo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   }
 })();
 </script>
