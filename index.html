@@ -266,7 +266,19 @@ button,a[href]{ cursor:pointer; }
   padding:120px 0 96px;
   min-height:88vh; display:flex; flex-direction:column; justify-content:center;
 }
-.hero-pattern{ position:absolute; inset:0; opacity:.16; pointer-events:none; }
+.hero-pattern{ position:absolute; inset:0; opacity:.16; pointer-events:none; transition:opacity .3s ease; }
+/* first-page brand pattern: statically visible (light theme), reveals under the
+   cursor only (dark theme) -- coarse-pointer devices always get the static version */
+.hero .hero-pattern{ opacity:.4; }
+:root[data-theme="dark"] .hero .hero-pattern{
+  opacity:0;
+  mask-image:radial-gradient(circle 260px at var(--mx,50%) var(--my,50%), #000 0%, transparent 100%);
+  -webkit-mask-image:radial-gradient(circle 260px at var(--mx,50%) var(--my,50%), #000 0%, transparent 100%);
+}
+:root[data-theme="dark"] .hero.is-pattern-live .hero-pattern{ opacity:.55; }
+:root[data-theme="dark"].coarse-pointer .hero .hero-pattern{
+  opacity:.4; mask-image:none; -webkit-mask-image:none;
+}
 .hero-ring{ position:absolute; border-radius:50%; border:1px solid rgba(255,255,255,.07); pointer-events:none; }
 .hero-inner{ position:relative; z-index:1; width:100%; }
 .hero-grid{ display:grid; grid-template-columns:1.2fr .8fr; gap:24px; align-items:center; }
@@ -600,8 +612,8 @@ button,a[href]{ cursor:pointer; }
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
 <defs>
 <pattern id="dar-pattern" x="0" y="0" width="64" height="64" patternUnits="userSpaceOnUse" patternTransform="rotate(20)">
-  <circle cx="12" cy="12" r="9" fill="none" stroke="#ffffff" stroke-width="1.4"/>
-  <line x1="34" y1="2" x2="34" y2="22" stroke="#ffffff" stroke-width="2.6"/>
+  <circle cx="12" cy="12" r="9" fill="none" stroke="#000000" stroke-width="1.4"/>
+  <line x1="34" y1="2" x2="34" y2="22" stroke="#000000" stroke-width="2.6"/>
 </pattern>
 
 <symbol id="i-hammer" viewBox="0 0 24 24"><path d="M9 4.5L6 7.5L4.5 6L3 7.5L6 10.5L7.5 9L10.5 12L4.5 18C4.1 18.4 4.1 19 4.5 19.5L5.5 20.5C5.9 20.9 6.5 20.9 6.9 20.5L15 12.4L16.5 13.9L18 12.4L14.1 8.5L15.6 7L12 3.4L10.5 4.9L9 4.5Z"/></symbol>
@@ -2028,6 +2040,24 @@ button,a[href]{ cursor:pointer; }
   } else {
     document.querySelectorAll('.reveal, .stagger').forEach(function(el){ el.classList.add('in'); });
   }
+
+  /* ---------- first-page brand pattern: cursor-reveal in dark theme ---------- */
+  (function(){
+    var hasFinePointerPattern = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+    if(!hasFinePointerPattern){
+      document.documentElement.classList.add('coarse-pointer');
+      return;
+    }
+    document.querySelectorAll('.hero').forEach(function(hero){
+      hero.addEventListener('mousemove', function(e){
+        var r = hero.getBoundingClientRect();
+        hero.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        hero.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+      hero.addEventListener('mouseenter', function(){ hero.classList.add('is-pattern-live'); });
+      hero.addEventListener('mouseleave', function(){ hero.classList.remove('is-pattern-live'); });
+    });
+  })();
 
   /* ---------- hero stat count-up (animates only on first entering the viewport) ---------- */
   (function(){
