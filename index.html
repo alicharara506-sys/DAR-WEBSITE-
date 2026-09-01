@@ -307,7 +307,6 @@ button,a[href]{ cursor:pointer; }
   font-size:11px; letter-spacing:.28em; color:var(--hero-muted); font-weight:600;
   display:flex; align-items:center; gap:14px; margin-bottom:34px;
 }
-.hero-eyebrow::after{ content:''; flex:1; max-width:64px; height:1px; background:var(--hero-line); }
 .hero h1{
   font-size:clamp(40px,7vw,84px); font-weight:800; letter-spacing:-2.5px; line-height:.98;
   margin-bottom:28px;
@@ -2270,8 +2269,7 @@ button,a[href]{ cursor:pointer; }
       /* DAR mark, extruded into 3D: the ring + vertical line from the brand's own
          logo (see .mark/.circle/.vline in the CSS), not an abstract shape */
       var group = new THREE.Group();
-      var isDarkNow = document.documentElement.getAttribute('data-theme') === 'dark';
-      var markMat = new THREE.MeshStandardMaterial({ color: isDarkNow ? 0xd94f1e : 0xffffff, roughness: 0.45, metalness: 0.35 });
+      var markMat = new THREE.MeshStandardMaterial({ color: 0xd94f1e, roughness: 0.45, metalness: 0.35 });
 
       /* proportions taken directly from .hero-big-mark: circle 110px diameter,
          margin-right 26px gap, vline 18px wide x 320px tall -- so the circle
@@ -2337,7 +2335,6 @@ button,a[href]{ cursor:pointer; }
 
       current = {
         canvas: canvas,
-        markMat: markMat,
         dispose: function(){
           mounted = false;
           if(raf) cancelAnimationFrame(raf);
@@ -2380,16 +2377,6 @@ button,a[href]{ cursor:pointer; }
       }
     });
     pages.forEach(function(p){ mo.observe(p, { attributes: true, attributeFilter: ['hidden'] }); });
-  }
-
-  /* keep the 3D mark's color in sync with the light/dark toggle */
-  if('MutationObserver' in window){
-    var themeMo = new MutationObserver(function(){
-      if(!current || !current.markMat) return;
-      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      current.markMat.color.set(isDark ? 0xd94f1e : 0xffffff);
-    });
-    themeMo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   }
 })();
 </script>
