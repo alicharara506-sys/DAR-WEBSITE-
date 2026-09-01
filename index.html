@@ -268,7 +268,7 @@ button,a[href]{ cursor:pointer; }
 }
 .hero-pattern{ position:absolute; inset:0; opacity:.16; pointer-events:none; transition:opacity .3s ease; }
 /* first-page brand pattern: statically visible (light theme), reveals under the
-   cursor only (dark theme) -- coarse-pointer devices always get the static version */
+   cursor/finger only (dark theme) -- mouse move and touch both work */
 .hero .hero-pattern{ opacity:.4; }
 :root[data-theme="dark"] .hero .hero-pattern{
   opacity:0;
@@ -276,9 +276,6 @@ button,a[href]{ cursor:pointer; }
   -webkit-mask-image:radial-gradient(circle 260px at var(--mx,50%) var(--my,50%), #000 0%, transparent 100%);
 }
 :root[data-theme="dark"] .hero.is-pattern-live .hero-pattern{ opacity:.55; }
-:root[data-theme="dark"].coarse-pointer .hero .hero-pattern{
-  opacity:.4; mask-image:none; -webkit-mask-image:none;
-}
 .hero-ring{ position:absolute; border-radius:50%; border:1px solid rgba(255,255,255,.07); pointer-events:none; }
 .hero-inner{ position:relative; z-index:1; width:100%; }
 .hero-grid{ display:grid; grid-template-columns:1.2fr .8fr; gap:24px; align-items:center; }
@@ -2041,21 +2038,29 @@ button,a[href]{ cursor:pointer; }
     document.querySelectorAll('.reveal, .stagger').forEach(function(el){ el.classList.add('in'); });
   }
 
-  /* ---------- first-page brand pattern: cursor-reveal in dark theme ---------- */
+  /* ---------- first-page brand pattern: cursor/touch-reveal in dark theme ---------- */
   (function(){
-    var hasFinePointerPattern = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
-    if(!hasFinePointerPattern){
-      document.documentElement.classList.add('coarse-pointer');
-      return;
+    function setSpot(hero, clientX, clientY){
+      var r = hero.getBoundingClientRect();
+      hero.style.setProperty('--mx', (clientX - r.left) + 'px');
+      hero.style.setProperty('--my', (clientY - r.top) + 'px');
     }
     document.querySelectorAll('.hero').forEach(function(hero){
-      hero.addEventListener('mousemove', function(e){
-        var r = hero.getBoundingClientRect();
-        hero.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-        hero.style.setProperty('--my', (e.clientY - r.top) + 'px');
-      });
+      hero.addEventListener('mousemove', function(e){ setSpot(hero, e.clientX, e.clientY); });
       hero.addEventListener('mouseenter', function(){ hero.classList.add('is-pattern-live'); });
       hero.addEventListener('mouseleave', function(){ hero.classList.remove('is-pattern-live'); });
+
+      hero.addEventListener('touchstart', function(e){
+        var t = e.touches[0];
+        setSpot(hero, t.clientX, t.clientY);
+        hero.classList.add('is-pattern-live');
+      }, { passive: true });
+      hero.addEventListener('touchmove', function(e){
+        var t = e.touches[0];
+        setSpot(hero, t.clientX, t.clientY);
+      }, { passive: true });
+      hero.addEventListener('touchend', function(){ hero.classList.remove('is-pattern-live'); });
+      hero.addEventListener('touchcancel', function(){ hero.classList.remove('is-pattern-live'); });
     });
   })();
 
