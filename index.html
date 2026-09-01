@@ -267,16 +267,16 @@ button,a[href]{ cursor:pointer; }
 /* ============================================================
    HERO
    ============================================================ */
-.hero{
+.hero, .usp-block{
   position:relative; background:#fff; color:var(--hero-text); overflow:hidden;
-  padding:120px 0 96px;
-  min-height:88vh; display:flex; flex-direction:column; justify-content:center;
   --hero-mark:var(--orange); --hero-accent:var(--orange);
   --hero-text:#111111; --hero-muted:rgba(17,17,17,.55); --hero-soft:rgba(17,17,17,.72);
   --hero-faint:rgba(17,17,17,.3); --hero-mid:rgba(17,17,17,.6);
   --hero-line:rgba(17,17,17,.2); --hero-line-mid:rgba(17,17,17,.12); --hero-line-soft:rgba(17,17,17,.08);
 }
-:root[data-theme="dark"] .hero{
+.hero{ padding:120px 0 96px; min-height:88vh; display:flex; flex-direction:column; justify-content:center; }
+.usp-block{ padding:96px 0; }
+:root[data-theme="dark"] .hero, :root[data-theme="dark"] .usp-block{
   background:var(--ink);
   --hero-text:#fff; --hero-muted:var(--white-muted); --hero-soft:rgba(255,255,255,.72);
   --hero-faint:var(--white-faint); --hero-mid:rgba(255,255,255,.6);
@@ -285,17 +285,17 @@ button,a[href]{ cursor:pointer; }
 .hero-pattern{ position:absolute; inset:0; opacity:.16; pointer-events:none; transition:opacity .3s ease; }
 /* first-page brand pattern: hidden by default, reveals in a soft circle that
    follows the mouse (desktop) or a finger (touch) -- same in light and dark theme.
-   The closing contact section (always on the dark ink background) shares this
-   same reveal behavior, matching the hero's style. */
-.hero .hero-pattern, .contact .hero-pattern{
+   The USP statement and the closing contact section share this same reveal
+   behavior and (for USP) the same light/dark background flip, matching the hero. */
+.hero .hero-pattern, .contact .hero-pattern, .usp-block .hero-pattern{
   opacity:0;
   mask-image:radial-gradient(circle 380px at var(--mx,50%) var(--my,50%), #000 0%, transparent 100%);
   -webkit-mask-image:radial-gradient(circle 380px at var(--mx,50%) var(--my,50%), #000 0%, transparent 100%);
 }
-.hero .hero-pattern rect{ fill:url(#dar-pattern-light); }
+.hero .hero-pattern rect, .usp-block .hero-pattern rect{ fill:url(#dar-pattern-light); }
 /* dark theme: orange rings + muted grey lines instead of orange-on-white */
-:root[data-theme="dark"] .hero .hero-pattern rect{ fill:url(#dar-pattern-dark); }
-.hero.is-pattern-live .hero-pattern, .contact.is-pattern-live .hero-pattern{ opacity:1; }
+:root[data-theme="dark"] .hero .hero-pattern rect, :root[data-theme="dark"] .usp-block .hero-pattern rect{ fill:url(#dar-pattern-dark); }
+.hero.is-pattern-live .hero-pattern, .contact.is-pattern-live .hero-pattern, .usp-block.is-pattern-live .hero-pattern{ opacity:1; }
 .hero-ring{ position:absolute; border-radius:50%; border:1px solid var(--hero-line-soft); pointer-events:none; }
 .hero-inner{ position:relative; z-index:1; width:100%; }
 .hero-grid{ display:grid; grid-template-columns:1.2fr .8fr; gap:24px; align-items:center; }
@@ -520,12 +520,13 @@ button,a[href]{ cursor:pointer; }
 [data-lang="ar"] .billboard-text{ letter-spacing:0; line-height:1.55; font-weight:700; }
 
 /* ============================================================
-   USP STATEMENT (dark declarative block, between 02 and 03)
+   USP STATEMENT (declarative block, between 02 and 03 -- shares
+   the hero's design: light/dark background flip + pattern reveal)
    ============================================================ */
-.usp-block{ background:var(--ink); padding:72px 0; }
-.usp-headline{ font-size:clamp(24px,3.4vw,34px); font-weight:800; letter-spacing:-1px; line-height:1.25; color:#fff; max-width:900px; margin-bottom:18px; }
-[data-lang="ar"] .usp-headline{ letter-spacing:0; line-height:1.55; }
-.usp-body{ font-size:15px; line-height:1.85; color:rgba(255,255,255,.55); max-width:640px; }
+.usp-block .wrap{ position:relative; z-index:1; }
+.usp-headline{ font-size:clamp(28px,4vw,42px); font-weight:800; letter-spacing:-1.5px; line-height:1.15; color:var(--hero-text); max-width:900px; margin-bottom:18px; }
+[data-lang="ar"] .usp-headline{ letter-spacing:0; line-height:1.5; }
+.usp-body{ font-size:16px; line-height:1.85; color:var(--hero-soft); max-width:640px; }
 [data-lang="ar"] .usp-body{ line-height:2.1; }
 
 /* ============================================================
@@ -824,6 +825,7 @@ button,a[href]{ cursor:pointer; }
 
   <!-- UNIQUE SELLING PROPOSITION — 11 -->
   <section class="usp-block reveal">
+    <svg class="hero-pattern" width="100%" height="100%" preserveAspectRatio="none"><rect width="100%" height="100%" fill="url(#dar-pattern-light)"/></svg>
     <div class="wrap">
       <div class="usp-headline">DAR is the first Lebanese contractor that treats your home like a project — managed, documented, delivered.</div>
       <p class="usp-body">Full service from design to final finish. Fixed timelines. Transparent costs. Professional communication throughout. No disappearing. No excuses. No surprises.</p>
@@ -1257,6 +1259,7 @@ button,a[href]{ cursor:pointer; }
 
   <!-- عرض القيمة الفريد — 11 -->
   <section class="usp-block reveal">
+    <svg class="hero-pattern" width="100%" height="100%" preserveAspectRatio="none"><rect width="100%" height="100%" fill="url(#dar-pattern-light)"/></svg>
     <div class="wrap">
       <div class="usp-headline">دار هي أول مقاول لبناني يتعامل مع منزلك كمشروع — مُدار، موثّق، مُسلَّم.</div>
       <p class="usp-body">خدمة متكاملة من التصميم إلى التشطيب النهائي. جداول زمنية ثابتة. تكاليف شفافة. تواصل احترافي طوال المشروع. لا اختفاء. لا أعذار. لا مفاجآت.</p>
@@ -1690,6 +1693,7 @@ button,a[href]{ cursor:pointer; }
 
   <!-- PROPOSITION DE VALEUR UNIQUE — 11 -->
   <section class="usp-block reveal">
+    <svg class="hero-pattern" width="100%" height="100%" preserveAspectRatio="none"><rect width="100%" height="100%" fill="url(#dar-pattern-light)"/></svg>
     <div class="wrap">
       <div class="usp-headline">DAR est le premier entrepreneur libanais à traiter votre maison comme un projet — géré, documenté, livré.</div>
       <p class="usp-body">Service complet, de la conception à la finition. Délais fixes. Coûts transparents. Communication professionnelle tout au long du projet. Pas de disparition. Pas d'excuses. Pas de surprises.</p>
@@ -2084,7 +2088,7 @@ button,a[href]{ cursor:pointer; }
       hero.style.setProperty('--mx', (clientX - r.left) + 'px');
       hero.style.setProperty('--my', (clientY - r.top) + 'px');
     }
-    document.querySelectorAll('.hero, .contact').forEach(function(hero){
+    document.querySelectorAll('.hero, .contact, .usp-block').forEach(function(hero){
       hero.addEventListener('mousemove', function(e){ setSpot(hero, e.clientX, e.clientY); });
       hero.addEventListener('mouseenter', function(){ hero.classList.add('is-pattern-live'); });
       hero.addEventListener('mouseleave', function(){ hero.classList.remove('is-pattern-live'); });
