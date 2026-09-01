@@ -262,12 +262,20 @@ button,a[href]{ cursor:pointer; }
    HERO
    ============================================================ */
 .hero{
-  position:relative; background:var(--orange); color:#fff; overflow:hidden;
+  position:relative; background:#fff; color:var(--hero-text); overflow:hidden;
   padding:120px 0 96px;
   min-height:88vh; display:flex; flex-direction:column; justify-content:center;
-  --hero-mark:#fff; --hero-accent:var(--ink);
+  --hero-mark:var(--orange); --hero-accent:var(--orange);
+  --hero-text:#111111; --hero-muted:rgba(17,17,17,.55); --hero-soft:rgba(17,17,17,.72);
+  --hero-faint:rgba(17,17,17,.3); --hero-mid:rgba(17,17,17,.6);
+  --hero-line:rgba(17,17,17,.2); --hero-line-mid:rgba(17,17,17,.12); --hero-line-soft:rgba(17,17,17,.08);
 }
-:root[data-theme="dark"] .hero{ background:var(--ink); --hero-mark:var(--orange); --hero-accent:var(--orange); }
+:root[data-theme="dark"] .hero{
+  background:var(--ink);
+  --hero-text:#fff; --hero-muted:var(--white-muted); --hero-soft:rgba(255,255,255,.72);
+  --hero-faint:var(--white-faint); --hero-mid:rgba(255,255,255,.6);
+  --hero-line:rgba(255,255,255,.2); --hero-line-mid:rgba(255,255,255,.12); --hero-line-soft:rgba(255,255,255,.08);
+}
 .hero-pattern{ position:absolute; inset:0; opacity:.16; pointer-events:none; transition:opacity .3s ease; }
 /* first-page brand pattern: hidden by default, reveals in a soft circle that
    follows the mouse (desktop) or a finger (touch) -- same in light and dark theme */
@@ -277,17 +285,17 @@ button,a[href]{ cursor:pointer; }
   -webkit-mask-image:radial-gradient(circle 380px at var(--mx,50%) var(--my,50%), #000 0%, transparent 100%);
 }
 .hero .hero-pattern rect{ fill:url(#dar-pattern-light); }
-/* dark theme: orange rings + muted grey lines instead of white-on-orange */
+/* dark theme: orange rings + muted grey lines instead of orange-on-white */
 :root[data-theme="dark"] .hero .hero-pattern rect{ fill:url(#dar-pattern-dark); }
 .hero.is-pattern-live .hero-pattern{ opacity:1; }
-.hero-ring{ position:absolute; border-radius:50%; border:1px solid rgba(255,255,255,.07); pointer-events:none; }
+.hero-ring{ position:absolute; border-radius:50%; border:1px solid var(--hero-line-soft); pointer-events:none; }
 .hero-inner{ position:relative; z-index:1; width:100%; }
 .hero-grid{ display:grid; grid-template-columns:1.2fr .8fr; gap:24px; align-items:center; }
 .hero-visual{ position:relative; height:420px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
 @media (max-width:960px){ .hero-grid{ grid-template-columns:1fr; } }
 @media (max-width:639px){ .hero-visual{ display:none; } }
 @media (min-width:640px) and (max-width:960px){ .hero-visual{ width:100%; height:280px; max-width:320px; margin:0 auto; } .hero-big-mark .circle{ width:76px; height:76px; border-width:8px; margin-right:18px; } .hero-big-mark .vline{ width:12px; height:220px; } }
-.hero-visual-ring{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:50%; border:1px solid rgba(255,255,255,.09); pointer-events:none; transition:opacity .5s ease; }
+.hero-visual-ring{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:50%; border:1px solid var(--hero-line-soft); pointer-events:none; transition:opacity .5s ease; }
 .hero-3d-canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; opacity:0; transition:opacity .8s ease; }
 .hero-3d-canvas.is-ready{ opacity:1; }
 .hero-visual.has-3d .hero-visual-ring, .hero-visual.has-3d .hero-big-mark{ opacity:0; }
@@ -296,40 +304,40 @@ button,a[href]{ cursor:pointer; }
 .hero-big-mark .circle{ width:110px; height:110px; border:11px solid var(--hero-mark); margin-top:6px; margin-right:26px; }
 .hero-big-mark .vline{ width:18px; height:320px; background:var(--hero-mark); }
 .hero-eyebrow{
-  font-size:11px; letter-spacing:.28em; color:var(--white-muted); font-weight:600;
+  font-size:11px; letter-spacing:.28em; color:var(--hero-muted); font-weight:600;
   display:flex; align-items:center; gap:14px; margin-bottom:34px;
 }
-.hero-eyebrow::after{ content:''; flex:1; max-width:64px; height:1px; background:rgba(255,255,255,.2); }
+.hero-eyebrow::after{ content:''; flex:1; max-width:64px; height:1px; background:var(--hero-line); }
 .hero h1{
   font-size:clamp(40px,7vw,84px); font-weight:800; letter-spacing:-2.5px; line-height:.98;
   margin-bottom:28px;
 }
 .hero h1 em{ font-style:normal; color:var(--hero-accent); }
 [data-lang="ar"] .hero h1{ letter-spacing:0; font-weight:700; line-height:1.15; }
-.hero-sub{ max-width:560px; font-size:18px; line-height:1.75; color:rgba(255,255,255,.72); margin-bottom:44px; }
+.hero-sub{ max-width:560px; font-size:18px; line-height:1.75; color:var(--hero-soft); margin-bottom:44px; }
 [data-lang="ar"] .hero-sub{ font-size:19px; line-height:2; }
 .hero-actions{ display:flex; flex-wrap:wrap; gap:14px; margin-bottom:56px; }
 .hero-stats{ display:grid; grid-template-columns:repeat(4,auto); gap:36px; margin-bottom:44px; }
 @media (max-width:640px){ .hero-stats{ grid-template-columns:repeat(2,1fr); gap:24px 32px; } }
 .hero-stat b{ display:block; font-size:26px; font-weight:800; color:var(--hero-accent); letter-spacing:-.5px; }
-.hero-stat span{ display:block; font-size:9.5px; letter-spacing:.13em; color:var(--white-faint); margin-top:7px; font-weight:600; text-transform:uppercase; line-height:1.4; }
+.hero-stat span{ display:block; font-size:9.5px; letter-spacing:.13em; color:var(--hero-faint); margin-top:7px; font-weight:600; text-transform:uppercase; line-height:1.4; }
 .btn{
   display:inline-flex; align-items:center; justify-content:center; min-height:44px; gap:10px; font-size:13px; font-weight:600; letter-spacing:.04em;
   padding:15px 28px; border-radius:999px; transition:transform .18s,background .18s,color .18s,border-color .18s;
 }
 .btn-primary{ background:var(--orange); color:#fff; }
 .btn-primary:hover{ background:#c04418; transform:translateY(-1px); }
-/* the hero's own background is orange, so its primary CTA needs its own contrast */
-.hero .btn-primary{ background:var(--hero-accent); }
-.hero .btn-primary:hover{ background:var(--hero-accent); opacity:.85; }
 .btn-ghost{ border:1px solid rgba(255,255,255,.28); color:#fff; }
 .btn-ghost:hover{ border-color:#fff; transform:translateY(-1px); }
+/* the hero's own background isn't always dark, so its ghost CTA needs its own contrast */
+.hero .btn-ghost{ border-color:var(--hero-line-mid); color:var(--hero-text); }
+.hero .btn-ghost:hover{ border-color:var(--hero-text); }
 .hero-strap{
   display:flex; flex-wrap:wrap; gap:10px 28px; align-items:center;
-  font-size:10.5px; letter-spacing:.24em; color:var(--white-faint); font-weight:600;
-  border-top:1px solid rgba(255,255,255,.12); padding-top:28px;
+  font-size:10.5px; letter-spacing:.24em; color:var(--hero-faint); font-weight:600;
+  border-top:1px solid var(--hero-line-mid); padding-top:28px;
 }
-.hero-strap b{ color:rgba(255,255,255,.6); font-weight:600; }
+.hero-strap b{ color:var(--hero-mid); font-weight:600; }
 
 /* ============================================================
    CHAPTER (numbered section shell, shared by 01–06)
@@ -624,8 +632,8 @@ button,a[href]{ cursor:pointer; }
   <line x1="34" y1="2" x2="34" y2="22" stroke="#6b6459" stroke-width="2.6"/>
 </pattern>
 <pattern id="dar-pattern-light" x="0" y="0" width="64" height="64" patternUnits="userSpaceOnUse" patternTransform="rotate(20)">
-  <circle cx="12" cy="12" r="9" fill="none" stroke="#ffffff" stroke-width="1.4"/>
-  <line x1="34" y1="2" x2="34" y2="22" stroke="#ffffff" stroke-width="2.6" opacity=".55"/>
+  <circle cx="12" cy="12" r="9" fill="none" stroke="#d94f1e" stroke-width="1.4"/>
+  <line x1="34" y1="2" x2="34" y2="22" stroke="#111111" stroke-width="2.6"/>
 </pattern>
 
 <symbol id="i-hammer" viewBox="0 0 24 24"><path d="M9 4.5L6 7.5L4.5 6L3 7.5L6 10.5L7.5 9L10.5 12L4.5 18C4.1 18.4 4.1 19 4.5 19.5L5.5 20.5C5.9 20.9 6.5 20.9 6.9 20.5L15 12.4L16.5 13.9L18 12.4L14.1 8.5L15.6 7L12 3.4L10.5 4.9L9 4.5Z"/></symbol>
