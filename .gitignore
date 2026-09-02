@@ -1,0 +1,3 @@
+node_modules/
+.lighthouseci/
+npm-debug.log*

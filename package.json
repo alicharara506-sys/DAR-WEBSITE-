@@ -1,0 +1,15 @@
+{
+  "name": "dar-trading-contracting-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static multilingual marketing site for DAR Trading & Contracting",
+  "scripts": {
+    "validate": "node scripts/validate-site.mjs",
+    "test": "npm run validate && html-validate index.html",
+    "audit:links": "node scripts/validate-site.mjs",
+    "audit:lighthouse": "npx --yes @lhci/cli@0.15.1 autorun"
+  },
+  "devDependencies": {
+    "html-validate": "10.10.0"
+  }
+}
